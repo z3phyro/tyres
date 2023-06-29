@@ -1,0 +1,38 @@
+{
+  "name": "@z3phyro/tyres-core",
+  "version": "0.1.0",
+  "description": "Core project of CLI inspired by prisma, to create and mantain statically typed resources on any typescript project.",
+  "files": [
+    "lib"
+  ],
+  "main": "./lib/index.js",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "devDependencies": {
+    "@vitest/ui": "^0.32.2",
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.1",
+    "vitest": "^0.32.2"
+  },
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "rm -rf lib && npx tsc -p tsconfig.json",
+    "postbuild": "echo '#!/usr/bin/env node' | cat - lib/index.js > temp && mv temp lib/index.js",
+    "test": "vitest",
+    "ui": "vitest --ui"
+  },
+  "keywords": [
+    "translation",
+    "typed",
+    "i18n",
+    "typescript",
+    "javascript",
+    "library",
+    "react",
+    "svelte",
+    "vue",
+    "solidjs"
+  ],
+  "author": "@z3phyro Maykel López Meneses",
+  "license": "ISC"
+}

@@ -1,0 +1,43 @@
+{
+  "name": "@z3phyro/tyres-cli",
+  "version": "0.1.0",
+  "description": "CLI inspired by prisma, to create and mantain statically typed resources on any typescript project.",
+  "main": "lib/index.js",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "npx tsc",
+    "postbuild": "echo '#!/usr/bin/env node' | cat - lib/index.js > temp && mv temp lib/index.js"
+  },
+  "files": [
+    "lib"
+  ],
+  "bin": {
+    "tyres": "./lib/index.js"
+  },
+  "keywords": [
+    "translation",
+    "typed",
+    "i18n",
+    "typescript",
+    "javascript",
+    "library",
+    "svelte",
+    "react",
+    "vue",
+    "solidjs"
+  ],
+  "author": "z3phyro maykel.meneses89@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/commander": "^2.12.2",
+    "@types/figlet": "^1.5.5",
+    "@types/node": "^18.15.0",
+    "@z3phyro/tyres-core": "file:../tyres-core",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "commander": "^10.0.0",
+    "figlet": "^1.5.2"
+  }
+}

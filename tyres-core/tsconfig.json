@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "./lib",
+    "target": "ES5",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "declaration": true
+  },
+
+  "exclude": ["node_modules", "src/**/*.test.ts", "vitest.config.ts"]
+}
