@@ -24,15 +24,19 @@ const program = new Command();
 
 program
   .command("init")
-  .description("Initialize translations")
+  .description("Initialize resources")
   .action(initTranslations);
 
-program
+const entry = program
+  .command("entry")
+  .description("Operations with translation resources");
+
+entry
   .command("list")
-  .description("Lists the dictionaries entries")
+  .description("Lists the translation interface entries")
   .action(listTranslation);
 
-program
+entry
   .command("add <entry.path> [values...]")
   .description(
     "Adds a new entry. Entry path is the index inside the translation object separated by periods. Values better be typed within 'simple quotes' because there are issues with double quotes: E.g. add general.bye 'Bye' 'Adios' "
@@ -41,27 +45,31 @@ program
     addTranslation(entryPath, values);
   });
 
-program
+entry
   .command("remove <entry.path>")
   .description("Removes an entry from the translations")
   .action(removeTranslation);
 
-program
-  .command("dict-list")
+const dict = program
+  .command("dict")
+  .description("Operations with dictionaries");
+
+dict
+  .command("list")
   .description("Lists the dictionaries")
   .action(listDictionaries);
 
-program
-  .command("dict-new <short_name> <long_name>")
+dict
+  .command("add <short_name> <long_name>")
   .description("Adds a new dictionary")
   .action(addDictionary);
 
-const dictRemove = program
-  .command("dict-remove <short_name>")
+dict
+  .command("remove <short_name>")
   .description("Removes a dictionary")
   .action(removeDictionary);
 
-program
+dict
   .command("import")
   .description(
     "Imports json files named eg: 'english.translation.json' into the typed files. Useful for importing common translation files."

@@ -3,15 +3,10 @@ import {
   initDictionaries,
   writeDictionaries,
 } from "../dictionaries";
-import {
-  createFolder,
-  readFile,
-  readTypedFile,
-  writeFile,
-  writeTranslation,
-} from "../io";
+import { readFile, readTypedFile, writeFile, writeTranslation } from "../io";
 import { generateInterface, pathAssign, pathGet, pathRemove } from "../utils";
 import { TCoverage, TDataNode, TDictNode } from "../types";
+import { createConfigs } from "../config";
 
 export const surfTranslations = (
   json: TDataNode,
@@ -110,13 +105,14 @@ export const removeTranslation = (entry_path: string) => {
 };
 
 export const initTranslations = () => {
-  createFolder("");
+  createConfigs();
   initDictionaries();
 
   const json = [
     {
       general: {
         hello: "Hello World!",
+        about: "About",
       },
       about: {
         company: "Company",
@@ -125,6 +121,7 @@ export const initTranslations = () => {
     {
       general: {
         hello: "Hola Mundo!",
+        about: "Acerca de",
       },
       about: {
         company: "-",

@@ -1,6 +1,6 @@
 {
   "name": "@z3phyro/tyres-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CLI inspired by prisma, to create and mantain statically typed resources on any typescript project.",
   "main": "lib/index.js",
   "scripts": {

@@ -1,3 +1,5 @@
 node_modules
 dist
-translations
+src/translations
+lib
+tyres.config.json

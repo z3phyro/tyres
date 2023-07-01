@@ -7,3 +7,5 @@ export type TDataNode = {
 };
 
 export type TCoverage = { percent: number; paths: string[] };
+
+export type TConfig = { translationsPath: string };
