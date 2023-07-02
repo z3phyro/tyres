@@ -2,12 +2,17 @@ import fs from "fs";
 import { beforeAll, describe, expect, test } from "vitest";
 import {
   CONFIG_FILE_NAME,
+  initConfigs,
+  DEFAULT_DICTIONARIES,
+  DEFAULT_ENVIRONMENT_DATA,
   DEFAULT_TRANSLATION_FOLDER,
   getConfigs,
+  getDictionaries,
+  getEnvironments,
   getFolder,
+  setDictionaries,
+  setEnvironments,
 } from "./config";
-
-const FOLDER = "src/i18n";
 
 describe("Checking configuration file", () => {
   beforeAll(() => {
@@ -15,12 +20,38 @@ describe("Checking configuration file", () => {
       fs.rmSync(CONFIG_FILE_NAME);
     }
 
-    fs.writeFileSync(CONFIG_FILE_NAME, `{ "translationsPath": "${FOLDER}" }`);
+    initConfigs();
   });
 
   test("Reads configuration file properly", () => {
     const config = getConfigs();
-    expect(config.translationsPath).toEqual(FOLDER);
+    expect(config.translationsPath).toEqual(DEFAULT_TRANSLATION_FOLDER);
+  });
+
+  test("Has dictionaries", () => {
+    expect(getDictionaries()).toEqual(DEFAULT_DICTIONARIES);
+  });
+
+  test("Writes dictionaries", () => {
+    const dicts = {
+      en: "English",
+      kl: "Klingon",
+    };
+    setDictionaries(dicts);
+
+    expect(getDictionaries()).toEqual(dicts);
+  });
+
+  test("Has environments", () => {
+    expect(getEnvironments()).toEqual(DEFAULT_ENVIRONMENT_DATA);
+  });
+
+  test("Writes environments", () => {
+    const envs = ["home", "work"];
+
+    setEnvironments(envs);
+
+    expect(getEnvironments()).toEqual(envs);
   });
 
   test("Checks default value for folder", () => {

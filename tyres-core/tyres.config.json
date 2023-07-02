@@ -1,1 +1,5 @@
-{ "translationsPath": "src/translations/" }
+{ 
+        "translationsPath": "src/translations/",
+        "dictionaries": {"en":"English","es":"Spanish"},
+        "environments": ["development","staging","production"]
+       }

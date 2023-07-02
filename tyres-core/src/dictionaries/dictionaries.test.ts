@@ -1,6 +1,5 @@
 import {
   addDictionary,
-  getDictionaries,
   initDictionaries,
   initNewTranslation,
   removeDictionary,
@@ -11,18 +10,16 @@ import {
 import {
   createFolder,
   fileExists,
-  readFile,
   readStringFile,
   readTypedFile,
   removeFile,
   removeFolder,
-  writeStringFile,
   writeTranslation,
 } from "../io";
 import * as config from "../config";
 import { afterAll, expect, describe, beforeAll, vi, test } from "vitest";
+import { getDictionaries, initConfigs } from "../config";
 
-const DICTIONARIES_FILE = "dictionaries.json";
 const DICTIONARIES_DATA = `{
   "en": "English",
   "es": "Spanish"
@@ -37,7 +34,6 @@ describe("Testing dictionaries", () => {
     getFolderMock.mockImplementation(() => TEST_FOLDER);
 
     createFolder(TEST_FOLDER);
-    writeStringFile(DICTIONARIES_FILE, DICTIONARIES_DATA);
   });
 
   afterAll(() => {
@@ -75,10 +71,8 @@ export default {
   });
 
   test("Initialize dictionaries", () => {
+    initConfigs();
     initDictionaries();
-
-    const json = readFile("dictionaries.json");
-    expect(json).toEqual(JSON.parse(DICTIONARIES_DATA));
 
     const translationFile = readStringFile("translation.ts").toString();
 

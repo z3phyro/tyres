@@ -1,6 +1,5 @@
 export {
   addDictionary,
-  getDictionaries,
   initDictionaries,
   initNewTranslation,
   listDictionaries,

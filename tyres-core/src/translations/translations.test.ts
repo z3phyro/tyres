@@ -33,6 +33,7 @@ describe("Test translation functions", () => {
     const getFolderMock = vi.spyOn(config, "getFolder");
 
     getFolderMock.mockImplementation(() => TEST_FOLDER);
+    config.initConfigs();
 
     createFolder(TEST_FOLDER);
   });
@@ -126,6 +127,7 @@ export interface TranslationInterface {
     expect(json).toEqual({
       general: {
         hello: "Hello World!",
+        about: "About",
       },
       about: {
         company: "Company",
@@ -137,6 +139,7 @@ export interface TranslationInterface {
     expect(jsonSpaish).toEqual({
       general: {
         hello: "Hola Mundo!",
+        about: "Acerca de",
       },
       about: {
         company: "-",

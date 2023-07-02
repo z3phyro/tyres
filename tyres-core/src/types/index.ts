@@ -1,1 +1,1 @@
-export { TDataNode, TCoverage, TDictNode } from "./types";
+export { TDataNode, TCoverage, TDictNode, TConfig } from "./types";

@@ -1,12 +1,8 @@
-import {
-  getDictionaries,
-  initDictionaries,
-  writeDictionaries,
-} from "../dictionaries";
+import { initDictionaries, writeDictionaries } from "../dictionaries";
 import { readFile, readTypedFile, writeFile, writeTranslation } from "../io";
 import { generateInterface, pathAssign, pathGet, pathRemove } from "../utils";
 import { TCoverage, TDataNode, TDictNode } from "../types";
-import { createConfigs } from "../config";
+import { initConfigs, getDictionaries } from "../config";
 
 export const surfTranslations = (
   json: TDataNode,
@@ -105,7 +101,7 @@ export const removeTranslation = (entry_path: string) => {
 };
 
 export const initTranslations = () => {
-  createConfigs();
+  initConfigs();
   initDictionaries();
 
   const json = [

@@ -1,16 +1,7 @@
-import { getFolder } from "../config";
-import {
-  readFile,
-  readTypedFile,
-  removeFile,
-  writeFile,
-  writeTranslation,
-} from "../io";
-import { TDataNode, TDictNode } from "../types/types";
+import { getDictionaries, getFolder } from "../config";
+import { readTypedFile, removeFile, writeFile, writeTranslation } from "../io";
+import { TDataNode } from "../types/types";
 import { clearEntries } from "../utils";
-
-export const getDictionaries = (): TDictNode =>
-  readFile("dictionaries.json") as TDictNode;
 
 export const writeDictionaries = (dicts: TDataNode) => {
   const keys = Object.keys(dicts);
@@ -33,15 +24,7 @@ export const writeDictionaries = (dicts: TDataNode) => {
 };
 
 export const initDictionaries = () => {
-  const dicts = {
-    en: "English",
-    es: "Spanish",
-  };
-
-  console.info("Initializing dictionaries... \n");
-
-  writeFile("dictionaries.json", JSON.stringify(dicts));
-  writeDictionaries(dicts);
+  writeDictionaries(getDictionaries());
 
   console.info("Dictionaries initialized \n");
 };
