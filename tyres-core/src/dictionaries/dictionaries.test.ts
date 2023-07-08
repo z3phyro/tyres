@@ -44,9 +44,7 @@ describe("Testing dictionaries", () => {
   });
 
   test("Get dictionaries", () => {
-    const json = getDictionaries();
-
-    expect(json).toEqual(JSON.parse(DICTIONARIES_DATA));
+    expect(getDictionaries()).toEqual(JSON.parse(DICTIONARIES_DATA));
   });
 
   test("Write dictionaries", () => {

@@ -28,7 +28,6 @@ export {
 
 export {
   addDictionary,
-  getDictionaries,
   initDictionaries,
   initNewTranslation,
   listDictionaries,
@@ -36,3 +35,25 @@ export {
   removeTranslationFile,
   writeDictionaries,
 } from "./dictionaries";
+
+export {
+  DEFAULT_TRANSLATION_FOLDER,
+  CONFIG_FILE_NAME,
+  DEFAULT_DICTIONARIES,
+  DEFAULT_ENVIRONMENT_DATA,
+  DEFAULT_ENVIRONMENT_FOLDER,
+  getFolder,
+  initConfigs,
+  getConfigs,
+  getDictionaries,
+  setConfigs,
+  setDictionaries,
+  getEnvironments,
+  setEnvironments,
+} from "./config";
+
+export {
+  addEnvironment,
+  listEnvironments,
+  removeEnvironment,
+} from "./environments";

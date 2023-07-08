@@ -1,5 +1,9 @@
 import { Command } from "commander";
-import { initTranslations } from "@z3phyro/tyres-core";
+import {
+  addEnvironment,
+  initTranslations,
+  removeEnvironment,
+} from "@z3phyro/tyres-core";
 import {
   addTranslation,
   listTranslation,
@@ -12,12 +16,13 @@ import {
   listDictionaries,
   removeDictionary,
 } from "@z3phyro/tyres-core";
+import { listEnvironments } from "@z3phyro/tyres-core";
 const figlet = require("figlet");
 
 console.log(
   "\n ----------------------------- \n" +
     figlet.textSync("Tyres") +
-    "\n ----------------------------- \n"
+    "\n ----------------------------- \n",
 );
 
 const program = new Command();
@@ -39,7 +44,7 @@ entry
 entry
   .command("add <entry.path> [values...]")
   .description(
-    "Adds a new entry. Entry path is the index inside the translation object separated by periods. Values better be typed within 'simple quotes' because there are issues with double quotes: E.g. add general.bye 'Bye' 'Adios' "
+    "Adds a new entry. Entry path is the index inside the translation object separated by periods. Values better be typed within 'simple quotes' because there are issues with double quotes: E.g. add general.bye 'Bye' 'Adios' ",
   )
   .action((entryPath: string, values: string[]) => {
     addTranslation(entryPath, values);
@@ -72,7 +77,7 @@ dict
 dict
   .command("import")
   .description(
-    "Imports json files named eg: 'english.translation.json' into the typed files. Useful for importing common translation files."
+    "Imports json files named eg: 'english.translation.json' into the typed files. Useful for importing common translation files.",
   )
   .action(translationImport);
 
@@ -80,5 +85,27 @@ program
   .command("coverage [language]")
   .description("Prints the coverage of the translation through languages")
   .action(translationCoverage);
+
+const env = program
+  .command("env")
+  .description("Add, list or remove environments");
+
+env.command("list").description("List environments").action(listEnvironments);
+
+env
+  .command("add <env_name>")
+  .description("Adds a new environment")
+  .action((env: string) => {
+    addEnvironment(env);
+    listEnvironments();
+  });
+
+env
+  .command("remove <env_name>")
+  .description("Removes an environment")
+  .action((env: string) => {
+    removeEnvironment(env);
+    listEnvironments();
+  });
 
 program.parse(process.argv);

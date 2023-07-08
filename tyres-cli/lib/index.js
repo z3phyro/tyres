@@ -5,6 +5,7 @@ const commander_1 = require("commander");
 const tyres_core_1 = require("@z3phyro/tyres-core");
 const tyres_core_2 = require("@z3phyro/tyres-core");
 const tyres_core_3 = require("@z3phyro/tyres-core");
+const tyres_core_4 = require("@z3phyro/tyres-core");
 const figlet = require("figlet");
 console.log("\n ----------------------------- \n" +
     figlet.textSync("Tyres") +
@@ -54,5 +55,13 @@ program
     .command("coverage [language]")
     .description("Prints the coverage of the translation through languages")
     .action(tyres_core_2.translationCoverage);
+const env = program
+    .command("env")
+    .description("Add, list or remove environments");
+env.command("list").description("List environments").action(tyres_core_4.listEnvironments);
+// env
+//   .command("add <env_name>")
+//   .description("Adds a new environment")
+//   .action(addEnv);
 program.parse(process.argv);
 //# sourceMappingURL=index.js.map
