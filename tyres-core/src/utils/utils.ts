@@ -47,10 +47,43 @@ export const pathAssign = (json: TDataNode, path: string, value: string) => {
   return json;
 };
 
-export const pathRemove = (json: TDataNode, path: string) => {
+export const pathRemove = (
+  json: TDataNode,
+  path: string,
+  level: number = 1,
+) => {
+  const parts = path.split(".");
+
+  if (parts.length > 1) {
+    const key = parts.shift() as string;
+
+    if (typeof json[key] === "object") {
+      pathRemove(json[key] as TDataNode, parts.join("."), ++level);
+      return;
+    } else {
+      throw `Incorrect path ${parts.join(
+        ".",
+      )} on level ${level} is not an object`;
+    }
+  }
+
+  if (typeof json[path] === "undefined") {
+    throw `Incorrect path. Property ${path} level ${level}`;
+  }
+
+  delete json[path];
+};
+
+export const pathRemove2 = (json: TDataNode, path: string) => {
   let curObj = json;
   const parts = path.split(".");
   let counter = 1;
+
+  if (parts.length === 1) {
+    delete curObj[parts[0]];
+    return;
+  }
+
   for (let part of parts) {
     if (counter++ < parts.length) {
       if (typeof curObj[part] == "object") {
@@ -94,7 +127,7 @@ export const pathExists = (json: TDataNode, path: string): boolean => {
 
 export const pathGet = (
   json: TDataNode,
-  path: string
+  path: string,
 ): string | boolean | TDataNode => {
   const parts = path.split(".");
   let counter = 1;

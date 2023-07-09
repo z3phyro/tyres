@@ -1,3 +1,4 @@
+import fs from "fs";
 import {
   addDictionary,
   initDictionaries,
@@ -16,9 +17,9 @@ import {
   removeFolder,
   writeTranslation,
 } from "../io";
+
 import * as config from "../config";
 import { afterAll, expect, describe, beforeAll, vi, test } from "vitest";
-import { getDictionaries, initConfigs } from "../config";
 
 const DICTIONARIES_DATA = `{
   "en": "English",
@@ -26,12 +27,21 @@ const DICTIONARIES_DATA = `{
 }`;
 
 const TEST_FOLDER = "src/dictionaries/sandbox/";
+const TEST_CONFIG_FILE = "tyres-dict.config.json";
 
 describe("Testing dictionaries", () => {
   beforeAll(() => {
-    const getFolderMock = vi.spyOn(config, "getFolder");
+    if (fs.existsSync(config.CONFIG_FILE_NAME)) {
+      fs.rmSync(config.CONFIG_FILE_NAME);
+    }
 
+    const getFolderMock = vi.spyOn(config, "getFolder");
     getFolderMock.mockImplementation(() => TEST_FOLDER);
+
+    const getConfigFilenameMock = vi.spyOn(config, "getConfigFilename");
+    getConfigFilenameMock.mockImplementation(() => TEST_CONFIG_FILE);
+
+    config.initConfigs();
 
     createFolder(TEST_FOLDER);
   });
@@ -41,10 +51,11 @@ describe("Testing dictionaries", () => {
     removeFile("translation.ts");
     removeFile("klingon.translation.ts");
     removeFolder(TEST_FOLDER);
+    config.removeConfigs();
   });
 
   test("Get dictionaries", () => {
-    expect(getDictionaries()).toEqual(JSON.parse(DICTIONARIES_DATA));
+    expect(config.getDictionaries()).toEqual(JSON.parse(DICTIONARIES_DATA));
   });
 
   test("Write dictionaries", () => {
@@ -69,7 +80,7 @@ export default {
   });
 
   test("Initialize dictionaries", () => {
-    initConfigs();
+    config.initConfigs();
     initDictionaries();
 
     const translationFile = readStringFile("translation.ts").toString();
@@ -106,7 +117,6 @@ export default {
   });
 
   test("Removes dictionary", () => {
-    writeTranslation({ general: "General" }, "English");
     removeDictionary("en");
 
     const dicts = readStringFile("dictionaries.json").toString();
@@ -118,7 +128,7 @@ export default {
     initDictionaries();
     addDictionary("kl", "Klingon");
 
-    const klingonFile = readTypedFile("klingon.translation.ts");
-    expect(klingonFile).toEqual({});
+    const dicts = readStringFile("dictionaries.json").toString();
+    expect(JSON.parse(dicts)["kl"]).toEqual("Klingon");
   });
 });

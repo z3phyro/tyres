@@ -6,10 +6,12 @@ export {
   DEFAULT_ENVIRONMENT_FOLDER,
   getFolder,
   initConfigs,
+  removeConfigs,
   getConfigs,
   getDictionaries,
   setConfigs,
   setDictionaries,
   getEnvironments,
   setEnvironments,
+  getConfigFilename,
 } from "./config";

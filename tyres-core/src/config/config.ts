@@ -13,31 +13,40 @@ export const DEFAULT_DICTIONARIES = {
   en: "English",
   es: "Spanish",
 };
+
+export const getConfigFilename = () => CONFIG_FILE_NAME;
+
 export const initConfigs = () => {
-  if (!fs.existsSync(CONFIG_FILE_NAME)) {
+  if (!fs.existsSync(getConfigFilename())) {
     fs.writeFileSync(
-      CONFIG_FILE_NAME,
+      getConfigFilename(),
       `{ 
         "translationsPath": "${DEFAULT_TRANSLATION_FOLDER}",
         "dictionaries": ${JSON.stringify(DEFAULT_DICTIONARIES)},
         "environments": ${JSON.stringify(DEFAULT_ENVIRONMENT_DATA)}
-       }`
+       }`,
     );
+  }
+};
+
+export const removeConfigs = () => {
+  if (fs.existsSync(getConfigFilename())) {
+    fs.rmSync(getConfigFilename());
   }
 };
 
 export const getConfigs = (): TConfig => {
   let result = {};
   try {
-    if (fs.existsSync(CONFIG_FILE_NAME)) {
-      result = JSON.parse(fs.readFileSync(CONFIG_FILE_NAME).toString());
+    if (fs.existsSync(getConfigFilename())) {
+      result = JSON.parse(fs.readFileSync(getConfigFilename()).toString());
     }
   } catch (e) {}
   return result as TConfig;
 };
 
 export const setConfigs = (config: TConfig) => {
-  fs.writeFileSync(CONFIG_FILE_NAME, JSON.stringify(config));
+  fs.writeFileSync(getConfigFilename(), JSON.stringify(config));
 };
 
 export const getFolder = () => {

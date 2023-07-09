@@ -1,8 +1,8 @@
 import fs from "fs";
-import { beforeAll, describe, expect, test } from "vitest";
+import { beforeAll, afterAll, describe, expect, test, vi } from "vitest";
+import * as config from "./config";
 import {
   CONFIG_FILE_NAME,
-  initConfigs,
   DEFAULT_DICTIONARIES,
   DEFAULT_ENVIRONMENT_DATA,
   DEFAULT_TRANSLATION_FOLDER,
@@ -14,13 +14,22 @@ import {
   setEnvironments,
 } from "./config";
 
+const TEST_CONFIG_FILE = "tyres-config.config.json";
+
 describe("Checking configuration file", () => {
   beforeAll(() => {
     if (fs.existsSync(CONFIG_FILE_NAME)) {
       fs.rmSync(CONFIG_FILE_NAME);
     }
 
-    initConfigs();
+    const getConfigFilenameMock = vi.spyOn(config, "getConfigFilename");
+    getConfigFilenameMock.mockImplementation(() => TEST_CONFIG_FILE);
+
+    config.initConfigs();
+  });
+
+  afterAll(() => {
+    config.removeConfigs();
   });
 
   test("Reads configuration file properly", () => {

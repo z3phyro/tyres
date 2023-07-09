@@ -27,12 +27,17 @@ import { describe, beforeAll, vi, afterAll, test, expect } from "vitest";
 import { TDataNode } from "../types";
 
 const TEST_FOLDER = "src/translations/sandbox/";
+const TEST_CONFIG_FILE = "tyres-translations.config.json";
 
 describe("Test translation functions", () => {
   beforeAll(() => {
     const getFolderMock = vi.spyOn(config, "getFolder");
 
     getFolderMock.mockImplementation(() => TEST_FOLDER);
+
+    const getConfigFilenameMock = vi.spyOn(config, "getConfigFilename");
+    getConfigFilenameMock.mockImplementation(() => TEST_CONFIG_FILE);
+
     config.initConfigs();
 
     createFolder(TEST_FOLDER);
@@ -47,6 +52,7 @@ describe("Test translation functions", () => {
     removeFile("english.translation.json");
 
     removeFolder(TEST_FOLDER);
+    config.removeConfigs();
   });
 
   test("Test Surf translations", () => {
@@ -63,6 +69,7 @@ describe("Test translation functions", () => {
   });
 
   test("Add translation", () => {
+    config.initConfigs();
     initDictionaries();
     initTranslations();
 
@@ -115,6 +122,7 @@ export interface TranslationInterface {
     removeTranslation("general.good");
 
     const result = readTranslation("english");
+    console.log(result);
 
     expect(result).toEqual({ general: { hi: "Hello" } });
   });
