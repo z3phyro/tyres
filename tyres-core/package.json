@@ -8,6 +8,7 @@
   "types": "./lib/index.d.ts",
   "devDependencies": {
     "@vitest/ui": "^0.32.2",
+    "husky": "^8.0.3",
     "prettier": "^2.8.8",
     "ts-node": "^10.9.1",
     "vitest": "^0.32.2"
@@ -16,8 +17,9 @@
     "prepublish": "npm run build",
     "build": "rm -rf lib && npx tsc -p tsconfig.json",
     "postbuild": "echo '#!/usr/bin/env node' | cat - lib/index.js > temp && mv temp lib/index.js",
-    "test": "vitest --no-threads",
-    "ui": "vitest --ui --no-threads"
+    "test": "vitest --no-threads --no-watch",
+    "ui": "vitest --ui --no-threads",
+    "prepare": "husky install"
   },
   "keywords": [
     "translation",
