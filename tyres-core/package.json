@@ -2,9 +2,7 @@
   "name": "@z3phyro/tyres-core",
   "version": "0.1.0",
   "description": "Core project of CLI inspired by prisma, to create and mantain statically typed resources on any typescript project.",
-  "files": [
-    "lib"
-  ],
+  "files": ["lib"],
   "main": "./lib/index.js",
   "module": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -18,8 +16,8 @@
     "prepublish": "npm run build",
     "build": "rm -rf lib && npx tsc -p tsconfig.json",
     "postbuild": "echo '#!/usr/bin/env node' | cat - lib/index.js > temp && mv temp lib/index.js",
-    "test": "vitest",
-    "ui": "vitest --ui"
+    "test": "vitest --no-threads",
+    "ui": "vitest --ui --no-threads"
   },
   "keywords": [
     "translation",
