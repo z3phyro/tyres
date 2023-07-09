@@ -7,7 +7,7 @@ export const writeDictionaries = (dicts: TDataNode) => {
   const keys = Object.keys(dicts);
   let result = "";
 
-  for (let key of keys) {
+  for (const key of keys) {
     result += `import { ${dicts[key]}Translation } from "./${(
       dicts[key] as string
     ).toLowerCase()}.translation";\n`;
@@ -15,7 +15,7 @@ export const writeDictionaries = (dicts: TDataNode) => {
 
   result += "\n";
   result += "export default {\n";
-  for (let key of keys) {
+  for (const key of keys) {
     result += `  "${key}": ${dicts[key]}Translation,\n`;
   }
   result += "} as const;\n";
@@ -73,7 +73,7 @@ export const listDictionaries = () => {
   const dicts = getDictionaries();
 
   console.info("Dictionaries: \n");
-  for (let dict of Object.entries(dicts)) {
+  for (const dict of Object.entries(dicts)) {
     console.info(`${dict[0]} ${dict[1]} `);
   }
 };

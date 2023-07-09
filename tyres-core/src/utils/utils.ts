@@ -1,7 +1,7 @@
 import { TDataNode } from "../types/types";
 
 export const clearEntries = (json: TDataNode, value = "") => {
-  for (let key in json) {
+  for (const key in json) {
     if (typeof json[key] == "string") {
       json[key] = value;
     } else if (typeof json[key] == "boolean") {
@@ -22,7 +22,7 @@ export const pathAssign = (json: TDataNode, path: string, value: string) => {
   let curObj: TDataNode = json;
   const parts = path.split(".");
   let counter = 1;
-  for (let part of parts) {
+  for (const part of parts) {
     if (counter++ < parts.length) {
       if (typeof curObj[part] === "undefined") {
         curObj[part] = {};
@@ -47,11 +47,7 @@ export const pathAssign = (json: TDataNode, path: string, value: string) => {
   return json;
 };
 
-export const pathRemove = (
-  json: TDataNode,
-  path: string,
-  level: number = 1
-) => {
+export const pathRemove = (json: TDataNode, path: string, level = 1) => {
   const parts = path.split(".");
 
   if (parts.length > 1) {
@@ -84,7 +80,7 @@ export const pathRemove2 = (json: TDataNode, path: string) => {
     return;
   }
 
-  for (let part of parts) {
+  for (const part of parts) {
     if (counter++ < parts.length) {
       if (typeof curObj[part] == "object") {
         curObj = curObj[part] as TDataNode;
@@ -107,7 +103,7 @@ export const pathExists = (json: TDataNode, path: string): boolean => {
   let curObj: TDataNode = json;
   const parts = path.split(".");
   let counter = 1;
-  for (let part of parts) {
+  for (const part of parts) {
     if (counter++ < parts.length) {
       if (typeof curObj[part] == "object") {
         curObj = curObj[part] as TDataNode;
@@ -131,7 +127,7 @@ export const pathGet = (
 ): string | boolean | TDataNode => {
   const parts = path.split(".");
   let counter = 1;
-  for (let part of parts) {
+  for (const part of parts) {
     if (typeof json[part] == "object") {
       json = json[part] as TDataNode;
       continue;

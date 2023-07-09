@@ -44,7 +44,7 @@ test("Checks that it generates the interface from the JSON Object", () => {
 });
 
 test("Assigns to an object in a particular path", () => {
-  const obj: any = {};
+  const obj: TDataNode = {};
 
   pathAssign(obj, "general.hi", "Hola!");
   expect(obj["general"]["hi"]).toBe("Hola!");
@@ -58,7 +58,7 @@ test("Assigns to an object in a particular path", () => {
 });
 
 test("Removes a path from an object", () => {
-  const obj: any = {
+  const obj: TDataNode = {
     general: {
       hi: "Gello World",
     },
@@ -77,7 +77,7 @@ test("Removes a path from an object", () => {
 });
 
 test("Checks existance of the path", () => {
-  const obj: any = {
+  const obj: TDataNode = {
     general: {
       hi: "Hello World",
       interesting: {

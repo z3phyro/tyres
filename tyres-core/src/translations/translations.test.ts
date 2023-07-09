@@ -197,7 +197,7 @@ export interface TranslationInterface {
 
     updateTranslation("english", "general.yes", "Sure Thing!");
 
-    const result: any = readTranslation("english") ?? {};
+    const result: TDataNode = readTranslation("english") ?? {};
 
     expect(result["general"]["yes"]).toBe("Sure Thing!");
   });

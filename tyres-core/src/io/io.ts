@@ -40,7 +40,7 @@ export const readTypedFile = (
   filename: string,
   folder = getFolder()
 ): TDataNode => {
-  let result: TDataNode = {};
+  const result: TDataNode = {};
 
   try {
     if (fs.existsSync(`${folder}${filename}`)) {
@@ -97,7 +97,7 @@ export const writeTranslation = (
   dictName = "English",
   folder = getFolder()
 ) => {
-  let result = `import type { TranslationInterface } from "./translation.interface"; 
+  const result = `import type { TranslationInterface } from "./translation.interface"; 
 
 export const ${dictName}Translation: TranslationInterface = ${JSON.stringify(
     json,

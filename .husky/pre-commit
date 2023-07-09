@@ -2,5 +2,6 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 cd tyres-core
+npm run eslint:check
 npm run prettier:check
 npm run test

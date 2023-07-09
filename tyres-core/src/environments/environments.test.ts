@@ -1,4 +1,3 @@
-import fs from "fs";
 import { beforeAll, afterAll, describe, expect, test, vi } from "vitest";
 import { addEnvironment, removeEnvironment } from "./environments";
 import * as config from "../config";

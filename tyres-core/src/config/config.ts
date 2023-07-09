@@ -41,7 +41,9 @@ export const getConfigs = (): TConfig => {
     if (fs.existsSync(getConfigFilename())) {
       result = JSON.parse(fs.readFileSync(getConfigFilename()).toString());
     }
-  } catch (e) {}
+  } catch (e) {
+    console.log(e);
+  }
   return result as TConfig;
 };
 

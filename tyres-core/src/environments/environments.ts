@@ -3,7 +3,7 @@ import { getEnvironments, setEnvironments } from "../config";
 export const listEnvironments = () => {
   const environments = getEnvironments();
 
-  for (let env of environments) {
+  for (const env of environments) {
     console.log(env);
   }
 };

@@ -37,7 +37,9 @@ describe("Checking IO functions", () => {
 
     try {
       mkdirSync(TEST_FOLDER);
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   });
 
   afterAll(() => {

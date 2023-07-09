@@ -1,6 +1,6 @@
 import { initDictionaries, writeDictionaries } from "../dictionaries";
 import { readFile, readTypedFile, writeFile, writeTranslation } from "../io";
-import { generateInterface, pathAssign, pathGet, pathRemove } from "../utils";
+import { generateInterface, pathAssign, pathRemove } from "../utils";
 import { TCoverage, TDataNode, TDictNode } from "../types";
 import { initConfigs, getDictionaries } from "../config";
 
@@ -11,7 +11,7 @@ export const surfTranslations = (
 ) => {
   const keys = Object.keys(json);
 
-  for (let key of keys) {
+  for (const key of keys) {
     const path = `${trail ? trail + "." : ""}${key}`;
     if (typeof json[key] == "object")
       surfTranslations(json[key] as TDataNode, path, list);
@@ -36,8 +36,8 @@ export const addTranslation = (
     const languages = Object.values(dicts);
 
     let count = 0;
-    for (let dict of languages) {
-      let json = readTranslation(dict);
+    for (const dict of languages) {
+      const json = readTranslation(dict);
       pathAssign(json, entry_path, default_values[count] || "-");
       writeTranslation(json, dict);
 
@@ -59,7 +59,7 @@ export const addTranslation = (
   return true;
 };
 
-export const writeInterface = (json: any) => {
+export const writeInterface = (json: TDataNode) => {
   const result = generateInterface(json);
   writeFile("translation.interface.ts", result);
 };
@@ -72,7 +72,7 @@ export const removeTranslation = (entry_path: string) => {
   const dicts = getDictionaries();
 
   let count = 0;
-  for (let dict in dicts) {
+  for (const dict in dicts) {
     const json = readTranslation(dicts[dict]);
 
     try {
@@ -121,7 +121,7 @@ export const initTranslations = () => {
 
   writeInterface(json[0]);
   let c = 0;
-  for (let dict of Object.values(dicts)) {
+  for (const dict of Object.values(dicts)) {
     writeTranslation(json[c++], dict);
   }
 };
@@ -130,8 +130,8 @@ export const translationImport = () => {
   const dicts = getDictionaries();
   writeDictionaries(dicts);
 
-  let count = 0;
-  for (let dict of Object.values(dicts)) {
+  const count = 0;
+  for (const dict of Object.values(dicts)) {
     const json = readFile(`${dict.toLowerCase()}.translation.json`);
     if (count == 0) writeInterface(json);
 
@@ -150,7 +150,7 @@ export const getCoverage = (dict: TDataNode, verbose = false): TCoverage => {
   const arraySurfer = (json: TDataNode, trail: string) => {
     const keys = Object.keys(json);
 
-    for (let key of keys) {
+    for (const key of keys) {
       const path = `${trail ? trail + "." : ""}${key}`;
       if (typeof json[key] == "object")
         arraySurfer(json[key] as TDataNode, path);
@@ -179,7 +179,7 @@ export const getAllCoverage = () => {
   const dicts = getDictionaries();
   const result: { [id: string]: TCoverage } = {};
 
-  for (let dict of Object.keys(dicts)) {
+  for (const dict of Object.keys(dicts)) {
     const json = readTypedFile(`${dicts[dict].toLowerCase()}.translation.ts`);
     result[dict] = getCoverage(json as TDictNode);
   }
@@ -190,7 +190,7 @@ export const getAllCoverage = () => {
 export const translationCoverage = (language: string | undefined) => {
   const dicts = getDictionaries();
   if (!language) {
-    for (let dict of Object.keys(dicts)) {
+    for (const dict of Object.keys(dicts)) {
       console.log(
         `${dict} ${dicts[dict]} ${
           getCoverage(
