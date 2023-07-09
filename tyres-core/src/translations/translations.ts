@@ -7,7 +7,7 @@ import { initConfigs, getDictionaries } from "../config";
 export const surfTranslations = (
   json: TDataNode,
   trail = "",
-  list: string[] = [],
+  list: string[] = []
 ) => {
   const keys = Object.keys(json);
 
@@ -29,7 +29,7 @@ export const listTranslation = () => {
 
 export const addTranslation = (
   entry_path: string,
-  default_values: string[],
+  default_values: string[]
 ) => {
   try {
     const dicts = getDictionaries();
@@ -49,7 +49,7 @@ export const addTranslation = (
     }
 
     console.log(
-      `Entry added ${entry_path} ${default_values} in ${count} Dictionaries \n`,
+      `Entry added ${entry_path} ${default_values} in ${count} Dictionaries \n`
     );
   } catch (e) {
     console.log(e);
@@ -195,10 +195,10 @@ export const translationCoverage = (language: string | undefined) => {
         `${dict} ${dicts[dict]} ${
           getCoverage(
             readTypedFile(
-              `${dicts[dict].toLowerCase()}.translation.ts`,
-            ) as TDictNode,
+              `${dicts[dict].toLowerCase()}.translation.ts`
+            ) as TDictNode
           ).percent
-        }`,
+        }`
       );
     }
   } else {
@@ -210,8 +210,8 @@ export const translationCoverage = (language: string | undefined) => {
     console.log(
       `${index} ${getCoverage(
         readTypedFile(`${index.toLowerCase()}.translation.ts`) as TDictNode,
-        true,
-      )}%`,
+        true
+      )}%`
     );
   }
 };
@@ -219,7 +219,7 @@ export const translationCoverage = (language: string | undefined) => {
 export const updateTranslation = (
   dictName: string,
   path: string,
-  newValue: string,
+  newValue: string
 ) => {
   const json = readTranslation(dictName);
 

@@ -29,7 +29,7 @@ describe("Checking environment manipulation", () => {
     removeEnvironment(TEST_ENV);
 
     expect(config.getEnvironments()).toEqual(
-      envs.filter((x) => x !== TEST_ENV),
+      envs.filter((x) => x !== TEST_ENV)
     );
   });
 });

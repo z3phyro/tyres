@@ -24,7 +24,7 @@ export const initConfigs = () => {
         "translationsPath": "${DEFAULT_TRANSLATION_FOLDER}",
         "dictionaries": ${JSON.stringify(DEFAULT_DICTIONARIES)},
         "environments": ${JSON.stringify(DEFAULT_ENVIRONMENT_DATA)}
-       }`,
+       }`
     );
   }
 };

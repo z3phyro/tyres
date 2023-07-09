@@ -50,7 +50,7 @@ export const pathAssign = (json: TDataNode, path: string, value: string) => {
 export const pathRemove = (
   json: TDataNode,
   path: string,
-  level: number = 1,
+  level: number = 1
 ) => {
   const parts = path.split(".");
 
@@ -62,7 +62,7 @@ export const pathRemove = (
       return;
     } else {
       throw `Incorrect path ${parts.join(
-        ".",
+        "."
       )} on level ${level} is not an object`;
     }
   }
@@ -127,7 +127,7 @@ export const pathExists = (json: TDataNode, path: string): boolean => {
 
 export const pathGet = (
   json: TDataNode,
-  path: string,
+  path: string
 ): string | boolean | TDataNode => {
   const parts = path.split(".");
   let counter = 1;
