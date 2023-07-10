@@ -6,6 +6,7 @@ import {
   DEFAULT_DICTIONARIES,
   DEFAULT_ENVIRONMENT_DATA,
   DEFAULT_TRANSLATION_FOLDER,
+  DEFAULT_FEATURE_FLAGS_FOLDER,
   getConfigs,
   getDictionaries,
   getEnvironments,
@@ -35,6 +36,8 @@ describe("Checking configuration file", () => {
   test("Reads configuration file properly", () => {
     const config = getConfigs();
     expect(config.translationsPath).toEqual(DEFAULT_TRANSLATION_FOLDER);
+
+    expect(config.featureFlagsPath).toEqual(DEFAULT_FEATURE_FLAGS_FOLDER);
   });
 
   test("Has dictionaries", () => {

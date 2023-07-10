@@ -5,11 +5,14 @@ import {
   pathExists,
   pathGet,
   pathRemove,
+  writeInterface,
 } from "./utils";
 
 import { test, expect } from "vitest";
 
 import { TDataNode } from "../types";
+import { getFolder } from "../config";
+import { readStringFile } from "../io";
 
 const TEST_JSON = { hi: "Hello World!", bye: "Bye bye" };
 const TEST_INTERFACE_JSON = {
@@ -35,6 +38,30 @@ test("Checks that it clears the JSON Object", () => {
   Object.keys(json).forEach((key) => {
     expect(json[key]).toBe("");
   });
+});
+
+test("Add interface", () => {
+  const json = {
+    uno: "uno",
+    dos: "",
+    general: { hello: "Ho la", bye: "Bye!" },
+  };
+
+  const expectedResult = `/* eslint-disable prettier/prettier */
+export interface TranslationInterface {
+  uno: string,
+  dos: string,
+  general: {
+    hello: string,
+    bye: string
+  }
+};`;
+
+  writeInterface(json, getFolder());
+
+  const result = readStringFile("translation.interface.ts").toString();
+
+  expect(result).toBe(expectedResult);
 });
 
 test("Checks that it generates the interface from the JSON Object", () => {

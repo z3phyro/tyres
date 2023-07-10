@@ -9,12 +9,10 @@ import {
   surfTranslations,
   translationImport,
   updateTranslation,
-  writeInterface,
 } from "./translations";
 
 import {
   createFolder,
-  readStringFile,
   readTypedFile,
   removeFile,
   removeFolder,
@@ -86,30 +84,6 @@ describe("Test translation functions", () => {
     const result = readTypedFile("english.translation.ts");
 
     expect(result).toEqual({ general: { hi: "Hello", good: "Good" } });
-  });
-
-  test("Add interface", () => {
-    const json = {
-      uno: "uno",
-      dos: "",
-      general: { hello: "Ho la", bye: "Bye!" },
-    };
-
-    const expectedResult = `/* eslint-disable prettier/prettier */
-export interface TranslationInterface {
-  uno: string,
-  dos: string,
-  general: {
-    hello: string,
-    bye: string
-  }
-};`;
-
-    writeInterface(json);
-
-    const result = readStringFile("translation.interface.ts").toString();
-
-    expect(result).toBe(expectedResult);
   });
 
   test("Read translation", () => {

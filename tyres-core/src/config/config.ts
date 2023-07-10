@@ -3,7 +3,7 @@ import { TConfig, TDictNode } from "../types";
 
 export const CONFIG_FILE_NAME = "tyres.config.json";
 export const DEFAULT_TRANSLATION_FOLDER = "src/translations/";
-export const DEFAULT_ENVIRONMENT_FOLDER = "src/environmentss/";
+export const DEFAULT_FEATURE_FLAGS_FOLDER = "src/feature-flags/";
 export const DEFAULT_ENVIRONMENT_DATA = [
   "development",
   "staging",
@@ -22,6 +22,7 @@ export const initConfigs = () => {
       getConfigFilename(),
       `{ 
         "translationsPath": "${DEFAULT_TRANSLATION_FOLDER}",
+        "featureFlagsPath": "${DEFAULT_FEATURE_FLAGS_FOLDER}", 
         "dictionaries": ${JSON.stringify(DEFAULT_DICTIONARIES)},
         "environments": ${JSON.stringify(DEFAULT_ENVIRONMENT_DATA)}
        }`
@@ -53,6 +54,10 @@ export const setConfigs = (config: TConfig) => {
 
 export const getFolder = () => {
   return getConfigs().translationsPath || DEFAULT_TRANSLATION_FOLDER;
+};
+
+export const getFeaturesFolder = () => {
+  return getConfigs().featureFlagsPath || DEFAULT_FEATURE_FLAGS_FOLDER;
 };
 
 export const getDictionaries = () => {

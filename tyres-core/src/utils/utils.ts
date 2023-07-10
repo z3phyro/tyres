@@ -1,3 +1,4 @@
+import { writeFile } from "../io";
 import { TDataNode } from "../types/types";
 
 export const clearEntries = (json: TDataNode, value = "") => {
@@ -12,13 +13,22 @@ export const clearEntries = (json: TDataNode, value = "") => {
   }
 };
 
+export const writeInterface = (json: TDataNode, folder: string) => {
+  const result = generateInterface(json);
+  writeFile("translation.interface.ts", result, folder);
+};
+
 export const generateInterface = (json: TDataNode, name = "Translation") => {
   return `export interface ${name}Interface ${JSON.stringify(json, null, 2)
     .replace(/("\w+"): (".*")(,?\n)/g, "$1: string$3")
     .replace(/"(\w+)"\s*:/g, "$1:")};`;
 };
 
-export const pathAssign = (json: TDataNode, path: string, value: string) => {
+export const pathAssign = (
+  json: TDataNode,
+  path: string,
+  value: string | boolean
+) => {
   let curObj: TDataNode = json;
   const parts = path.split(".");
   let counter = 1;

@@ -1,8 +1,8 @@
 import { initDictionaries, writeDictionaries } from "../dictionaries";
-import { readFile, readTypedFile, writeFile, writeTranslation } from "../io";
-import { generateInterface, pathAssign, pathRemove } from "../utils";
+import { readFile, readTypedFile, writeTranslation } from "../io";
+import { pathAssign, pathRemove, writeInterface } from "../utils";
 import { TCoverage, TDataNode, TDictNode } from "../types";
-import { initConfigs, getDictionaries } from "../config";
+import { initConfigs, getDictionaries, getFolder } from "../config";
 
 export const surfTranslations = (
   json: TDataNode,
@@ -42,7 +42,7 @@ export const addTranslation = (
       writeTranslation(json, dict);
 
       if (count == 0) {
-        writeInterface(json);
+        writeInterface(json, getFolder());
       }
 
       count++;
@@ -57,11 +57,6 @@ export const addTranslation = (
   }
 
   return true;
-};
-
-export const writeInterface = (json: TDataNode) => {
-  const result = generateInterface(json);
-  writeFile("translation.interface.ts", result);
 };
 
 export const readTranslation = (dictName = "english"): TDataNode => {
@@ -83,7 +78,7 @@ export const removeTranslation = (entry_path: string) => {
 
     writeTranslation(json, dicts[dict]);
     if (count == 0) {
-      writeInterface(json);
+      writeInterface(json, getFolder());
     }
 
     count++;
@@ -119,7 +114,7 @@ export const initTranslations = () => {
 
   const dicts = getDictionaries();
 
-  writeInterface(json[0]);
+  writeInterface(json[0], getFolder());
   let c = 0;
   for (const dict of Object.values(dicts)) {
     writeTranslation(json[c++], dict);
@@ -133,7 +128,7 @@ export const translationImport = () => {
   const count = 0;
   for (const dict of Object.values(dicts)) {
     const json = readFile(`${dict.toLowerCase()}.translation.json`);
-    if (count == 0) writeInterface(json);
+    if (count == 0) writeInterface(json, getFolder());
 
     writeTranslation(json, dict);
   }

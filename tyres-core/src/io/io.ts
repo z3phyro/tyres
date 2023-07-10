@@ -1,5 +1,5 @@
 import fs from "fs";
-import { getFolder } from "../config";
+import { getFeaturesFolder, getFolder } from "../config";
 import { TDataNode } from "../types/types";
 
 export const createFolder = (folder: string) => {
@@ -12,7 +12,7 @@ export const createFolder = (folder: string) => {
 
 export const removeFolder = (folder: string) => {
   try {
-    fs.rmdirSync(folder);
+    fs.rmdirSync(folder, { recursive: true });
   } catch (e) {
     console.error(e);
   }
@@ -107,6 +107,23 @@ export const ${dictName}Translation: TranslationInterface = ${JSON.stringify(
 `;
 
   writeFile(`${dictName.toLowerCase()}.translation.ts`, result, folder);
+};
+
+export const writeFeatureFlag = (
+  json: TDataNode,
+  envName = "development",
+  folder = getFeaturesFolder()
+) => {
+  const result = `import type { TranslationInterface } from "./translation.interface"; 
+
+export const ${envName}featureFlag: TFeatureFlags = ${JSON.stringify(
+    json,
+    null,
+    2
+  ).replace(/"(\w+)"\s*:/g, "$1:")};
+`;
+
+  writeFile(`feature-flags.${envName.toLowerCase()}.ts`, result, folder);
 };
 
 export const fileExists = (filename: string, folder = getFolder()) => {

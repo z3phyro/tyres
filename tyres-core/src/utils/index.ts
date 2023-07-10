@@ -5,4 +5,5 @@ export {
   pathExists,
   pathGet,
   pathRemove,
+  writeInterface,
 } from "./utils";
