@@ -4,4 +4,6 @@
 cd tyres-core
 npm run eslint:check
 npm run prettier:check
+rm -rf lib
+npm run build
 npm run test
