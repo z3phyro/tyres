@@ -10,5 +10,4 @@ export {
   translationCoverage,
   translationImport,
   updateTranslation,
-  writeInterface,
 } from "./translations";

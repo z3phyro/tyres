@@ -1,18 +1,13 @@
 import {
+  createFolder,
   readFile,
   readTypedFile,
   removeFile,
+  removeFolder,
   writeFile,
   writeTranslation,
 } from "./io";
-import {
-  existsSync,
-  mkdirSync,
-  rmdirSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from "node:fs";
+import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import * as config from "../config/config";
 
 import { afterAll, beforeAll, describe, vi, test, expect } from "vitest";
@@ -35,19 +30,11 @@ describe("Checking IO functions", () => {
 
     getFolderMock.mockImplementation(() => TEST_FOLDER);
 
-    try {
-      mkdirSync(TEST_FOLDER);
-    } catch (e) {
-      console.log(e);
-    }
+    createFolder(TEST_FOLDER);
   });
 
   afterAll(() => {
-    try {
-      rmdirSync(TEST_FOLDER);
-    } catch (e) {
-      console.log(e);
-    }
+    removeFolder(TEST_FOLDER);
   });
 
   test("Writes the file into the system", () => {

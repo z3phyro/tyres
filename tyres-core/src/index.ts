@@ -10,7 +10,6 @@ export {
   translationCoverage,
   translationImport,
   updateTranslation,
-  writeInterface,
 } from "./translations";
 
 export {
@@ -41,7 +40,6 @@ export {
   CONFIG_FILE_NAME,
   DEFAULT_DICTIONARIES,
   DEFAULT_ENVIRONMENT_DATA,
-  DEFAULT_ENVIRONMENT_FOLDER,
   getFolder,
   initConfigs,
   getConfigs,
