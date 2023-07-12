@@ -6,4 +6,5 @@ export {
   pathGet,
   pathRemove,
   writeInterface,
+  surfObjectKeys,
 } from "./utils";

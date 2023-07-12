@@ -3,20 +3,22 @@ import {
   addEnvironment,
   initTranslations,
   removeEnvironment,
-} from "@z3phyro/tyres-core";
-import {
   addTranslation,
   listTranslation,
   removeTranslation,
   translationCoverage,
   translationImport,
-} from "@z3phyro/tyres-core";
-import {
   addDictionary,
   listDictionaries,
   removeDictionary,
+  listEnvironments,
+  addFeatureFlag,
+  initFeatureFlags,
+  removeFeatureFlag,
+  enableFeatureFlag,
+  disableFeatureFlag,
+  listFeatureFlags,
 } from "@z3phyro/tyres-core";
-import { listEnvironments } from "@z3phyro/tyres-core";
 const figlet = require("figlet");
 
 console.log(
@@ -57,7 +59,7 @@ entry
 
 const dict = program
   .command("dict")
-  .description("Operations with dictionaries");
+  .description("List, add or remove dictionaries");
 
 dict
   .command("list")
@@ -107,5 +109,39 @@ env
     removeEnvironment(env);
     listEnvironments();
   });
+
+const featureFlags = program
+  .command("feature")
+  .description("Initialize, list, add, remove, enable or disable features");
+
+featureFlags
+  .command("list")
+  .description("Lists feature flags")
+  .action(listFeatureFlags);
+
+featureFlags
+  .command("init")
+  .description("Initializes feature flags")
+  .action(initFeatureFlags);
+
+featureFlags
+  .command("add <feature_name>")
+  .description("Add feature flag")
+  .action(addFeatureFlag);
+
+featureFlags
+  .command("remove <feature_name>")
+  .description("Remove feature flag")
+  .action(removeFeatureFlag);
+
+featureFlags
+  .command("enable <feature_name>")
+  .description("Enable feature flag")
+  .action(enableFeatureFlag);
+
+featureFlags
+  .command("disable <feature_name>")
+  .description("Disable feature flag")
+  .action(disableFeatureFlag);
 
 program.parse(process.argv);

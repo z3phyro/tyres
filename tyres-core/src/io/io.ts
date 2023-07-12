@@ -114,9 +114,9 @@ export const writeFeatureFlag = (
   envName = "development",
   folder = getFeaturesFolder()
 ) => {
-  const result = `import type { TranslationInterface } from "./translation.interface"; 
+  const result = `import type { FeatureFlagsInterface } from "./feature-flags.interface"; 
 
-export const ${envName}featureFlag: TFeatureFlags = ${JSON.stringify(
+export const ${envName}featureFlag: FeatureFlagsInterface = ${JSON.stringify(
     json,
     null,
     2

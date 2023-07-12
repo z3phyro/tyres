@@ -6,7 +6,6 @@ export {
   listTranslation,
   readTranslation,
   removeTranslation,
-  surfTranslations,
   translationCoverage,
   translationImport,
   updateTranslation,

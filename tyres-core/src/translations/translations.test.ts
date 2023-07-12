@@ -6,7 +6,6 @@ import {
   initTranslations,
   readTranslation,
   removeTranslation,
-  surfTranslations,
   translationImport,
   updateTranslation,
 } from "./translations";
@@ -51,19 +50,6 @@ describe("Test translation functions", () => {
 
     removeFolder(TEST_FOLDER);
     config.removeConfigs();
-  });
-
-  test("Test Surf translations", () => {
-    const json = {
-      general: {
-        hi: "Hello",
-        bye: "Good Bye",
-      },
-    };
-    const result: string[] = [];
-    surfTranslations(json, "", result);
-
-    expect(result).toEqual(["general.hi", "general.bye"]);
   });
 
   test("Add translation", () => {

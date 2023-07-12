@@ -6,7 +6,6 @@ export {
   listTranslation,
   readTranslation,
   removeTranslation,
-  surfTranslations,
   translationCoverage,
   translationImport,
   updateTranslation,
@@ -55,3 +54,12 @@ export {
   listEnvironments,
   removeEnvironment,
 } from "./environments";
+
+export {
+  addFeatureFlag,
+  disableFeatureFlag,
+  enableFeatureFlag,
+  initFeatureFlags,
+  removeFeatureFlag,
+  listFeatureFlags,
+} from "./feature-flags";

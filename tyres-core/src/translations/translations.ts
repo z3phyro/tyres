@@ -1,30 +1,16 @@
 import { initDictionaries, writeDictionaries } from "../dictionaries";
 import { readFile, readTypedFile, writeTranslation } from "../io";
-import { pathAssign, pathRemove, writeInterface } from "../utils";
+import {
+  pathAssign,
+  pathRemove,
+  surfObjectKeys,
+  writeInterface,
+} from "../utils";
 import { TCoverage, TDataNode, TDictNode } from "../types";
 import { initConfigs, getDictionaries, getFolder } from "../config";
 
-export const surfTranslations = (
-  json: TDataNode,
-  trail = "",
-  list: string[] = []
-) => {
-  const keys = Object.keys(json);
-
-  for (const key of keys) {
-    const path = `${trail ? trail + "." : ""}${key}`;
-    if (typeof json[key] == "object")
-      surfTranslations(json[key] as TDataNode, path, list);
-    else {
-      console.log(path, json[key]);
-      list.push(path);
-    }
-  }
-};
-
 export const listTranslation = () => {
-  const json = readTranslation();
-  surfTranslations(json);
+  surfObjectKeys(readTranslation());
 };
 
 export const addTranslation = (

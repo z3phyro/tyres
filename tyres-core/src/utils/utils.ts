@@ -13,14 +13,24 @@ export const clearEntries = (json: TDataNode, value = "") => {
   }
 };
 
-export const writeInterface = (json: TDataNode, folder: string) => {
-  const result = generateInterface(json);
-  writeFile("translation.interface.ts", result, folder);
+export const writeInterface = (
+  json: TDataNode,
+  folder: string,
+  name = "Translation",
+  filename = "translation.interface.ts",
+  dataType = "string"
+) => {
+  const result = generateInterface(json, name, dataType);
+  writeFile(filename, result, folder);
 };
 
-export const generateInterface = (json: TDataNode, name = "Translation") => {
+export const generateInterface = (
+  json: TDataNode,
+  name = "Translation",
+  dataType = "string"
+) => {
   return `export interface ${name}Interface ${JSON.stringify(json, null, 2)
-    .replace(/("\w+"): (".*")(,?\n)/g, "$1: string$3")
+    .replace(/("\w+"): (".*")(,?\n)/g, `$1: ${dataType}$3`)
     .replace(/"(\w+)"\s*:/g, "$1:")};`;
 };
 
@@ -80,35 +90,6 @@ export const pathRemove = (json: TDataNode, path: string, level = 1) => {
   delete json[path];
 };
 
-export const pathRemove2 = (json: TDataNode, path: string) => {
-  let curObj = json;
-  const parts = path.split(".");
-  let counter = 1;
-
-  if (parts.length === 1) {
-    delete curObj[parts[0]];
-    return;
-  }
-
-  for (const part of parts) {
-    if (counter++ < parts.length) {
-      if (typeof curObj[part] == "object") {
-        curObj = curObj[part] as TDataNode;
-        continue;
-      }
-
-      throw `Incorrect path. Property ${part} level ${counter - 1}`;
-    }
-
-    if (typeof curObj[part] == "undefined")
-      throw `Incorrect path. Property ${part} level ${counter - 1}`;
-
-    delete curObj[part];
-  }
-
-  return json;
-};
-
 export const pathExists = (json: TDataNode, path: string): boolean => {
   let curObj: TDataNode = json;
   const parts = path.split(".");
@@ -154,4 +135,22 @@ export const pathGet = (
   }
 
   return json;
+};
+
+export const surfObjectKeys = (
+  json: TDataNode,
+  trail = "",
+  list: string[] = []
+) => {
+  const keys = Object.keys(json);
+
+  for (const key of keys) {
+    const path = `${trail ? trail + "." : ""}${key}`;
+    if (typeof json[key] == "object")
+      surfObjectKeys(json[key] as TDataNode, path, list);
+    else {
+      console.log(path, json[key]);
+      list.push(path);
+    }
+  }
 };

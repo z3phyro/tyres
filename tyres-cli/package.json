@@ -4,6 +4,7 @@
   "description": "CLI inspired by prisma, to create and mantain statically typed resources on any typescript project.",
   "main": "lib/index.js",
   "scripts": {
+    "prepare": "cd .. && husky install",
     "prepublish": "npm run build",
     "build": "npx tsc",
     "postbuild": "echo '#!/usr/bin/env node' | cat - lib/index.js > temp && mv temp lib/index.js"

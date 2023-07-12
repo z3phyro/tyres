@@ -1,7 +1,12 @@
 import * as config from "../config";
 import { readTypedFile, writeFile } from "../io";
-import { writeFeatureFlag } from "../io/io";
-import { pathAssign, pathRemove } from "../utils";
+import { createFolder, writeFeatureFlag } from "../io/io";
+import {
+  pathAssign,
+  pathRemove,
+  surfObjectKeys,
+  writeInterface,
+} from "../utils";
 
 const DEFAULT_INTERFACE_VALUE = `{
   general: {
@@ -16,9 +21,10 @@ const DEFAULT_INTERFACE = `{
 }`;
 
 export const initFeatureFlags = () => {
+  createFolder(config.getFeaturesFolder());
   writeFile(
     "feature-flags.interface.ts",
-    `export interface TFeatureFlags ${DEFAULT_INTERFACE}`,
+    `export interface FeatureFlagsInterface ${DEFAULT_INTERFACE}`,
     config.getFeaturesFolder()
   );
 
@@ -27,22 +33,23 @@ export const initFeatureFlags = () => {
   for (const env of environments) {
     writeFile(
       `feature-flags.${env}.ts`,
-      `import { TFeatureFlags } from "./feature-flags.interface.ts";
+      `import { FeatureFlagsInterface } from "./feature-flags.interface.ts";
 
 export const flags${env[0].toUpperCase()}${env.slice(
         1
-      )}: TFeatureFlags = ${DEFAULT_INTERFACE_VALUE}`,
+      )}: FeatureFlagsInterface = ${DEFAULT_INTERFACE_VALUE}`,
       config.getFeaturesFolder()
     );
   }
 
   writeFile(
     "feature-flags.ts",
-    `import { flagsDevelopment } from "./feature-flags.development.ts";
+    `import { FeatureFlagsInterface } from "./feature-flags.interface.ts";
+import { flagsDevelopment } from "./feature-flags.development.ts";
 import { flagsStaging } from "./feature-flags.staging.ts";       
 import { flagsProduction } from "./feature-flags.production.ts";
 
-export const featureFlags: { [id: string]: TFeatureFlags } = {
+export const featureFlags: { [id: string]: FeatureFlagsInterface } = {
   development: flagsDevelopment,
   staging: flagsStaging,
   production: flagsProduction
@@ -62,6 +69,15 @@ export const addFeatureFlag = (path: string) => {
 
     pathAssign(json, path, false);
 
+    if (env == envs[0]) {
+      writeInterface(
+        json,
+        config.getFeaturesFolder(),
+        "FeatureFlags",
+        "feature-flags.interface.ts"
+      );
+    }
+
     writeFeatureFlag(json, env, config.getFeaturesFolder());
   }
 };
@@ -79,6 +95,16 @@ export const removeFeatureFlag = (path: string) => {
       pathRemove(json, path);
     } catch (e) {
       console.log(e);
+    }
+
+    if (env == envs[0]) {
+      writeInterface(
+        json,
+        config.getFeaturesFolder(),
+        "FeatureFlags",
+        "feature-flags.interface.ts",
+        "boolean"
+      );
     }
 
     writeFeatureFlag(json, env, config.getFeaturesFolder());
@@ -121,4 +147,12 @@ export const disableFeatureFlag = (path: string) => {
 
     writeFeatureFlag(json, env, config.getFeaturesFolder());
   }
+};
+
+export const listFeatureFlags = () => {
+  const envs = config.getEnvironments();
+
+  const json = readTypedFile(`feature-flags.${envs[0]}.ts`);
+
+  surfObjectKeys(json);
 };

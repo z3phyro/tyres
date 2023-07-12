@@ -42,7 +42,7 @@ describe("Checks feature flags", () => {
     ).toString();
 
     expect(interfaceString).toEqual(`/* eslint-disable prettier/prettier */
-export interface TFeatureFlags {
+export interface FeatureFlagsInterface {
   general: {
     showHelloWorld: boolean;
   }
@@ -53,9 +53,9 @@ export interface TFeatureFlags {
       config.getFeaturesFolder()
     ).toString();
     expect(devEnvironmentString).toEqual(`/* eslint-disable prettier/prettier */
-import { TFeatureFlags } from "./feature-flags.interface.ts";
+import { FeatureFlagsInterface } from "./feature-flags.interface.ts";
 
-export const flagsDevelopment: TFeatureFlags = {
+export const flagsDevelopment: FeatureFlagsInterface = {
   general: {
     showHelloWorld: true
   }
@@ -66,11 +66,12 @@ export const flagsDevelopment: TFeatureFlags = {
       config.getFeaturesFolder()
     ).toString();
     expect(featureFlagsString).toEqual(`/* eslint-disable prettier/prettier */
+import { FeatureFlagsInterface } from "./feature-flags.interface.ts";
 import { flagsDevelopment } from "./feature-flags.development.ts";
 import { flagsStaging } from "./feature-flags.staging.ts";       
 import { flagsProduction } from "./feature-flags.production.ts";
 
-export const featureFlags: { [id: string]: TFeatureFlags } = {
+export const featureFlags: { [id: string]: FeatureFlagsInterface } = {
   development: flagsDevelopment,
   staging: flagsStaging,
   production: flagsProduction

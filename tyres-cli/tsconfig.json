@@ -7,7 +7,7 @@
     "module": "commonjs",
     "sourceMap": true,
     "esModuleInterop": true,
-    "moduleResolution": "node"  
+    "moduleResolution": "node"
   },
-  "exclude": ["node_modules", "src/translations"]
+  "exclude": ["node_modules", "src/translations", "src/feature-flags"]
 }

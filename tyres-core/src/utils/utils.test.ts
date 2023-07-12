@@ -5,6 +5,7 @@ import {
   pathExists,
   pathGet,
   pathRemove,
+  surfObjectKeys,
   writeInterface,
 } from "./utils";
 
@@ -154,5 +155,18 @@ export interface TranslationInterface {
       },
     });
     expect(pathGet(obj, "general.interesting.stuff")).toBe("Ciekawe!");
+  });
+
+  test("Test Surf translations", () => {
+    const json = {
+      general: {
+        hi: "Hello",
+        bye: "Good Bye",
+      },
+    };
+    const result: string[] = [];
+    surfObjectKeys(json, "", result);
+
+    expect(result).toEqual(["general.hi", "general.bye"]);
   });
 });
