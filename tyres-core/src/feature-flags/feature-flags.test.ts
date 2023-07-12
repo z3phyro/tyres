@@ -2,20 +2,24 @@ import { describe, beforeAll, vi, afterAll, test, expect } from "vitest";
 import * as config from "../config";
 import {
   createFolder,
+  fileExists,
   readStringFile,
   readTypedFile,
   removeFolder,
 } from "../io";
 import {
   addFeatureFlag,
+  createFileForEnvironment,
   disableFeatureFlag,
   enableFeatureFlag,
   initFeatureFlags,
   removeFeatureFlag,
+  removeFileFromEnvironment,
 } from "./feature-flags";
 import { initConfigs } from "../config";
 
 const TEST_FOLDER = "src/feature-flags/sandbox/";
+const ENV_NAME = "preview";
 
 describe("Checks feature flags", () => {
   beforeAll(() => {
@@ -137,5 +141,23 @@ export const featureFlags: { [id: string]: FeatureFlagsInterface } = {
         showHelloWorld: true,
       },
     });
+  });
+
+  test("Creates file for environment", () => {
+    createFileForEnvironment(ENV_NAME);
+
+    const envFlags = readTypedFile(`feature-flags.${ENV_NAME}.ts`);
+
+    expect(envFlags).toEqual({
+      general: {
+        showHelloWorld: false,
+      },
+    });
+  });
+
+  test("Removes file from environment", () => {
+    removeFileFromEnvironment(ENV_NAME);
+
+    expect(fileExists(`feature-flags.${ENV_NAME}.ts`)).toBeFalsy();
   });
 });

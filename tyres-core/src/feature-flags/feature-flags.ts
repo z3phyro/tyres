@@ -1,7 +1,8 @@
 import * as config from "../config";
 import { readTypedFile, writeFile } from "../io";
-import { createFolder, writeFeatureFlag } from "../io/io";
+import { createFolder, removeFile, writeFeatureFlag } from "../io/io";
 import {
+  clearEntries,
   pathAssign,
   pathRemove,
   surfObjectKeys,
@@ -58,7 +59,28 @@ export const featureFlags: { [id: string]: FeatureFlagsInterface } = {
   );
 };
 
-export const addFeatureFlag = (path: string) => {
+export const createFileForEnvironment = (env: string) => {
+  const envs = config.getEnvironments();
+
+  const json = readTypedFile(
+    `feature-flags.${envs[0]}.ts`,
+    config.getFeaturesFolder()
+  );
+
+  clearEntries(json);
+
+  writeFeatureFlag(json, env, config.getFeaturesFolder());
+};
+
+export const removeFileFromEnvironment = (env: string) => {
+  try {
+    removeFile(`feature-flags.${env}.ts`, config.getFeaturesFolder());
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const manageFeatureFlag = (path: string, operation: "add" | "remove") => {
   const envs = config.getEnvironments();
 
   for (const env of envs) {
@@ -67,7 +89,15 @@ export const addFeatureFlag = (path: string) => {
       config.getFeaturesFolder()
     );
 
-    pathAssign(json, path, false);
+    try {
+      if (operation == "add") {
+        pathAssign(json, path, false);
+      } else {
+        pathRemove(json, path);
+      }
+    } catch (e) {
+      console.error(e);
+    }
 
     if (env == envs[0]) {
       writeInterface(
@@ -82,33 +112,12 @@ export const addFeatureFlag = (path: string) => {
   }
 };
 
+export const addFeatureFlag = (path: string) => {
+  manageFeatureFlag(path, "add");
+};
+
 export const removeFeatureFlag = (path: string) => {
-  const envs = config.getEnvironments();
-
-  for (const env of envs) {
-    const json = readTypedFile(
-      `feature-flags.${env}.ts`,
-      config.getFeaturesFolder()
-    );
-
-    try {
-      pathRemove(json, path);
-    } catch (e) {
-      console.log(e);
-    }
-
-    if (env == envs[0]) {
-      writeInterface(
-        json,
-        config.getFeaturesFolder(),
-        "FeatureFlags",
-        "feature-flags.interface.ts",
-        "boolean"
-      );
-    }
-
-    writeFeatureFlag(json, env, config.getFeaturesFolder());
-  }
+  manageFeatureFlag(path, "remove");
 };
 
 const setFeatureFlag = (path: string, value: boolean, environment = "") => {

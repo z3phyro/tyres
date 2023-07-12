@@ -1,4 +1,8 @@
 import { getEnvironments, setEnvironments } from "../config";
+import {
+  createFileForEnvironment,
+  removeFileFromEnvironment,
+} from "../feature-flags";
 
 export const listEnvironments = () => {
   const environments = getEnvironments();
@@ -13,6 +17,7 @@ export const addEnvironment = (envName: string) => {
 
   environments.push(envName);
   setEnvironments(Array.from(new Set(environments)));
+  createFileForEnvironment(envName.toLowerCase());
 };
 
 export const removeEnvironment = (envName: string) => {
@@ -21,4 +26,5 @@ export const removeEnvironment = (envName: string) => {
   setEnvironments(
     environments.filter((env) => env.toLowerCase() !== envName.toLowerCase())
   );
+  removeFileFromEnvironment(envName.toLowerCase());
 };
