@@ -27,7 +27,8 @@
     "prettier:format": "prettier . -w",
     "prettier:check": "prettier . --check",
     "eslint:check": "eslint .",
-    "eslint:fix": "eslint . --fix"
+    "eslint:fix": "eslint . --fix",
+    "fix": "prettier . -w && eslint . --fix"
   },
   "keywords": [
     "translation",

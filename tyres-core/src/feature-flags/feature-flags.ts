@@ -111,17 +111,20 @@ export const removeFeatureFlag = (path: string) => {
   }
 };
 
-export const enableFeatureFlag = (path: string) => {
+const setFeatureFlag = (path: string, value: boolean, environment = "") => {
   const envs = config.getEnvironments();
 
   for (const env of envs) {
+    if (environment && environment.toLowerCase() !== env.toLowerCase())
+      continue;
+
     const json = readTypedFile(
       `feature-flags.${env}.ts`,
       config.getFeaturesFolder()
     );
 
     try {
-      pathAssign(json, path, true);
+      pathAssign(json, path, value);
     } catch (e) {
       console.log(e);
     }
@@ -130,23 +133,12 @@ export const enableFeatureFlag = (path: string) => {
   }
 };
 
-export const disableFeatureFlag = (path: string) => {
-  const envs = config.getEnvironments();
+export const enableFeatureFlag = (path: string, environment = "") => {
+  setFeatureFlag(path, true, environment);
+};
 
-  for (const env of envs) {
-    const json = readTypedFile(
-      `feature-flags.${env}.ts`,
-      config.getFeaturesFolder()
-    );
-
-    try {
-      pathAssign(json, path, false);
-    } catch (e) {
-      console.log(e);
-    }
-
-    writeFeatureFlag(json, env, config.getFeaturesFolder());
-  }
+export const disableFeatureFlag = (path: string, environment = "") => {
+  setFeatureFlag(path, false, environment);
 };
 
 export const listFeatureFlags = () => {

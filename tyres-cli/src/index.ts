@@ -23,8 +23,8 @@ const figlet = require("figlet");
 
 console.log(
   "\n ----------------------------- \n" +
-    figlet.textSync("Tyres") +
-    "\n ----------------------------- \n",
+  figlet.textSync("Tyres") +
+  "\n ----------------------------- \n",
 );
 
 const program = new Command();
@@ -135,12 +135,12 @@ featureFlags
   .action(removeFeatureFlag);
 
 featureFlags
-  .command("enable <feature_name>")
+  .command("enable <feature_name> [environment]")
   .description("Enable feature flag")
   .action(enableFeatureFlag);
 
 featureFlags
-  .command("disable <feature_name>")
+  .command("disable <feature_name> [environment]")
   .description("Disable feature flag")
   .action(disableFeatureFlag);
 
