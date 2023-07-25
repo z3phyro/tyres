@@ -10,13 +10,7 @@ interface TMenuLink {
   isChild?: boolean;
   isActive?: () => boolean;
 }
-export default function MenuLink({
-  title,
-  href,
-  items,
-  isChild,
-  isActive,
-}: TMenuLink) {
+export default function MenuLink({ title, href, items, isChild, isActive }: TMenuLink) {
   const location = useLocation();
   const [open, setOpen] = createSignal(false);
 
@@ -28,8 +22,7 @@ export default function MenuLink({
     if (!isActive?.() || !items?.length) return title;
 
     return (
-      items?.find((item) => item.href && location.pathname.includes(item.href))
-        ?.title ?? title
+      items?.find((item) => item.href && location.pathname.includes(item.href))?.title ?? title
     );
   };
 
@@ -41,9 +34,7 @@ export default function MenuLink({
         } ${isChild ? "p-2" : ""}`}>
         {href ? <A href={href}>{title}</A> : showTitle()}
         {items?.length && (
-          <DropdownMenu.Icon>
-            {open() ? <FiChevronUp /> : <FiChevronDown />}
-          </DropdownMenu.Icon>
+          <DropdownMenu.Icon>{open() ? <FiChevronUp /> : <FiChevronDown />}</DropdownMenu.Icon>
         )}
       </DropdownMenu.Trigger>
       <Show when={items?.length}>

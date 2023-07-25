@@ -17,7 +17,6 @@ import "./root.css";
 import TopMenu from "./stories/containers/top-menu";
 
 export default function Root() {
-  const location = useLocation();
   return (
     <Html lang="en">
       <Head>
@@ -25,7 +24,7 @@ export default function Root() {
         <Meta charset="utf-8" />
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Body>
+      <Body class="h-full bg-gray-30">
         <Suspense>
           <ErrorBoundary>
             <TopMenu />
