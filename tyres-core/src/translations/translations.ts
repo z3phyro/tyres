@@ -10,7 +10,9 @@ import { TCoverage, TDataNode, TDictNode } from "../types";
 import { initConfigs, getDictionaries, getFolder } from "../config";
 
 export const listTranslation = () => {
-  surfObjectKeys(readTranslation());
+  const result: string[] = [];
+  surfObjectKeys(readTranslation(), "", result);
+  return result;
 };
 
 export const addTranslation = (

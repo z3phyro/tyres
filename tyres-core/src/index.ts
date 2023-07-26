@@ -63,3 +63,11 @@ export {
   removeFeatureFlag,
   listFeatureFlags,
 } from "./feature-flags";
+
+export {
+  pathGet,
+  clearEntries,
+  pathAssign,
+  pathExists,
+  pathRemove,
+} from "./utils";
