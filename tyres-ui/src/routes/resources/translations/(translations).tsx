@@ -1,13 +1,14 @@
 import { FiDelete, FiFilter } from "solid-icons/fi";
 import { createResource, createSignal } from "solid-js";
-import { useRouteData } from "solid-start";
+import { useNavigate, useRouteData } from "solid-start";
 import DictionaryService from "~/services/dictionary.service";
 import TranslationService from "~/services/translation.service";
-import Breadcrumbs from "~/stories/components/breadcrumbs/breadcrumbs";
 import Card from "~/stories/components/card";
 import Input from "~/stories/components/input";
 import Table from "~/stories/components/table";
-import { LINKS_DATA } from "./translations.const";
+import { ROUTE_PAGE_TRANSLATIONS } from "~/config/routes";
+import Main from "~/stories/components/main";
+import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
 
 export function routeData() {
   const [all] = createResource(async () => {
@@ -20,9 +21,11 @@ export function routeData() {
 }
 
 export default function Page() {
+  const navigate = useNavigate();
   const { all } = useRouteData<typeof routeData>();
 
   const [searchText, setSearchText] = createSignal("");
+
   const filteredData = () =>
     all()?.data?.filter((row: string[]) =>
       row.some((cell) => cell.toLowerCase().includes(searchText().toLowerCase())),
@@ -37,8 +40,8 @@ export default function Page() {
   };
 
   return (
-    <main class="container mt-4">
-      <Breadcrumbs links={LINKS_DATA} />
+    <Main>
+      <SmartBreadcrumbs />
       <Input
         value={searchText()}
         onInput={handleSearchChange}
@@ -52,9 +55,9 @@ export default function Page() {
         <Table
           columns={["path", ...(all()?.dicts || []), ""]}
           data={filteredData()}
-          onEdit={(row) => console.log(row)}
+          onEdit={(row) => navigate(`${ROUTE_PAGE_TRANSLATIONS}/${filteredData()[row][0]}`)}
         />
       </Card>
-    </main>
+    </Main>
   );
 }

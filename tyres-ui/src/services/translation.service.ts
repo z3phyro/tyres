@@ -1,8 +1,18 @@
 import { pathGet } from "@z3phyro/tyres-core";
 import { ROUTE_API_PATHS, ROUTE_API_TRANSLATIONS } from "~/config/routes";
 import DictionaryService from "./dictionary.service";
+import { TDataNode } from "@z3phyro/tyres-core/lib/types";
 
 const TranslationService = {
+  getTranslationsObject: async (): Promise<TDataNode[]> => {
+    const dicts = await DictionaryService.getDictionaries();
+    const promiseList = dicts.map((dict: string) =>
+      fetch(`${ROUTE_API_TRANSLATIONS}/${dict.toLowerCase()}/`),
+    );
+
+    const result = await Promise.all(promiseList);
+    return await Promise.all(result.map((res) => res.json()));
+  },
   getTranslationsTable: async (): Promise<string[][]> => {
     const dicts = await DictionaryService.getDictionaries();
     const promiseList = dicts.map((dict: string) =>

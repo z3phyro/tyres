@@ -1,12 +1,13 @@
 import { JSX } from "solid-js";
 import { A } from "solid-start";
 
+export interface TBreadcrumbLink {
+  title: string | JSX.Element;
+  href?: string;
+  active: boolean;
+}
 export interface TBreadcrumbsProps {
-  links: {
-    title: string | JSX.Element;
-    href?: string;
-    active: boolean;
-  }[];
+  links: TBreadcrumbLink[];
 }
 export default function Breadcrumbs(props: TBreadcrumbsProps) {
   return (

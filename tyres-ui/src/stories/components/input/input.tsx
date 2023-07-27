@@ -18,7 +18,7 @@ export default function Input(props: TInputProps) {
       <span
         class={`absolute left-3 top-2 transition-color duration-300 ${
           !!props.value ? props.leadingClass || "text-blue-500" : "text-gray-300"
-        } ${props.trailingClick ? "cursor-pointer" : ""}`}>
+        } ${props.leadingClick ? "cursor-pointer" : ""}`}>
         {props.leading}
       </span>
       <TextField.Input
