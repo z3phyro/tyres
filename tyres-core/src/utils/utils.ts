@@ -117,14 +117,15 @@ export const pathGet = (
   path: string
 ): string | boolean | TDataNode => {
   const parts = path.split(".");
-  let counter = 1;
+  let counter = 0;
   for (const part of parts) {
+    counter++;
     if (typeof json[part] == "object") {
       json = json[part] as TDataNode;
       continue;
     }
 
-    if (counter++ > parts.length) {
+    if (counter > parts.length) {
       throw `Path doesn't exist property ${part} level ${counter}`;
     }
 
