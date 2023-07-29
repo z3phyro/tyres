@@ -55,7 +55,11 @@ export default function Page() {
         <Table
           columns={["path", ...(all()?.dicts || []), ""]}
           data={filteredData()}
-          onEdit={(row) => navigate(`${ROUTE_PAGE_TRANSLATIONS}/${filteredData()[row][0]}`)}
+          onEdit={(row) =>
+            navigate(
+              `${ROUTE_PAGE_TRANSLATIONS}/${filteredData()[row][0]}?dictionary=${all()?.dicts[0]}`,
+            )
+          }
         />
       </Card>
     </Main>

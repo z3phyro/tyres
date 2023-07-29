@@ -18,11 +18,11 @@
     "@kobalte/core": "^0.9.8",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.2",
+    "@z3phyro/tyres-core": "file:../tyres-core",
     "solid-icons": "^1.0.11",
     "solid-js": "^1.7.2",
     "solid-start": "^0.2.26",
-    "undici": "^5.15.1",
-    "@z3phyro/tyres-core": "file:../tyres-core"
+    "undici": "^5.15.1"
   },
   "engines": {
     "node": ">=16"

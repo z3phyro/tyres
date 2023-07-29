@@ -1,10 +1,12 @@
 import { pathExists, pathGet } from "@z3phyro/tyres-core";
-import { createResource } from "solid-js";
-import { A, useParams, useRouteData, useSearchParams } from "solid-start";
+import { createEffect, createResource, createSignal } from "solid-js";
+import { A, createRouteAction, useParams, useRouteData, useSearchParams } from "solid-start";
 import DictionaryService from "~/services/dictionary.service";
 import TranslationService from "~/services/translation.service";
+import Button from "~/stories/components/button";
 import Card from "~/stories/components/card";
 import Main from "~/stories/components/main";
+import Textarea from "~/stories/components/textarea";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
 
 export function routeData() {
@@ -24,15 +26,34 @@ export default function Page() {
   const { all } = useRouteData<typeof routeData>();
   const dictIndex = () =>
     (searchParams.dictionary && all()?.dicts.indexOf(searchParams.dictionary)) || 0;
-  const value = () =>
-    pathExists(all()?.data[dictIndex()] ?? {}, path) &&
-    pathGet(all()?.data[dictIndex()] ?? {}, path)?.toString();
+
+  const [value, setValue] = createSignal("");
+
+  const [modified, setModified] = createSignal(false);
+  const handleInput = (event: Event) => {
+    setValue((event.target as HTMLTextAreaElement)?.value);
+    if (!modified()) setModified(true);
+  };
+
+  createEffect(() => {
+    setValue(
+      (pathExists(all()?.data[dictIndex()] ?? {}, path) &&
+        pathGet(all()?.data[dictIndex()] ?? {}, path)?.toString()) ||
+        "",
+    );
+    setModified(false);
+  });
+
+  const [updatingEntry, updateEntry] = createRouteAction(async (value: string) => {
+    TranslationService.updateTranslationEntry(searchParams.dictionary, path, value);
+    return value;
+  });
 
   return (
     <Main>
       <SmartBreadcrumbs />
       <Card>
-        <div class="flex w-full justify-end gap-2">
+        <div class="flex w-full justify-end gap-2 mb-4">
           {all()?.dicts.map((dict: string) => (
             <A
               class={`${searchParams.dictionary === dict ? "text-blue-500" : "text-gray-500"}`}
@@ -42,7 +63,17 @@ export default function Page() {
           ))}
         </div>
 
-        {value()}
+        <Textarea value={value()} onInput={handleInput} />
+        <div class="flex w-full justify-between">
+          <Button variant="Danger">Delete</Button>
+          <Button
+            type="submit"
+            disabled={!modified() || updatingEntry.pending}
+            loading={updatingEntry.pending}
+            onClick={() => updateEntry(value())}>
+            Update
+          </Button>
+        </div>
       </Card>
     </Main>
   );
