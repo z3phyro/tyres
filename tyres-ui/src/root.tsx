@@ -13,6 +13,7 @@ import {
 } from "solid-start";
 import "./root.css";
 import TopMenu from "./stories/containers/top-menu";
+import { DialogProvider } from "./stories/containers/dialog/dialog";
 
 export default function Root() {
   return (
@@ -26,9 +27,11 @@ export default function Root() {
         <Suspense>
           <ErrorBoundary>
             <TopMenu />
-            <Routes>
-              <FileRoutes />
-            </Routes>
+            <DialogProvider>
+              <Routes>
+                <FileRoutes />
+              </Routes>
+            </DialogProvider>
           </ErrorBoundary>
         </Suspense>
         <Scripts />

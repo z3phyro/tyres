@@ -26,13 +26,11 @@ class TranslationService {
 
     return data;
   };
-  static updateTranslationEntry = async (
-    dictionary: string,
-    path: string,
-    newValue: string,
-  ): Promise<boolean> => {
+  static updateEntry = async (dictionary: string, path: string, newValue: string) => {
     await FetchHelper.put(`${ROUTE_API_TRANSLATIONS}/${dictionary}/${path}`, { value: newValue });
-    return true;
+  };
+  static deleteEntry = async (dictionary: string, path: string) => {
+    await FetchHelper.delete(`${ROUTE_API_TRANSLATIONS}/${dictionary}/${path}`);
   };
 }
 
