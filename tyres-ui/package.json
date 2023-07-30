@@ -1,7 +1,7 @@
 {
   "name": "tyres-ui",
   "scripts": {
-    "dev": "solid-start dev",
+    "dev": "rm -rf .solid && solid-start dev",
     "build": "solid-start build",
     "start": "solid-start start"
   },
