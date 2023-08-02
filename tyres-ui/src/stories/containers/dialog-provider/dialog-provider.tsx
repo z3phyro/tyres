@@ -1,4 +1,4 @@
-import { JSX, children, createContext, createEffect, createSignal, useContext } from "solid-js";
+import { JSX, createContext, createEffect, createSignal, useContext } from "solid-js";
 import { TButtonProps } from "~/stories/components/button/button";
 import Modal from "~/stories/components/modal";
 import { TModalProps } from "~/stories/components/modal/modal";
@@ -7,7 +7,7 @@ export interface TDialogContext {
   show: (modalProps: TModalProps) => void;
 }
 const DialogContext = createContext<TDialogContext>({
-  show: () => alert("SHOWING"),
+  show: () => console.error("DialogContext not properly initialized"),
 });
 
 export interface TDialogProviderProps {

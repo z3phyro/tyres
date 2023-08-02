@@ -9,8 +9,9 @@ import Button from "~/stories/components/button";
 import Card from "~/stories/components/card";
 import Main from "~/stories/components/main";
 import Textarea from "~/stories/components/textarea";
-import { DialogProvider, useDialog } from "~/stories/containers/dialog/dialog";
+import { DialogProvider, useDialog } from "~/stories/containers/dialog-provider/dialog-provider";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
+import { useToast } from "~/stories/containers/toast-provider/toast-provider";
 
 export function routeData() {
   const [all] = createResource(async () => {
@@ -29,9 +30,10 @@ export default function Page() {
   const { all } = useRouteData<typeof routeData>();
   const dialog = useDialog();
   const navigate = useNavigate();
+  const toast = useToast();
 
-  const dictIndex = () =>
-    (searchParams.dictionary && all()?.dicts.indexOf(searchParams.dictionary)) || 0;
+  const dictionary = () => searchParams.dictionary;
+  const dictIndex = () => (dictionary() && all()?.dicts.indexOf(dictionary())) || 0;
 
   const [value, setValue] = createSignal("");
   const [modified, setModified] = createSignal(false);
@@ -51,11 +53,19 @@ export default function Page() {
   });
 
   const updateEntryAction = async (value: string) => {
-    await TranslationService.updateEntry(searchParams.dictionary, path, value);
+    await TranslationService.updateEntry(dictionary(), path, value);
+    toast.show({
+      title: "Entry updated",
+      variant: EUiVariant.Success,
+    });
   };
 
   const deleteEntryAction = async () => {
-    await TranslationService.deleteEntry(searchParams.dictionary, path);
+    await TranslationService.deleteEntry(dictionary(), path);
+    toast.show({
+      title: "Entry removed",
+      variant: EUiVariant.Danger,
+    });
     navigate(ROUTE_PAGE_TRANSLATIONS);
   };
 
@@ -85,7 +95,7 @@ export default function Page() {
           <div class="flex w-full justify-end gap-2 mb-4">
             {all()?.dicts.map((dict: string) => (
               <A
-                class={`${searchParams.dictionary === dict ? "text-blue-500" : "text-gray-500"}`}
+                class={`${dictionary() === dict ? "text-blue-500" : "text-gray-500"}`}
                 href={`?dictionary=${dict}`}>
                 {dict}
               </A>
@@ -98,7 +108,7 @@ export default function Page() {
             <Button variant={EUiVariant.Danger} onClick={deleteEntry}>
               Delete
             </Button>
-            <Button type="submit" disabled={!modified()} onClick={() => updateEntryAction(value())}>
+            <Button type="button" disabled={!modified()} onClick={() => updateEntryAction(value())}>
               Update
             </Button>
           </div>
