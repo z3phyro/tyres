@@ -1,10 +1,11 @@
-import { FiEdit } from "solid-icons/fi";
+import { FiDelete, FiEdit, FiTrash2 } from "solid-icons/fi";
 import { For } from "solid-js";
 
 export interface TTableProps {
   columns: string[];
   data: string[][];
   onEdit?: (row: number) => void;
+  onRemove?: (row: number) => void;
 }
 
 export default function Table(props: TTableProps) {
@@ -34,14 +35,26 @@ export default function Table(props: TTableProps) {
                   <td class={`${i() == 0 ? "pl-4" : ""} text-gray-800 text-lg py-2`}>{cell}</td>
                 )}
               </For>
-              {props.onEdit && (
-                <td class="select-none">
-                  <span
-                    role="button"
-                    class="cursor-pointer hover:text-blue-500"
-                    onClick={() => props.onEdit?.(k())}>
-                    <FiEdit />
-                  </span>
+              {(props.onEdit || props.onRemove) && (
+                <td>
+                  <div class="flex items-center justify-center select-none gap-2">
+                    {props.onEdit && (
+                      <span
+                        role="button"
+                        class="cursor-pointer hover:text-blue-500"
+                        onClick={() => props.onEdit?.(k())}>
+                        <FiEdit />
+                      </span>
+                    )}
+                    {props.onRemove && (
+                      <span
+                        role="button"
+                        class="cursor-pointer hover:text-blue-500"
+                        onClick={() => props.onRemove?.(k())}>
+                        <FiTrash2 />
+                      </span>
+                    )}
+                  </div>
                 </td>
               )}
             </tr>

@@ -1,6 +1,6 @@
 import { Toast as KToast } from "@kobalte/core";
 import { FiX } from "solid-icons/fi";
-import { EUiVariant, TUiVariant, BackgroundVariantColor } from "~/config/ui-variants.type";
+import { EUiVariant, TUiVariant, BackgroundVariantColor } from "~/core/types/ui-variants.type";
 
 export interface TToastProps {
   title: string;

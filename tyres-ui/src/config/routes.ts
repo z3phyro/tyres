@@ -11,3 +11,6 @@ export const ROUTE_API_LOCAL = "http://localhost:3000/api";
 export const ROUTE_API_DICTIONARIES = `${ROUTE_API_LOCAL}/dictionaries`;
 export const ROUTE_API_TRANSLATIONS = `${ROUTE_API_LOCAL}/translations`;
 export const ROUTE_API_PATHS = `${ROUTE_API_LOCAL}/paths`;
+
+// Action routes
+export const ROUTE_ACTION_NEW = "new";

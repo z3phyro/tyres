@@ -2,14 +2,14 @@ import { pathExists, pathGet } from "@z3phyro/tyres-core";
 import { createEffect, createResource, createSignal } from "solid-js";
 import { A, useNavigate, useParams, useRouteData, useSearchParams } from "solid-start";
 import { ROUTE_PAGE_TRANSLATIONS } from "~/config/routes";
-import { EUiVariant } from "~/config/ui-variants.type";
+import { EUiVariant } from "~/core/types/ui-variants.type";
 import DictionaryService from "~/services/dictionary.service";
 import TranslationService from "~/services/translation.service";
 import Button from "~/stories/components/button";
 import Card from "~/stories/components/card";
 import Main from "~/stories/components/main";
 import Textarea from "~/stories/components/textarea";
-import { DialogProvider, useDialog } from "~/stories/containers/dialog-provider/dialog-provider";
+import { useDialog } from "~/stories/containers/dialog-provider/dialog-provider";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
 import { useToast } from "~/stories/containers/toast-provider/toast-provider";
 
@@ -80,7 +80,7 @@ export default function Page() {
         },
         {
           children: "Yes",
-          variant: EUiVariant.Info,
+          variant: EUiVariant.Danger,
           onClick: deleteEntryAction,
         },
       ],
@@ -88,32 +88,28 @@ export default function Page() {
   };
 
   return (
-    <DialogProvider>
-      <Main>
-        <SmartBreadcrumbs />
-        <Card>
-          <div class="flex w-full justify-end gap-2 mb-4">
-            {all()?.dicts.map((dict: string) => (
-              <A
-                class={`${dictionary() === dict ? "text-blue-500" : "text-gray-500"}`}
-                href={`?dictionary=${dict}`}>
-                {dict}
-              </A>
-            ))}
-          </div>
-
-          <Textarea value={value()} onInput={handleInput} />
-
-          <div class="flex w-full justify-between">
-            <Button variant={EUiVariant.Danger} onClick={deleteEntry}>
-              Delete
-            </Button>
-            <Button type="button" disabled={!modified()} onClick={() => updateEntryAction(value())}>
-              Update
-            </Button>
-          </div>
-        </Card>
-      </Main>
-    </DialogProvider>
+    <Main>
+      <SmartBreadcrumbs />
+      <div class="flex w-full justify-end gap-2 mb-4">
+        {all()?.dicts.map((dict: string) => (
+          <A
+            class={`${dictionary() === dict ? "text-blue-500" : "text-gray-500"}`}
+            href={`?dictionary=${dict}`}>
+            {dict}
+          </A>
+        ))}
+      </div>
+      <Card>
+        <Textarea placeholder="Value eg. Hello world!" value={value()} onInput={handleInput} />
+      </Card>
+      <div class="flex justify-end gap-2">
+        <Button variant={EUiVariant.Danger} onClick={deleteEntry}>
+          Delete
+        </Button>
+        <Button type="button" disabled={!modified()} onClick={() => updateEntryAction(value())}>
+          Update
+        </Button>
+      </div>
+    </Main>
   );
 }

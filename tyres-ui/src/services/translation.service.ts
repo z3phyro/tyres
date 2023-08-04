@@ -32,6 +32,9 @@ class TranslationService {
   static deleteEntry = async (dictionary: string, path: string) => {
     await FetchHelper.delete(`${ROUTE_API_TRANSLATIONS}/${dictionary}/${path}`);
   };
+  static addEntry = async (path: string) => {
+    await FetchHelper.post(`${ROUTE_API_TRANSLATIONS}/English/${path}`, {});
+  };
 }
 
 export default TranslationService;

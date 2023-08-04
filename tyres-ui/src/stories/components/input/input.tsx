@@ -11,10 +11,14 @@ export interface TInputProps {
   trailingClass?: string;
   trailingClick?: () => void;
   placeholder?: string;
+  label?: string;
 }
 export default function Input(props: TInputProps) {
   return (
     <TextField.Root class="relative group">
+      {props.label && (
+        <TextField.Label class="text-gray-600 text-light text-small">{props.label}</TextField.Label>
+      )}
       <span
         class={`absolute left-3 top-2 transition-color duration-300 ${
           !!props.value ? props.leadingClass || "text-blue-500" : "text-gray-300"

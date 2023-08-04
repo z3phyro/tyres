@@ -1,3 +1,5 @@
+import { ObjectValues } from "~/utils/object-values.helper";
+
 export const EUiVariant = {
   Danger: "Danger",
   Info: "Info",
@@ -5,8 +7,6 @@ export const EUiVariant = {
   Warning: "Warning",
   Neutral: "Neutral",
 } as const;
-
-export type ObjectValues<T> = keyof T;
 
 export type TUiVariant = ObjectValues<typeof EUiVariant>;
 

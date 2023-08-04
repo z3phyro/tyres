@@ -1,4 +1,4 @@
-import { removeTranslation, updateTranslation } from "@z3phyro/tyres-core";
+import { addTranslation, removeTranslation, updateTranslation } from "@z3phyro/tyres-core";
 import { APIEvent } from "solid-start/api";
 import { ok } from "~/utils/response.helper";
 
@@ -15,5 +15,12 @@ export const DELETE = async ({ params }: APIEvent) => {
   const entryPath = params.entry;
 
   removeTranslation(entryPath);
+  return ok();
+};
+
+export const POST = async ({ params }: APIEvent) => {
+  const entryPath = params.entry;
+
+  addTranslation(entryPath);
   return ok();
 };

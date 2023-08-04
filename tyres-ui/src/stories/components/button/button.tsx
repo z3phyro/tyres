@@ -1,7 +1,7 @@
 import { JSX, children } from "solid-js";
 import { Button as KButton } from "@kobalte/core";
 import Spinner from "../spinner/spinner";
-import { BackgroundVariantColor, EUiVariant, TUiVariant } from "~/config/ui-variants.type";
+import { BackgroundVariantColor, EUiVariant, TUiVariant } from "~/core/types/ui-variants.type";
 
 export interface TButtonProps {
   children?: JSX.Element | JSX.Element[] | string;
@@ -10,6 +10,7 @@ export interface TButtonProps {
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
   loading?: boolean;
+  class?: string;
 }
 export default function Button(props: TButtonProps) {
   const solved = children(() => props.children);
@@ -18,7 +19,7 @@ export default function Button(props: TButtonProps) {
     <KButton.Root
       class={`flex items-center rounded  ${
         BackgroundVariantColor[props.variant ?? EUiVariant.Info]
-      } h-4 p-4 transition-all duration-300 ${props.disabled ? "bg-gray-300" : ""}`}
+      } h-4 p-4 transition-all duration-300 ${props.disabled ? "bg-gray-300" : ""} ${props.class}`}
       type={props.type ?? "button"}
       onClick={props.onClick}
       disabled={props.disabled}>
