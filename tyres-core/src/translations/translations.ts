@@ -17,7 +17,7 @@ export const listTranslation = () => {
 
 export const addTranslation = (
   entry_path: string,
-  default_values: string[]
+  default_values?: string[]
 ) => {
   try {
     const dicts = getDictionaries();
@@ -26,7 +26,7 @@ export const addTranslation = (
     let count = 0;
     for (const dict of languages) {
       const json = readTranslation(dict);
-      pathAssign(json, entry_path, default_values[count] || "-");
+      pathAssign(json, entry_path, default_values?.[count] || "-");
       writeTranslation(json, dict);
 
       if (count == 0) {
