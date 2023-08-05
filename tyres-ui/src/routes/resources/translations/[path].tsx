@@ -26,14 +26,22 @@ export function routeData() {
 
 export default function Page() {
   const { path } = useParams();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { all } = useRouteData<typeof routeData>();
   const dialog = useDialog();
   const navigate = useNavigate();
   const toast = useToast();
 
   const dictionary = () => searchParams.dictionary;
-  const dictIndex = () => (dictionary() && all()?.dicts.indexOf(dictionary())) || 0;
+  const dictIndex = () => {
+    if (dictionary()) {
+      return all()?.dicts.indexOf(dictionary());
+    }
+    setSearchParams({
+      dictionary: all()?.dicts[0] ?? "English",
+    });
+    return 0;
+  };
 
   const [value, setValue] = createSignal("");
   const [modified, setModified] = createSignal(false);
@@ -54,17 +62,16 @@ export default function Page() {
 
   const updateEntryAction = async (value: string) => {
     await TranslationService.updateEntry(dictionary(), path, value);
-    toast.show({
+    toast.info({
       title: "Entry updated",
-      variant: EUiVariant.Success,
     });
+    navigate(ROUTE_PAGE_TRANSLATIONS);
   };
 
   const deleteEntryAction = async () => {
     await TranslationService.deleteEntry(dictionary(), path);
-    toast.show({
+    toast.info({
       title: "Entry removed",
-      variant: EUiVariant.Danger,
     });
     navigate(ROUTE_PAGE_TRANSLATIONS);
   };
@@ -107,7 +114,7 @@ export default function Page() {
           Delete
         </Button>
         <Button type="button" disabled={!modified()} onClick={() => updateEntryAction(value())}>
-          Update
+          Save
         </Button>
       </div>
     </Main>

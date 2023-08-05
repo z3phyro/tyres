@@ -13,7 +13,7 @@ export default function Toast(props: TToastProps) {
   return (
     <KToast.Root
       toastId={props.toastId}
-      class={`selection-none p-4 bg-white rounded-sm shadow w-[300px] flex flex-col justify-between mb-2 ${
+      class={`selection-none p-4 rounded-sm shadow w-[300px] flex flex-col justify-between mb-2 ${
         BackgroundVariantColor[props.variant ?? EUiVariant.Neutral]
       }`}>
       <div class="flex justify-between">

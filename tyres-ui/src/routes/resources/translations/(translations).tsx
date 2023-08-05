@@ -15,20 +15,20 @@ import { EUiVariant } from "~/core/types/ui-variants.type";
 import { useToast } from "~/stories/containers/toast-provider/toast-provider";
 
 export function routeData() {
-  const [all] = createResource(async () => {
+  const [all, { refetch }] = createResource(async () => {
     const dicts = await DictionaryService.getDictionaries();
     const data = await TranslationService.getTranslationsTable();
     return { dicts, data };
   });
 
-  return { all };
+  return { all, refetch };
 }
 
 export default function Page() {
   const navigate = useNavigate();
   const dialog = useDialog();
   const toast = useToast();
-  const { all } = useRouteData<typeof routeData>();
+  const { all, refetch: refetchAll } = useRouteData<typeof routeData>();
 
   const [searchText, setSearchText] = createSignal("");
 
@@ -50,11 +50,10 @@ export default function Page() {
 
   const deleteEntryAction = async (path: string) => {
     await TranslationService.deleteEntry("dict", path);
-    toast.show({
+    toast.info({
       title: "Entry removed",
-      variant: EUiVariant.Danger,
     });
-    navigate(ROUTE_PAGE_TRANSLATIONS);
+    refetchAll();
   };
 
   const handleRemove = (row: number) => {
