@@ -1,5 +1,5 @@
 import { createResource, createSignal } from "solid-js";
-import { useNavigate, useRouteData } from "solid-start";
+import { useNavigate, useRouteData, useSearchParams } from "solid-start";
 import { ROUTE_PAGE_TRANSLATIONS } from "~/config/routes";
 import { EUiVariant } from "~/core/types/ui-variants.type";
 import DictionaryService from "~/services/dictionary.service";
@@ -10,6 +10,9 @@ import Input from "~/stories/components/input";
 import Main from "~/stories/components/main";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
 import { useToast } from "~/stories/containers/toast-provider/toast-provider";
+import { string, regex } from "valibot";
+
+const NameSchema = string([regex(/\w\..+/)]);
 
 export function routeData() {
   const [dicts] = createResource(async () => {
@@ -21,7 +24,8 @@ export function routeData() {
 
 export default function Page() {
   const navigate = useNavigate();
-  const [value, setValue] = createSignal("");
+  const [searchParams] = useSearchParams();
+  const [value, setValue] = createSignal(searchParams["duplicate"] ?? "");
   const toast = useToast();
   const { dicts } = useRouteData<typeof routeData>();
 
@@ -30,7 +34,12 @@ export default function Page() {
   };
 
   const isValid = () => {
-    return !value.length;
+    try {
+      NameSchema.parse(value());
+    } catch (e) {
+      return false;
+    }
+    return value().toLowerCase() !== searchParams["duplicate"];
   };
 
   const createTranslation = async () => {

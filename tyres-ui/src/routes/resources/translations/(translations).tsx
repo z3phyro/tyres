@@ -1,4 +1,4 @@
-import { FiDelete, FiFilter } from "solid-icons/fi";
+import { FiCopy, FiDelete, FiEdit, FiFilter, FiTrash2 } from "solid-icons/fi";
 import { createResource, createSignal } from "solid-js";
 import { useNavigate, useRouteData } from "solid-start";
 import DictionaryService from "~/services/dictionary.service";
@@ -44,6 +44,9 @@ export default function Page() {
   const handleClear = () => {
     setSearchText("");
   };
+
+  const handleDuplicate = (row: number) =>
+    navigate(`${ROUTE_PAGE_TRANSLATIONS}/${ROUTE_ACTION_NEW}?duplicate=${filteredData()[row][0]}`);
 
   const handleEdit = (row: number) =>
     navigate(`${ROUTE_PAGE_TRANSLATIONS}/${filteredData()[row][0]}?dictionary=${all()?.dicts[0]}`);
@@ -92,8 +95,20 @@ export default function Page() {
         <Table
           columns={["path", ...(all()?.dicts || []), ""]}
           data={filteredData()}
-          onEdit={handleEdit}
-          onRemove={handleRemove}
+          actions={[
+            {
+              content: <FiCopy />,
+              action: handleDuplicate,
+            },
+            {
+              content: <FiEdit />,
+              action: handleEdit,
+            },
+            {
+              content: <FiTrash2 />,
+              action: handleRemove,
+            },
+          ]}
         />
       </Card>
     </Main>
