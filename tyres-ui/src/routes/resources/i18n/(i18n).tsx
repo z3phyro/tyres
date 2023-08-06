@@ -88,9 +88,7 @@ export default function Page() {
         trailing={<FiDelete size={22} />}
         trailingClick={handleClear}
       />
-      <Button onClick={() => navigate(`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}`)}>
-        New
-      </Button>
+      <Button onClick={() => navigate(`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}`)}>New</Button>
       <Card>
         <Table
           columns={["path", ...(all()?.dicts || []), ""]}
@@ -99,14 +97,17 @@ export default function Page() {
             {
               content: <FiCopy />,
               action: handleDuplicate,
+              hint: "Duplicate",
             },
             {
               content: <FiEdit />,
               action: handleEdit,
+              hint: "Edit",
             },
             {
               content: <FiTrash2 />,
               action: handleRemove,
+              hint: "Delete",
             },
           ]}
         />

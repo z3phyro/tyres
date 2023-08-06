@@ -1,9 +1,10 @@
-import { FiDelete, FiEdit, FiTrash2 } from "solid-icons/fi";
 import { For, JSX } from "solid-js";
+import Tooltip from "../tooltip/tooltip";
 
 export interface TTableAction {
   content: JSX.Element | string;
   action: (row: number) => void;
+  hint: string;
 }
 export interface TTableProps {
   columns: string[];
@@ -42,12 +43,14 @@ export default function Table(props: TTableProps) {
                 <td>
                   <div class="flex items-center justify-center select-none gap-2">
                     {props.actions.map((action) => (
-                      <span
-                        role="button"
-                        class="cursor-pointer hover:text-blue-500"
-                        onClick={() => action.action(k())}>
-                        {action.content}
-                      </span>
+                      <Tooltip content={action.hint}>
+                        <span
+                          role="button"
+                          class="cursor-pointer hover:text-blue-500"
+                          onClick={() => action.action(k())}>
+                          {action.content}
+                        </span>
+                      </Tooltip>
                     ))}
                   </div>
                 </td>
