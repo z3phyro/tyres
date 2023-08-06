@@ -5,7 +5,7 @@ import {
   ROUTE_PAGE_COVERAGE,
   ROUTE_PAGE_FEATURE_FLAGS,
   ROUTE_PAGE_RESOURCES,
-  ROUTE_PAGE_TRANSLATIONS,
+  ROUTE_PAGE_I18N,
 } from "~/config/routes";
 
 export default function TopMenu() {
@@ -24,9 +24,9 @@ export default function TopMenu() {
             isActive={() => checkActive(ROUTE_PAGE_RESOURCES)}
             items={[
               {
-                title: "Translations",
-                href: ROUTE_PAGE_TRANSLATIONS,
-                isActive: () => checkActive(ROUTE_PAGE_TRANSLATIONS),
+                title: "i18n",
+                href: ROUTE_PAGE_I18N,
+                isActive: () => checkActive(ROUTE_PAGE_I18N),
               },
               {
                 title: "Feature Flags",

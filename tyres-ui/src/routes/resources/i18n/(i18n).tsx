@@ -9,7 +9,7 @@ import Table from "~/stories/components/table";
 import Main from "~/stories/components/main";
 import Button from "~/stories/components/button";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
-import { ROUTE_ACTION_NEW, ROUTE_PAGE_TRANSLATIONS } from "~/config/routes";
+import { ROUTE_ACTION_NEW, ROUTE_PAGE_I18N } from "~/config/routes";
 import { useDialog } from "~/stories/containers/dialog-provider/dialog-provider";
 import { EUiVariant } from "~/core/types/ui-variants.type";
 import { useToast } from "~/stories/containers/toast-provider/toast-provider";
@@ -46,10 +46,10 @@ export default function Page() {
   };
 
   const handleDuplicate = (row: number) =>
-    navigate(`${ROUTE_PAGE_TRANSLATIONS}/${ROUTE_ACTION_NEW}?duplicate=${filteredData()[row][0]}`);
+    navigate(`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}?duplicate=${filteredData()[row][0]}`);
 
   const handleEdit = (row: number) =>
-    navigate(`${ROUTE_PAGE_TRANSLATIONS}/${filteredData()[row][0]}?dictionary=${all()?.dicts[0]}`);
+    navigate(`${ROUTE_PAGE_I18N}/${filteredData()[row][0]}?dictionary=${all()?.dicts[0]}`);
 
   const deleteEntryAction = async (path: string) => {
     await TranslationService.deleteEntry("dict", path);
@@ -88,7 +88,7 @@ export default function Page() {
         trailing={<FiDelete size={22} />}
         trailingClick={handleClear}
       />
-      <Button onClick={() => navigate(`${ROUTE_PAGE_TRANSLATIONS}/${ROUTE_ACTION_NEW}`)}>
+      <Button onClick={() => navigate(`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}`)}>
         New
       </Button>
       <Card>

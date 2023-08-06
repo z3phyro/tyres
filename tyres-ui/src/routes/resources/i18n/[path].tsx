@@ -1,7 +1,7 @@
 import { pathExists, pathGet } from "@z3phyro/tyres-core";
 import { createEffect, createResource, createSignal } from "solid-js";
 import { A, useNavigate, useParams, useRouteData, useSearchParams } from "solid-start";
-import { ROUTE_PAGE_TRANSLATIONS } from "~/config/routes";
+import { ROUTE_PAGE_I18N } from "~/config/routes";
 import { EUiVariant } from "~/core/types/ui-variants.type";
 import DictionaryService from "~/services/dictionary.service";
 import TranslationService from "~/services/translation.service";
@@ -65,7 +65,7 @@ export default function Page() {
     toast.info({
       title: "Entry updated",
     });
-    navigate(ROUTE_PAGE_TRANSLATIONS);
+    navigate(ROUTE_PAGE_I18N);
   };
 
   const deleteEntryAction = async () => {
@@ -73,7 +73,7 @@ export default function Page() {
     toast.info({
       title: "Entry removed",
     });
-    navigate(ROUTE_PAGE_TRANSLATIONS);
+    navigate(ROUTE_PAGE_I18N);
   };
 
   const deleteEntry = () => {
