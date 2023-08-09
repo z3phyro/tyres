@@ -22,7 +22,7 @@ export default function Input(props: TInputProps) {
       )}
       <span
         class={`absolute left-3 top-2 transition-color duration-300 ${
-          !!props.value ? props.leadingClass || "text-blue-500" : "text-gray-300"
+          props.value ? props.leadingClass || "text-blue-500" : "text-gray-300"
         } ${props.leadingClick ? "cursor-pointer" : ""}`}>
         {props.leading}
       </span>
@@ -33,7 +33,7 @@ export default function Input(props: TInputProps) {
             ? "border-2 border-red-500 focus:shadow-red-50 focus:border-red-500 "
             : "border-1 focus:border-blue-500 focus:shadow-blue-50"
         } transition-all 
-        duration-300 ${!!props.trailing ? "pr-4" : ""} ${!!props.leading ? "pl-10" : ""}
+        duration-300 ${props.trailing ? "pr-4" : ""} ${props.leading ? "pl-10" : ""}
         `}
         value={props.value}
         onInput={props.onInput}
@@ -41,7 +41,7 @@ export default function Input(props: TInputProps) {
       />
       <span
         class={`absolute right-3 top-2 transition-color duration-300 ${
-          !!props.value ? props.trailingClass || "text-blue-500" : "text-gray-300"
+          props.value ? props.trailingClass || "text-blue-500" : "text-gray-300"
         } ${props.trailingClick ? "cursor-pointer" : ""}`}
         onClick={props.trailingClick}>
         {props.trailing}

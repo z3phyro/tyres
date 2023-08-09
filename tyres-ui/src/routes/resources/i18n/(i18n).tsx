@@ -34,7 +34,7 @@ export default function Page() {
 
   const filteredData = () =>
     all()?.data?.filter((row: string[]) =>
-      row.some((cell) => cell.toLowerCase().includes(searchText().toLowerCase())),
+      row.some((cell) => cell.toLowerCase().includes(searchText().toLowerCase()))
     ) ?? [];
 
   const handleSearchChange = (e: Event) => {

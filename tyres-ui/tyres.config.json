@@ -1,6 +1,6 @@
-{ 
-        "translationsPath": "src/translations/",
-        "featureFlagsPath": "src/feature-flags/", 
-        "dictionaries": {"en":"English","es":"Spanish"},
-        "environments": ["development","staging","production"]
-       }
+{
+  "translationsPath": "src/translations/",
+  "featureFlagsPath": "src/feature-flags/",
+  "dictionaries": { "en": "English", "es": "Spanish" },
+  "environments": ["development", "staging", "production"]
+}

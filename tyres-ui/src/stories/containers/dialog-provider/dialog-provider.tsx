@@ -40,6 +40,7 @@ export function DialogProvider(props: TDialogProviderProps) {
   };
 
   const restModal = () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { open, ...rest } = modalProps();
     return rest;
   };

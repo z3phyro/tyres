@@ -3,12 +3,20 @@
   "scripts": {
     "dev": "rm -rf .solid && solid-start dev",
     "build": "solid-start build",
-    "start": "solid-start start"
+    "start": "solid-start start",
+    "prettier:format": "prettier . -w",
+    "prettier:check": "prettier . --check",
+    "eslint:check": "eslint .",
+    "eslint:fix": "eslint . --fix",
+    "fix": "prettier . -w && eslint . --fix"
   },
   "type": "module",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
     "autoprefixer": "^10.4.13",
+    "eslint": "^8.44.0",
     "postcss": "^8.4.21",
+    "prettier": "^2.8.8",
     "solid-start-node": "^0.2.19",
     "tailwindcss": "^3.2.4",
     "typescript": "^4.9.4",

@@ -38,6 +38,7 @@ export class FetchHelper {
       this.handleErrors(response);
       return this.parseJSON<T>(response);
     } catch (error) {
+      console.error(error);
       throw error;
     }
   }
@@ -54,6 +55,7 @@ export class FetchHelper {
       this.handleErrors(response);
       return this.parseJSON<T>(response);
     } catch (error) {
+      console.error(error);
       throw error;
     }
   }
@@ -70,6 +72,7 @@ export class FetchHelper {
       this.handleErrors(response);
       return this.parseJSON<T>(response);
     } catch (error) {
+      console.error(error);
       throw error;
     }
   }
@@ -85,6 +88,7 @@ export class FetchHelper {
       this.handleErrors(response);
       return this.parseJSON<T>(response);
     } catch (error) {
+      console.error(error);
       throw error;
     }
   }
