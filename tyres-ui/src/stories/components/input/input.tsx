@@ -12,6 +12,7 @@ export interface TInputProps {
   trailingClick?: () => void;
   placeholder?: string;
   label?: string;
+  hasError?: boolean;
 }
 export default function Input(props: TInputProps) {
   return (
@@ -26,8 +27,12 @@ export default function Input(props: TInputProps) {
         {props.leading}
       </span>
       <TextField.Input
-        class={`w-full p-2 bg-white rounded mb-2 border border-1 outline-0 
-        focus:shadow-md focus:shadow-blue-50 focus:border-blue-500 transition-all 
+        class={`w-full p-2 bg-white rounded mb-2 border outline-0 
+        focus:shadow-md ${
+          props.hasError
+            ? "border-2 border-red-500 focus:shadow-red-50 focus:border-red-500 "
+            : "border-1 focus:border-blue-500 focus:shadow-blue-50"
+        } transition-all 
         duration-300 ${!!props.trailing ? "pr-4" : ""} ${!!props.leading ? "pl-10" : ""}
         `}
         value={props.value}
