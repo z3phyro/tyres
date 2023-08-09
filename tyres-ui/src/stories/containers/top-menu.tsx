@@ -1,7 +1,6 @@
 import { useLocation } from "solid-start";
 import MenuLink from "../components/menu-link";
 import {
-  ROUTE_PAGE_ABOUT,
   ROUTE_PAGE_COVERAGE,
   ROUTE_PAGE_FEATURE_FLAGS,
   ROUTE_PAGE_RESOURCES,
@@ -11,7 +10,9 @@ import {
 export default function TopMenu() {
   const location = useLocation();
 
-  const checkActive = (path: string) => location.pathname.includes(path);
+  const checkActive = (path: string) => {
+    return location.pathname.toString().indexOf(path) === 0;
+  };
 
   return (
     <nav class="shadow-lg shadow-gray-150 bg-white">
@@ -39,11 +40,6 @@ export default function TopMenu() {
             title={"Coverage"}
             href={ROUTE_PAGE_COVERAGE}
             isActive={() => checkActive(ROUTE_PAGE_COVERAGE)}
-          />
-          <MenuLink
-            title={"About"}
-            href={ROUTE_PAGE_ABOUT}
-            isActive={() => checkActive(ROUTE_PAGE_ABOUT)}
           />
         </ul>
       </div>

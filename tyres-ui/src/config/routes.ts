@@ -2,7 +2,6 @@
 export const ROUTE_PAGE_RESOURCES = "/resources";
 export const ROUTE_PAGE_I18N = `${ROUTE_PAGE_RESOURCES}/i18n`;
 export const ROUTE_PAGE_FEATURE_FLAGS = `${ROUTE_PAGE_RESOURCES}/feature-flags`;
-export const ROUTE_PAGE_ABOUT = "/about";
 export const ROUTE_PAGE_COVERAGE = "/coverage";
 export const ROUTE_PAGE_HOME = "/";
 
