@@ -16,7 +16,7 @@ import { useToast } from "~/stories/containers/toast-provider/toast-provider";
 
 export function routeData() {
   const [all, { refetch }] = createResource(async () => {
-    const dicts = await DictionaryService.getDictionaries();
+    const dicts = await DictionaryService.getDictionariesList();
     const data = await TranslationService.getTranslationsTable();
     return { dicts, data };
   });

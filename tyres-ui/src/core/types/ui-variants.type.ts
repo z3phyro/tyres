@@ -6,6 +6,8 @@ export const EUiVariant = {
   Success: "Success",
   Warning: "Warning",
   Neutral: "Neutral",
+  White: "White",
+  Black: "Black",
 } as const;
 
 export type TUiVariant = ObjectValues<typeof EUiVariant>;
@@ -18,6 +20,8 @@ export const BorderVariantColor: TUiVariantDict = {
   Success: "border-green-700",
   Warning: "border-yellow-500",
   Neutral: "border-white-500",
+  White: "border-gray-200",
+  Black: "border-gray-200",
 };
 
 export const BackgroundVariantColor: TUiVariantDict = {
@@ -26,4 +30,6 @@ export const BackgroundVariantColor: TUiVariantDict = {
   Success: "bg-green-500 text-white",
   Warning: "bg-yellow-500 text-white",
   Neutral: "bg-gray-200 text-black",
+  White: "bg-white text-black",
+  Black: "bg-gray-500 text-white",
 };

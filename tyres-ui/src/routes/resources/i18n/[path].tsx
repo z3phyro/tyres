@@ -15,7 +15,7 @@ import { useToast } from "~/stories/containers/toast-provider/toast-provider";
 
 export function routeData() {
   const [all] = createResource(async () => {
-    const dicts = await DictionaryService.getDictionaries();
+    const dicts = await DictionaryService.getDictionariesList();
     const data = await TranslationService.getTranslationsObject();
 
     return { dicts, data };

@@ -17,8 +17,8 @@ export default function SmartBreadcrumbs() {
     .split("/")
     .filter((part) => part);
 
-  const links = parts.map((part, i) => ({
-    active: i === parts.length - 1,
+  const links = parts.map((part) => ({
+    active: false,
     title: ROUTES_NAME[part] || part,
     href: pathname().slice(0, pathname().indexOf(part) + part.length),
   }));
