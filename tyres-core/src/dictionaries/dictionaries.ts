@@ -1,4 +1,4 @@
-import { getDictionaries, getFolder } from "../config";
+import { getDictionaries, getFolder, setDictionaries } from "../config";
 import { readTypedFile, removeFile, writeFile, writeTranslation } from "../io";
 import { TDataNode } from "../types/types";
 import { clearEntries } from "../utils";
@@ -50,9 +50,9 @@ export const removeDictionary = (shortName: string) => {
   const name = dicts[shortName] as string;
   delete dicts[shortName];
 
-  writeFile("dictionaries.json", JSON.stringify(dicts, null, 2));
   writeDictionaries(dicts);
   removeTranslationFile(name);
+  setDictionaries(dicts);
 
   console.info(`Dictionary ${name} Removed`);
 };

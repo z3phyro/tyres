@@ -119,9 +119,7 @@ export default {
   test("Removes dictionary", () => {
     removeDictionary("en");
 
-    const dicts = readStringFile("dictionaries.json").toString();
-
-    expect(JSON.parse(dicts)).toEqual({ es: "Spanish" });
+    expect(config.getDictionaries()).toEqual({ es: "Spanish" });
   });
 
   test("Adds dictionary", () => {
