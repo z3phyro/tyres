@@ -15,7 +15,7 @@ import { useToast } from "~/stories/containers/toast-provider/toast-provider";
 
 export function routeData() {
   const [all] = createResource(async () => {
-    const dicts = await DictionaryService.getDictionariesList();
+    const dicts = await DictionaryService.getAllList();
     const data = await TranslationService.getTranslationsObject();
 
     return { dicts, data };
@@ -35,7 +35,7 @@ export default function Page() {
   const dictionary = () => searchParams.dictionary;
   const dictIndex = () => {
     if (dictionary()) {
-      return all()?.dicts.indexOf(dictionary());
+      return all()?.dicts.indexOf(dictionary()) ?? 0;
     }
     setSearchParams({
       dictionary: all()?.dicts[0] ?? "English",
@@ -55,7 +55,7 @@ export default function Page() {
     setValue(
       (pathExists(all()?.data[dictIndex()] ?? {}, path) &&
         pathGet(all()?.data[dictIndex()] ?? {}, path)?.toString()) ||
-        ""
+        "",
     );
     setModified(false);
   });

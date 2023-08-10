@@ -16,7 +16,7 @@ import { useToast } from "~/stories/containers/toast-provider/toast-provider";
 
 export function routeData() {
   const [all, { refetch }] = createResource(async () => {
-    const dicts = await DictionaryService.getDictionariesList();
+    const dicts = await DictionaryService.getAllList();
     const data = await TranslationService.getTranslationsTable();
     return { dicts, data };
   });
@@ -34,7 +34,7 @@ export default function Page() {
 
   const filteredData = () =>
     all()?.data?.filter((row: string[]) =>
-      row.some((cell) => cell.toLowerCase().includes(searchText().toLowerCase()))
+      row.some((cell) => cell.toLowerCase().includes(searchText().toLowerCase())),
     ) ?? [];
 
   const handleSearchChange = (e: Event) => {
@@ -91,7 +91,7 @@ export default function Page() {
       <Button onClick={() => navigate(`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}`)}>New</Button>
       <Card>
         <Table
-          columns={["path", ...(all()?.dicts || []), ""]}
+          columns={["path", ...(all()?.dicts || [])]}
           data={filteredData()}
           actions={[
             {

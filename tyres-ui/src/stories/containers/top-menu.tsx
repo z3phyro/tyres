@@ -5,7 +5,9 @@ import {
   ROUTE_PAGE_FEATURE_FLAGS,
   ROUTE_PAGE_RESOURCES,
   ROUTE_PAGE_I18N,
+  ROUTE_PAGE_DICTIONARIES,
 } from "~/config/routes";
+import { ETerms } from "~/config/terms";
 
 export default function TopMenu() {
   const location = useLocation();
@@ -21,16 +23,21 @@ export default function TopMenu() {
 
         <ul class="flex justify-between items-center gap-4 select-none">
           <MenuLink
-            title={"Resources"}
+            title={ETerms.Resources}
             isActive={() => checkActive(ROUTE_PAGE_RESOURCES)}
             items={[
               {
-                title: "i18n",
+                title: ETerms.i18n,
                 href: ROUTE_PAGE_I18N,
                 isActive: () => checkActive(ROUTE_PAGE_I18N),
               },
               {
-                title: "Feature Flags",
+                title: ETerms.Dictionaries,
+                href: ROUTE_PAGE_DICTIONARIES,
+                isActive: () => checkActive(ROUTE_PAGE_DICTIONARIES),
+              },
+              {
+                title: ETerms.FeatureFlags,
                 href: ROUTE_PAGE_FEATURE_FLAGS,
                 isActive: () => checkActive(ROUTE_PAGE_FEATURE_FLAGS),
               },

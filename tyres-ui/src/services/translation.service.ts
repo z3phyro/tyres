@@ -6,9 +6,9 @@ import { FetchHelper } from "~/utils/fetch.helper";
 
 class TranslationService {
   static getTranslationsObject = async (): Promise<TDataNode[]> => {
-    const dicts = await DictionaryService.getDictionariesList();
+    const dicts = await DictionaryService.getAllList();
     const promiseList = dicts.map((dict: string) =>
-      fetch(`${ROUTE_API_I18N}/${dict.toLowerCase()}/`)
+      fetch(`${ROUTE_API_I18N}/${dict.toLowerCase()}/`),
     );
 
     const result = await Promise.all(promiseList);

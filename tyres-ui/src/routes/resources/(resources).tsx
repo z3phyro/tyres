@@ -1,5 +1,10 @@
 import { A } from "solid-start";
-import { ROUTE_PAGE_FEATURE_FLAGS, ROUTE_PAGE_I18N } from "~/config/routes";
+import {
+  ROUTE_PAGE_DICTIONARIES,
+  ROUTE_PAGE_FEATURE_FLAGS,
+  ROUTE_PAGE_I18N,
+} from "~/config/routes";
+import { ETerms } from "~/config/terms";
 import Card from "~/stories/components/card";
 import Main from "~/stories/components/main";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
@@ -11,12 +16,17 @@ export default function Page() {
       <ul>
         <li>
           <A href={ROUTE_PAGE_I18N}>
-            <Card>I18n</Card>
+            <Card>{ETerms.i18n}</Card>
+          </A>
+        </li>
+        <li>
+          <A href={ROUTE_PAGE_DICTIONARIES}>
+            <Card>{ETerms.Dictionaries}</Card>
           </A>
         </li>
         <li>
           <A href={ROUTE_PAGE_FEATURE_FLAGS}>
-            <Card>Feature Flags</Card>
+            <Card>{ETerms.FeatureFlags}</Card>
           </A>
         </li>
       </ul>

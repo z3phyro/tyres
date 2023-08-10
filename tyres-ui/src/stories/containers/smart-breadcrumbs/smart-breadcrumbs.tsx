@@ -1,14 +1,8 @@
 import { createMemo } from "solid-js";
 import { useLocation } from "solid-start";
 import Breadcrumbs from "~/stories/components/breadcrumbs/breadcrumbs";
+import { deSlugify } from "~/utils/slugify.helper";
 
-const ROUTES_NAME: { [id: string]: string } = {
-  resources: "Resources",
-  translations: "Translations",
-  about: "About",
-  coverage: "Coverage",
-  "feature-flags": "Feature flags",
-};
 export default function SmartBreadcrumbs() {
   const location = useLocation();
   const pathname = createMemo(() => location.pathname);
@@ -19,7 +13,7 @@ export default function SmartBreadcrumbs() {
 
   const links = parts.map((part) => ({
     active: false,
-    title: ROUTES_NAME[part] || part,
+    title: deSlugify(part),
     href: pathname().slice(0, pathname().indexOf(part) + part.length),
   }));
 

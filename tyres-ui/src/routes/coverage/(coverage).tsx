@@ -12,7 +12,7 @@ import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-bread
 
 export function routeData() {
   const [all] = createResource(async () => {
-    const dicts = await DictionaryService.getDictionaries();
+    const dicts = await DictionaryService.getAll();
     const coverage = await CoverageService.getCoverage();
 
     return { dicts, coverage };

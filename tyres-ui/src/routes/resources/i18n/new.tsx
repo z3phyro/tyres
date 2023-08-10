@@ -19,7 +19,7 @@ const NameSchema = string([
 
 export function routeData() {
   const [dicts] = createResource(async () => {
-    return await DictionaryService.getDictionariesList();
+    return await DictionaryService.getAllList();
   });
 
   return { dicts };
