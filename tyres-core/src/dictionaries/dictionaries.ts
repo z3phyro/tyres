@@ -41,6 +41,19 @@ export const initNewTranslation = (name: string, folder = getFolder()) => {
   writeTranslation(json, name, folder);
 };
 
+export const renameTranslation = (
+  key: string,
+  newName: string,
+  folder = getFolder()
+) => {
+  const dicts = getDictionaries();
+
+  const json = readTypedFile(`${key.toLowerCase()}.translation.ts`, folder);
+
+  writeTranslation(json, newName, folder);
+  removeTranslationFile(dicts[key]);
+};
+
 export const removeTranslationFile = (name: string) => {
   removeFile(`${name}.translation.ts`);
 };
@@ -62,11 +75,24 @@ export const addDictionary = (shortName: string, name: string) => {
   const dicts = getDictionaries();
   dicts[shortName] = name;
 
-  writeFile("dictionaries.json", JSON.stringify(dicts, null, 2));
+  setDictionaries(dicts);
   writeDictionaries(dicts);
   initNewTranslation(name);
 
   console.info(`Added ${name} dictionary`);
+};
+
+export const editDictionary = (shortName: string, name: string) => {
+  console.info("Editting dict");
+  renameTranslation(shortName, name);
+
+  const dicts = getDictionaries();
+  dicts[shortName] = name;
+
+  writeDictionaries(dicts);
+  setDictionaries(dicts);
+
+  console.info(`Edited ${name} dictionary`);
 };
 
 export const listDictionaries = () => {

@@ -1,6 +1,7 @@
 import fs from "fs";
 import {
   addDictionary,
+  editDictionary,
   initDictionaries,
   initNewTranslation,
   removeDictionary,
@@ -126,7 +127,19 @@ export default {
     initDictionaries();
     addDictionary("kl", "Klingon");
 
-    const dicts = readStringFile("dictionaries.json").toString();
-    expect(JSON.parse(dicts)["kl"]).toEqual("Klingon");
+    const dicts = config.getDictionaries();
+    expect(dicts["kl"]).toEqual("Klingon");
+  });
+
+  test("Edit dictionary", () => {
+    const newName = "Klingno";
+    editDictionary("kl", newName);
+
+    const dicts = config.getDictionaries();
+    expect(dicts["kl"]).toEqual(newName);
+
+    expect(
+      readTypedFile(`${newName.toLowerCase()}.translation.ts`)
+    ).toBeTruthy();
   });
 });
