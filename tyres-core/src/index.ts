@@ -26,6 +26,7 @@ export {
 
 export {
   addDictionary,
+  editDictionary,
   initDictionaries,
   initNewTranslation,
   listDictionaries,
