@@ -1,9 +1,10 @@
 import { FiEdit, FiTrash2 } from "solid-icons/fi";
 import { createResource } from "solid-js";
 import { useNavigate, useRouteData } from "solid-start";
-import { ROUTE_PAGE_DICTIONARIES } from "~/config/routes";
+import { ROUTE_ACTION_NEW, ROUTE_PAGE_DICTIONARIES } from "~/config/routes";
 import { EUiVariant } from "~/core/types/ui-variants.type";
 import DictionaryService from "~/services/dictionary.service";
+import Button from "~/stories/components/button";
 import Card from "~/stories/components/card";
 import Main from "~/stories/components/main";
 import Table from "~/stories/components/table";
@@ -61,6 +62,11 @@ export default function Page() {
   return (
     <Main>
       <SmartBreadcrumbs />
+      <Button
+        variant="Info"
+        onClick={() => navigate(`${ROUTE_PAGE_DICTIONARIES}/${ROUTE_ACTION_NEW}`)}>
+        New
+      </Button>
       <Card>
         <Table
           data={data()}

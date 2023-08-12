@@ -30,7 +30,12 @@ export default function Page() {
 
   const [state, { Form }] = createServerAction$(async (formData: FormData) => {
     if (!formData || !formData.get("key")) return;
-    editDictionary(formData.get("key")!.toString(), formData.get("name")!.toString());
+
+    try {
+      editDictionary(formData.get("key")!.toString(), formData.get("name")!.toString());
+    } catch (e) {
+      console.log(e);
+    }
 
     return ok();
   });
@@ -55,7 +60,8 @@ export default function Page() {
       <SmartBreadcrumbs />
       <Form>
         <Card>
-          <Input label="Key" name="key" value={key} disabled />
+          <input type="hidden" name="key" value={key} />
+          <Input label="Key" value={key} disabled />
           <Input
             label="Name"
             name="name"
