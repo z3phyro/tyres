@@ -48,7 +48,10 @@ export const renameTranslation = (
 ) => {
   const dicts = getDictionaries();
 
-  const json = readTypedFile(`${key.toLowerCase()}.translation.ts`, folder);
+  const json = readTypedFile(
+    `${dicts[key].toLowerCase()}.translation.ts`,
+    folder
+  );
 
   writeTranslation(json, newName, folder);
   removeTranslationFile(dicts[key]);
