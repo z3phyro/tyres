@@ -1,6 +1,7 @@
 import * as config from "../config";
 import { readTypedFile, writeFile } from "../io";
 import { createFolder, removeFile, writeFeatureFlag } from "../io/io";
+import { TDataNode } from "../types";
 import {
   clearEntries,
   pathAssign,
@@ -150,10 +151,32 @@ export const disableFeatureFlag = (path: string, environment = "") => {
   setFeatureFlag(path, false, environment);
 };
 
-export const listFeatureFlags = () => {
+export const getAllFeatureFlags = () => {
+  const envs = config.getEnvironments();
+  const result: TDataNode = {};
+
+  for (const env of envs) {
+    result[env] = readTypedFile(
+      `feature-flags.${env}.ts`,
+      config.getFeaturesFolder()
+    );
+  }
+
+  return result;
+};
+
+export const getFeatureFlags = () => {
   const envs = config.getEnvironments();
 
-  const json = readTypedFile(`feature-flags.${envs[0]}.ts`);
+  return readTypedFile(
+    `feature-flags.${envs[0]}.ts`,
+    config.getFeaturesFolder()
+  );
+};
 
-  surfObjectKeys(json);
+export const listFeatureFlags = () => {
+  const list: string[] = [];
+  surfObjectKeys(getFeatureFlags(), "", list);
+
+  return list;
 };

@@ -5,6 +5,8 @@ export {
   initFeatureFlags,
   removeFeatureFlag,
   listFeatureFlags,
+  getFeatureFlags,
+  getAllFeatureFlags,
   createFileForEnvironment,
   removeFileFromEnvironment,
 } from "./feature-flags";

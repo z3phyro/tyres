@@ -12,6 +12,7 @@ import {
   createFileForEnvironment,
   disableFeatureFlag,
   enableFeatureFlag,
+  getFeatureFlags,
   initFeatureFlags,
   removeFeatureFlag,
   removeFileFromEnvironment,
@@ -107,6 +108,16 @@ export const featureFlags: { [id: string]: FeatureFlagsInterface } = {
     );
 
     expect(devFlags).toEqual({
+      general: {
+        showHelloWorld: true,
+      },
+    });
+  });
+
+  test("Get feature flags", () => {
+    const featureFlags = getFeatureFlags();
+
+    expect(featureFlags).toEqual({
       general: {
         showHelloWorld: true,
       },

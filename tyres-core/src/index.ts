@@ -63,6 +63,8 @@ export {
   initFeatureFlags,
   removeFeatureFlag,
   listFeatureFlags,
+  getAllFeatureFlags,
+  getFeatureFlags,
 } from "./feature-flags";
 
 export {
