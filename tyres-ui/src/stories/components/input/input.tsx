@@ -1,5 +1,6 @@
 import { TextField } from "@kobalte/core";
 import { JSX } from "solid-js";
+import { EUiVariant, TextVariantColor } from "~/core/types/ui-variants.type";
 
 export interface TInputProps {
   value: string;
@@ -13,12 +14,13 @@ export interface TInputProps {
   placeholder?: string;
   label?: string;
   hasError?: boolean;
+  errorMessages?: string[];
   name?: string;
   disabled?: boolean;
 }
 export default function Input(props: TInputProps) {
   return (
-    <TextField.Root class="relative group">
+    <TextField.Root class="relative group" validationState={props.hasError ? "invalid" : "valid"}>
       {props.label && (
         <TextField.Label class="text-gray-600 text-light text-sm">{props.label}</TextField.Label>
       )}
@@ -50,6 +52,11 @@ export default function Input(props: TInputProps) {
         onClick={props.trailingClick}>
         {props.trailing}
       </span>
+      <TextField.ErrorMessage class={`block text-xs ${TextVariantColor[EUiVariant.Danger]}`}>
+        {props.errorMessages?.map((error) => (
+          <span>{error}</span>
+        ))}
+      </TextField.ErrorMessage>
     </TextField.Root>
   );
 }

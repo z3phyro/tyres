@@ -63,6 +63,7 @@ export default function Page() {
     <Main>
       <SmartBreadcrumbs />
       <Button
+        class="mb-2"
         variant="Info"
         onClick={() => navigate(`${ROUTE_PAGE_DICTIONARIES}/${ROUTE_ACTION_NEW}`)}>
         New

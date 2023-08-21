@@ -10,12 +10,8 @@ import Input from "~/stories/components/input";
 import Main from "~/stories/components/main";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
 import { useToast } from "~/stories/containers/toast-provider/toast-provider";
-import { string, regex } from "valibot";
 import { InfoBlock } from "~/stories/components/info-block/info-block";
-
-const NameSchema = string([
-  regex(/^[a-z]+[a-z0-9](?:\.[a-z]+[a-z0-9]*)+$/, "Needs to have at least 1 period"),
-]);
+import { EntryNameSchema } from "~/core/validation/entry-name.validation";
 
 export function routeData() {
   const [dicts] = createResource(async () => {
@@ -38,7 +34,7 @@ export default function Page() {
 
   const isValid = () => {
     try {
-      NameSchema.parse(value());
+      EntryNameSchema.parse(value());
     } catch (e) {
       return false;
     }
@@ -62,7 +58,7 @@ export default function Page() {
           onInput={handleInput}
           placeholder="eg. general.hello"
           value={value()}
-          hasError={!isValid()}
+          hasError={!!value() && !isValid()}
         />
         <InfoBlock title="Naming rules:">
           <ul class="list-disc">

@@ -33,3 +33,13 @@ export const BackgroundVariantColor: TUiVariantDict = {
   White: "bg-white text-black",
   Black: "bg-gray-500 text-white",
 };
+
+export const TextVariantColor: TUiVariantDict = {
+  Danger: "text-red-500",
+  Info: "text-blue-500",
+  Success: "text-green-700",
+  Warning: "text-yellow-500",
+  Neutral: "text-white-500",
+  White: "text-gray-200",
+  Black: "text-gray-200",
+};
