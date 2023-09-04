@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@kobalte/core": "^0.9.8",
+    "@modular-forms/solid": "^0.19.1",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.2",
     "@z3phyro/tyres-core": "file:../tyres-core",

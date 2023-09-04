@@ -10,8 +10,9 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint"],
-  "ignorePatterns": [".solid", "dist", "src/translations"],
+  "ignorePatterns": [".solid", "dist", "src/translations", "src/feature-flags"],
   "rules": {
-    "@typescript-eslint/no-non-null-assertion": 0
+    "@typescript-eslint/no-non-null-assertion": 0,
+    "@typescript-eslint/no-explicit-any": 0
   }
 }

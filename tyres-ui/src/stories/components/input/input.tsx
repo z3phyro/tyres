@@ -4,7 +4,9 @@ import { EUiVariant, TextVariantColor } from "~/core/types/ui-variants.type";
 
 export interface TInputProps {
   value: string;
-  onInput?: (event: Event) => void;
+  error?: string;
+  name?: string;
+  disabled?: boolean;
   leading?: JSX.Element;
   leadingClass?: string;
   leadingClick?: () => void;
@@ -13,14 +15,15 @@ export interface TInputProps {
   trailingClick?: () => void;
   placeholder?: string;
   label?: string;
-  hasError?: boolean;
-  errorMessages?: string[];
-  name?: string;
-  disabled?: boolean;
+  required?: boolean;
+  onInput: JSX.EventHandler<HTMLInputElement, InputEvent>;
+  onChange?: JSX.EventHandler<HTMLInputElement, Event>;
+  onBlur?: JSX.EventHandler<HTMLInputElement, FocusEvent>;
+  ref: (element: HTMLInputElement) => void;
 }
 export default function Input(props: TInputProps) {
   return (
-    <TextField.Root class="relative group" validationState={props.hasError ? "invalid" : "valid"}>
+    <TextField.Root class="relative group" validationState={props.error ? "invalid" : "valid"}>
       {props.label && (
         <TextField.Label class="text-gray-600 text-light text-sm">{props.label}</TextField.Label>
       )}
@@ -34,7 +37,7 @@ export default function Input(props: TInputProps) {
         name={props.name ?? props.label}
         class={`w-full p-2 bg-white rounded mb-2 border outline-0 
         focus:shadow-md ${
-          props.hasError
+          props.error
             ? "border-2 border-red-500 focus:shadow-red-50 focus:border-red-500 "
             : "border-1 focus:border-blue-500 focus:shadow-blue-50"
         } transition-all 
@@ -43,6 +46,8 @@ export default function Input(props: TInputProps) {
         value={props.value}
         onInput={props.onInput}
         placeholder={props.placeholder}
+        aria-invalid={!!props.error}
+        aria-errormessage={`${props.name}-error`}
         disabled={props.disabled}
       />
       <span
@@ -53,9 +58,7 @@ export default function Input(props: TInputProps) {
         {props.trailing}
       </span>
       <TextField.ErrorMessage class={`block text-xs ${TextVariantColor[EUiVariant.Danger]}`}>
-        {props.errorMessages?.map((error) => (
-          <span>{error}</span>
-        ))}
+        {props.error}
       </TextField.ErrorMessage>
     </TextField.Root>
   );
