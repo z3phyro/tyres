@@ -105,7 +105,8 @@ const manageFeatureFlag = (path: string, operation: "add" | "remove") => {
         json,
         config.getFeaturesFolder(),
         "FeatureFlags",
-        "feature-flags.interface.ts"
+        "feature-flags.interface.ts",
+        "boolean"
       );
     }
 

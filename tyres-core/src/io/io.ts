@@ -116,11 +116,12 @@ export const writeFeatureFlag = (
 ) => {
   const result = `import type { FeatureFlagsInterface } from "./feature-flags.interface"; 
 
-export const ${envName}featureFlag: FeatureFlagsInterface = ${JSON.stringify(
-    json,
-    null,
-    2
-  ).replace(/"(\w+)"\s*:/g, "$1:")};
+export const flags${envName[0].toUpperCase()}${envName.slice(
+    1
+  )}: FeatureFlagsInterface = ${JSON.stringify(json, null, 2).replace(
+    /"(\w+)"\s*:/g,
+    "$1:"
+  )};
 `;
 
   writeFile(`feature-flags.${envName.toLowerCase()}.ts`, result, folder);
