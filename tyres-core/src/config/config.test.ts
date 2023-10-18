@@ -13,6 +13,7 @@ import {
   getFolder,
   setDictionaries,
   setEnvironments,
+  checkInit,
 } from "./config";
 
 const TEST_CONFIG_FILE = "tyres-config.config.json";
@@ -70,5 +71,9 @@ describe("Checking configuration file", () => {
     fs.rmSync(CONFIG_FILE_NAME);
 
     expect(getFolder()).toEqual(DEFAULT_TRANSLATION_FOLDER);
+  });
+
+  test("Checks if the initialization was done", () => {
+    expect(checkInit()).toBeFalsy();
   });
 });

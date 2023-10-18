@@ -14,4 +14,5 @@ export {
   getEnvironments,
   setEnvironments,
   getConfigFilename,
+  checkInit,
 } from "./config";

@@ -48,6 +48,7 @@ export {
   setDictionaries,
   getEnvironments,
   setEnvironments,
+  checkInit,
 } from "./config";
 
 export {

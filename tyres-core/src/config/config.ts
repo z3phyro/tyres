@@ -28,6 +28,14 @@ export const initConfigs = () => {
        }`
     );
   }
+
+  if (!fs.existsSync(DEFAULT_TRANSLATION_FOLDER)) {
+    fs.mkdirSync(DEFAULT_TRANSLATION_FOLDER);
+  }
+
+  if (!fs.existsSync(DEFAULT_FEATURE_FLAGS_FOLDER)) {
+    fs.mkdirSync(DEFAULT_FEATURE_FLAGS_FOLDER);
+  }
 };
 
 export const removeConfigs = () => {
@@ -80,4 +88,12 @@ export const setEnvironments = (environments: string[]) => {
   const config = getConfigs();
   config.environments = environments;
   setConfigs(config);
+};
+
+export const checkInit = () => {
+  return (
+    fs.existsSync(getConfigFilename()) &&
+    fs.existsSync(getConfigs().translationsPath) &&
+    fs.existsSync(getConfigs().featureFlagsPath)
+  );
 };
