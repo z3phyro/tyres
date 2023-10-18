@@ -30,7 +30,7 @@ export const generateInterface = (
   dataType = "string"
 ) => {
   return `export interface ${name}Interface ${JSON.stringify(json, null, 2)
-    .replace(/("\w+"): (".*")(,?\n)/g, `$1: ${dataType}$3`)
+    .replace(/("\w+"): ((".*")|true|false)(,?\n)/g, `$1: ${dataType};\n`)
     .replace(/"(\w+)"\s*:/g, "$1:")};`;
 };
 
