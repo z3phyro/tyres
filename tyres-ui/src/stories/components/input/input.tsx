@@ -19,7 +19,7 @@ export interface TInputProps {
   onInput: JSX.EventHandler<HTMLInputElement, InputEvent>;
   onChange?: JSX.EventHandler<HTMLInputElement, Event>;
   onBlur?: JSX.EventHandler<HTMLInputElement, FocusEvent>;
-  ref: (element: HTMLInputElement) => void;
+  ref?: (element: HTMLInputElement) => void;
 }
 export default function Input(props: TInputProps) {
   return (

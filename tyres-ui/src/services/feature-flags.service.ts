@@ -20,6 +20,11 @@ class FeatureFlagsService {
       value,
     });
   };
+  static add = async (name: string) => {
+    await FetchHelper.post(ROUTE_API_FEATURE_FLAGS, {
+      name,
+    });
+  };
   static remove = async (path: string) => {
     await FetchHelper.delete(`${ROUTE_API_FEATURE_FLAGS}/${path}`);
   };

@@ -12,6 +12,12 @@ class DictionaryService {
 
     return await response.json();
   };
+  static add = async (shortName: string, name: string) => {
+    await FetchHelper.post(ROUTE_API_DICTIONARIES, {
+      shortName,
+      name,
+    });
+  };
   static delete = async (key: string) => {
     await FetchHelper.delete(`${ROUTE_API_DICTIONARIES}/${key}`);
   };
