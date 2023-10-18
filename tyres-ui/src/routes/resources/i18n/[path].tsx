@@ -55,7 +55,7 @@ export default function Page() {
     setValue(
       (pathExists(all()?.data[dictIndex()] ?? {}, path) &&
         pathGet(all()?.data[dictIndex()] ?? {}, path)?.toString()) ||
-        "",
+        ""
     );
     setModified(false);
   });

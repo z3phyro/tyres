@@ -7,6 +7,8 @@ export const ETerms = {
   FeatureFlags: "Feature Flags",
   Resources: "Resources",
   Paths: "Paths",
+  Init: "Init",
+  Check: "Check",
 } as const;
 
 const slugifyHandler = {

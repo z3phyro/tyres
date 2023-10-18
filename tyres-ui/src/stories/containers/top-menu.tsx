@@ -1,4 +1,4 @@
-import { useLocation } from "solid-start";
+import { A, useLocation } from "solid-start";
 import MenuLink from "../components/menu-link";
 import {
   ROUTE_PAGE_COVERAGE,
@@ -19,7 +19,9 @@ export default function TopMenu() {
   return (
     <nav class="shadow-lg shadow-gray-150 bg-white">
       <div class="flex py-6 justify-between container">
-        <h1>TyRes</h1>
+        <A href="/" class="">
+          TyRes
+        </A>
 
         <ul class="flex justify-between items-center gap-4 select-none">
           <MenuLink
