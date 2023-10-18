@@ -9,7 +9,7 @@ export const ROUTE_PAGE_COVERAGE = `/${ETermsSlugged.Coverage}`;
 export const ROUTE_PAGE_HOME = "/";
 
 // API routes
-export const ROUTE_API_LOCAL = "http://localhost:3000/api";
+export const ROUTE_API_LOCAL = "http://localhost:8123/api";
 export const ROUTE_API_DICTIONARIES = `${ROUTE_API_LOCAL}/${ETermsSlugged.Dictionaries}`;
 export const ROUTE_API_FEATURE_FLAGS = `${ROUTE_API_LOCAL}/${ETermsSlugged.FeatureFlags}`;
 export const ROUTE_API_I18N = `${ROUTE_API_LOCAL}/${ETermsSlugged.i18n}`;
