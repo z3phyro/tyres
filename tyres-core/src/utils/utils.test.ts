@@ -25,11 +25,11 @@ const TEST_INTERFACE_JSON = {
 };
 
 const TEST_INTERFACE_RESULT = `export interface TranslationInterface {
-  uno: string,
-  dos: string,
+  uno: string;
+  dos: string;
   general: {
-    hello: string,
-    bye: string
+    hello: string;
+    bye: string;
   }
 };`;
 
@@ -65,11 +65,11 @@ describe("Utils tests", () => {
 
     const expectedResult = `/* eslint-disable prettier/prettier */
 export interface TranslationInterface {
-  uno: string,
-  dos: string,
+  uno: string;
+  dos: string;
   general: {
-    hello: string,
-    bye: string
+    hello: string;
+    bye: string;
   }
 };`;
 
