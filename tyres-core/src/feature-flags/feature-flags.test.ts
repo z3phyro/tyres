@@ -58,7 +58,7 @@ export interface FeatureFlagsInterface {
       config.getFeaturesFolder()
     ).toString();
     expect(devEnvironmentString).toEqual(`/* eslint-disable prettier/prettier */
-import { FeatureFlagsInterface } from "./feature-flags.interface.ts";
+import { FeatureFlagsInterface } from "./feature-flags.interface";
 
 export const flagsDevelopment: FeatureFlagsInterface = {
   general: {
@@ -71,10 +71,10 @@ export const flagsDevelopment: FeatureFlagsInterface = {
       config.getFeaturesFolder()
     ).toString();
     expect(featureFlagsString).toEqual(`/* eslint-disable prettier/prettier */
-import { FeatureFlagsInterface } from "./feature-flags.interface.ts";
-import { flagsDevelopment } from "./feature-flags.development.ts";
-import { flagsStaging } from "./feature-flags.staging.ts";       
-import { flagsProduction } from "./feature-flags.production.ts";
+import { FeatureFlagsInterface } from "./feature-flags.interface";
+import { flagsDevelopment } from "./feature-flags.development";
+import { flagsStaging } from "./feature-flags.staging";       
+import { flagsProduction } from "./feature-flags.production";
 
 export const featureFlags: { [id: string]: FeatureFlagsInterface } = {
   development: flagsDevelopment,

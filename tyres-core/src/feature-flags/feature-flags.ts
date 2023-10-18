@@ -35,7 +35,7 @@ export const initFeatureFlags = () => {
   for (const env of environments) {
     writeFile(
       `feature-flags.${env}.ts`,
-      `import { FeatureFlagsInterface } from "./feature-flags.interface.ts";
+      `import { FeatureFlagsInterface } from "./feature-flags.interface";
 
 export const flags${env[0].toUpperCase()}${env.slice(
         1
@@ -46,10 +46,10 @@ export const flags${env[0].toUpperCase()}${env.slice(
 
   writeFile(
     "feature-flags.ts",
-    `import { FeatureFlagsInterface } from "./feature-flags.interface.ts";
-import { flagsDevelopment } from "./feature-flags.development.ts";
-import { flagsStaging } from "./feature-flags.staging.ts";       
-import { flagsProduction } from "./feature-flags.production.ts";
+    `import { FeatureFlagsInterface } from "./feature-flags.interface";
+import { flagsDevelopment } from "./feature-flags.development";
+import { flagsStaging } from "./feature-flags.staging";       
+import { flagsProduction } from "./feature-flags.production";
 
 export const featureFlags: { [id: string]: FeatureFlagsInterface } = {
   development: flagsDevelopment,
