@@ -21,7 +21,6 @@
     "prepare": "cd .. && husky install",
     "prepublish": "npm run build",
     "build": "rm -rf lib && npx tsc -p tsconfig.json",
-    "postbuild": "echo '#!/usr/bin/env node' | cat - lib/index.js > temp && mv temp lib/index.js",
     "test": "vitest --no-threads --no-watch",
     "ui": "vitest --ui --no-threads",
     "prettier:format": "prettier . -w",
