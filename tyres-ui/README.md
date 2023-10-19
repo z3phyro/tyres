@@ -1,30 +1,33 @@
-# SolidStart
+# Typed Resources UI - TyRes-UI
 
-Everything you need to build a Solid project, powered by [`solid-start`](https://start.solidjs.com);
+UI for typed resources package (TyRes). It allows to use most of the functions of tyres-core, including, initializing the project.
 
-## Creating a project
+# Installation
 
-```bash
-# create a new project in the current directory
-npm init solid@latest
+## Install the dependency
 
-# create a new project in my-app
-npm init solid@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+This needs to be executed inside your typescript project.
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+npm i -D @z3phyro/tyres-ui
 ```
 
-## Building
+```bash
+yarn add -D @z3phyro/tyres-ui
+```
 
-Solid apps are built with _adapters_, which optimise your project for deployment to different environments.
+## Setup project package.json script
 
-By default, `npm run build` will generate a Node app that you can run with `npm start`. To use a different adapter, add it to the `devDependencies` in `package.json` and specify in your `vite.config.js`.
+```json
+{
+  "scripts": {
+    "tyres-ui": "PORT=8123 node ./node_modules/.bin/tyres-ui"
+  }
+}
+```
+
+## Run it!
+
+```bash
+npm run tyres-ui
+```

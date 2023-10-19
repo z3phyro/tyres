@@ -1,14 +1,28 @@
 {
-  "name": "tyres-ui",
+  "name": "@z3phyro/tyres-ui",
+  "description": "UI for typed resources package (TyRes). It allows to use most of the functions of tyres-core, including, initializing the project.",
+  "version": "0.1.1",
   "scripts": {
     "dev": "rm -rf .solid && solid-start dev",
     "build": "solid-start build",
     "start": "solid-start start",
     "prettier:format": "prettier . -w",
+    "postbuild": "echo '#!/usr/bin/env node' | cat - dist/server.js > temp && mv temp dist/server.js",
     "prettier:check": "prettier . --check",
     "eslint:check": "eslint .",
     "eslint:fix": "eslint . --fix",
     "fix": "prettier . -w && eslint . --fix"
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "ISC",
+  "bin": {
+    "tyres-ui": "./dist/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/z3phyro/tyres.git"
   },
   "type": "module",
   "devDependencies": {
