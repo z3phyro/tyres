@@ -30,11 +30,11 @@ export const initConfigs = () => {
   }
 
   if (!fs.existsSync(DEFAULT_TRANSLATION_FOLDER)) {
-    fs.mkdirSync(DEFAULT_TRANSLATION_FOLDER);
+    fs.mkdirSync(DEFAULT_TRANSLATION_FOLDER, { recursive: true });
   }
 
   if (!fs.existsSync(DEFAULT_FEATURE_FLAGS_FOLDER)) {
-    fs.mkdirSync(DEFAULT_FEATURE_FLAGS_FOLDER);
+    fs.mkdirSync(DEFAULT_FEATURE_FLAGS_FOLDER, { recursive: true });
   }
 };
 
