@@ -1,0 +1,40 @@
+{
+  "name": "tyres-ui",
+  "scripts": {
+    "dev": "rm -rf .solid && solid-start dev",
+    "build": "solid-start build",
+    "start": "solid-start start",
+    "prettier:format": "prettier . -w",
+    "prettier:check": "prettier . --check",
+    "eslint:check": "eslint .",
+    "eslint:fix": "eslint . --fix",
+    "fix": "prettier . -w && eslint . --fix"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
+    "autoprefixer": "^10.4.13",
+    "eslint": "^8.44.0",
+    "postcss": "^8.4.21",
+    "prettier": "^2.8.8",
+    "solid-start-node": "^0.2.19",
+    "tailwindcss": "^3.2.4",
+    "typescript": "^4.9.4",
+    "vite": "^4.1.4"
+  },
+  "dependencies": {
+    "@kobalte/core": "^0.9.8",
+    "@modular-forms/solid": "^0.19.1",
+    "@solidjs/meta": "^0.28.2",
+    "@solidjs/router": "^0.8.2",
+    "@z3phyro/tyres-core": "file:../tyres-core",
+    "solid-icons": "^1.0.11",
+    "solid-js": "^1.7.2",
+    "solid-start": "^0.2.26",
+    "undici": "^5.15.1",
+    "valibot": "^0.11.0"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
