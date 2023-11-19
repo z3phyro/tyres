@@ -6,7 +6,7 @@ import { EUiVariant } from "~/core/types/ui-variants.type";
 import CoverageService from "~/services/coverage.service";
 import DictionaryService from "~/services/dictionary.service";
 import Accordion from "~/stories/components/accordion/accordion";
-import Badge from "~/stories/components/badge/badge";
+import { Badge } from "@z3phyro/may-ui";
 import Main from "~/stories/components/main";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
 
@@ -50,7 +50,7 @@ export default function Page() {
       <SmartBreadcrumbs />
       <section class="flex flex-col gap-2">
         {dicts() &&
-          Object.keys(dicts()).map((dict: string) => (
+          Object.keys(dicts()!).map((dict: string) => (
             <Accordion
               variant={getVariantFromPercent(getPercent(dict))}
               disabled={!coverage()?.[dict].paths.length}
@@ -61,7 +61,7 @@ export default function Page() {
                       <Badge class="w-8" variant={EUiVariant.White}>
                         {getParsedPercent(dict)}
                       </Badge>
-                      <span>{dicts()[dict]}</span>
+                      <span>{dicts()![dict]}</span>
                     </span>
                   ),
                   content: (
@@ -69,7 +69,7 @@ export default function Page() {
                       {coverage()?.[dict].paths.map((path) => (
                         <A
                           class="flex items-center gap-1 hover:text-blue-500"
-                          href={`${ROUTE_PAGE_I18N}/${path}?dictionary=${dicts()[dict]}`}>
+                          href={`${ROUTE_PAGE_I18N}/${path}?dictionary=${dicts()![dict]}`}>
                           <FiLink /> {path}
                         </A>
                       ))}
