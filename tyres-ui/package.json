@@ -1,7 +1,7 @@
 {
   "name": "@z3phyro/tyres-ui",
   "description": "UI for typed resources package (TyRes). It allows to use most of the functions of tyres-core, including, initializing the project.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "dev": "rm -rf .solid && solid-start dev",
     "build": "solid-start build",
@@ -41,7 +41,7 @@
     "@modular-forms/solid": "^0.19.1",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.2",
-    "@z3phyro/tyres-core": "^0.1.0",
+    "@z3phyro/tyres-core": "^0.1.2",
     "solid-icons": "^1.0.11",
     "solid-js": "^1.7.2",
     "solid-start": "^0.2.26",

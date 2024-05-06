@@ -6,7 +6,7 @@ import { EUiVariant } from "~/core/types/ui-variants.type";
 import CoverageService from "~/services/coverage.service";
 import DictionaryService from "~/services/dictionary.service";
 import Accordion from "~/stories/components/accordion/accordion";
-import { Badge } from "@z3phyro/may-ui";
+import Badge from "~/stories/components/badge/badge";
 import Main from "~/stories/components/main";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
 
