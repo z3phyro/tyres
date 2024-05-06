@@ -2,7 +2,7 @@ import fs from "fs";
 import { TConfig, TDictNode } from "../types";
 
 export const CONFIG_FILE_NAME = "tyres.config.json";
-export const DEFAULT_TRANSLATION_FOLDER = "src/translations/";
+export const DEFAULT_TRANSLATION_FOLDER = "src/i18n/";
 export const DEFAULT_FEATURE_FLAGS_FOLDER = "src/feature-flags/";
 export const DEFAULT_ENVIRONMENT_DATA = [
   "development",
@@ -29,12 +29,14 @@ export const initConfigs = () => {
     );
   }
 
-  if (!fs.existsSync(DEFAULT_TRANSLATION_FOLDER)) {
-    fs.mkdirSync(DEFAULT_TRANSLATION_FOLDER, { recursive: true });
+  const configs = getConfigs();
+
+  if (!fs.existsSync(configs.translationsPath)) {
+    fs.mkdirSync(configs.translationsPath, { recursive: true });
   }
 
-  if (!fs.existsSync(DEFAULT_FEATURE_FLAGS_FOLDER)) {
-    fs.mkdirSync(DEFAULT_FEATURE_FLAGS_FOLDER, { recursive: true });
+  if (!fs.existsSync(configs.featureFlagsPath)) {
+    fs.mkdirSync(configs.featureFlagsPath, { recursive: true });
   }
 };
 
