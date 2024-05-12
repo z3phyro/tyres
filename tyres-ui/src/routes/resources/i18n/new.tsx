@@ -24,7 +24,7 @@ export function routeData() {
 export default function Page() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [value, setValue] = createSignal(searchParams["duplicate"] ?? "");
+  const [value, setValue] = createSignal(searchParams.duplicate ?? searchParams.search ?? "-");
   const toast = useToast();
   const { dicts } = useRouteData<typeof routeData>();
 
@@ -46,7 +46,7 @@ export default function Page() {
     toast.info({
       title: "Entry added",
     });
-    navigate(`${ROUTE_PAGE_I18N}/${value()}?dictionary=${dicts()?.[0]}`);
+    navigate(`${ROUTE_PAGE_I18N}/${value()}?dictionary=${dicts()?.[0]}&search=${searchParams.search ?? ""}`);
   };
 
   return (
@@ -58,7 +58,6 @@ export default function Page() {
           onInput={handleInput}
           placeholder="eg. general.hello"
           value={value()}
-          hasError={!!value() && !isValid()}
         />
         <InfoBlock title="Naming rules:">
           <ul class="list-disc">

@@ -55,17 +55,18 @@ export default function Page() {
     setValue(
       (pathExists(all()?.data[dictIndex()] ?? {}, path) &&
         pathGet(all()?.data[dictIndex()] ?? {}, path)?.toString()) ||
-        ""
+      ""
     );
     setModified(false);
   });
 
-  const updateEntryAction = async (value: string) => {
+  const updateEntryAction = async (value: string, close: boolean = false) => {
     await TranslationService.updateEntry(dictionary(), path, value);
     toast.info({
       title: "Entry updated",
     });
-    navigate(ROUTE_PAGE_I18N);
+
+    if (close) navigate(`${ROUTE_PAGE_I18N}?search=${searchParams.search ?? ""}`);
   };
 
   const deleteEntryAction = async () => {
@@ -73,7 +74,7 @@ export default function Page() {
     toast.info({
       title: "Entry removed",
     });
-    navigate(ROUTE_PAGE_I18N);
+    navigate(`${ROUTE_PAGE_I18N}?search=${searchParams.search ?? ""}`);
   };
 
   const deleteEntry = () => {
@@ -101,7 +102,7 @@ export default function Page() {
         {all()?.dicts.map((dict: string) => (
           <A
             class={`${dictionary() === dict ? "text-blue-500" : "text-gray-500"}`}
-            href={`?dictionary=${dict}`}>
+            href={`?dictionary=${dict}&search=${searchParams.search ?? ""}`}>
             {dict}
           </A>
         ))}
@@ -115,6 +116,9 @@ export default function Page() {
         </Button>
         <Button type="button" disabled={!modified()} onClick={() => updateEntryAction(value())}>
           Save
+        </Button>
+        <Button type="button" disabled={!modified()} onClick={() => updateEntryAction(value(), true)}>
+          Save and Close
         </Button>
       </div>
     </Main>

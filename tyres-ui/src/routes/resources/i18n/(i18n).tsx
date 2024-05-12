@@ -1,6 +1,6 @@
 import { FiCopy, FiDelete, FiEdit, FiFilter, FiTrash2 } from "solid-icons/fi";
 import { createResource, createSignal } from "solid-js";
-import { useNavigate, useRouteData } from "solid-start";
+import { useNavigate, useRouteData, useSearchParams } from "solid-start";
 import DictionaryService from "~/services/dictionary.service";
 import TranslationService from "~/services/translation.service";
 import Card from "~/stories/components/card";
@@ -30,7 +30,8 @@ export default function Page() {
   const toast = useToast();
   const { all, refetch: refetchAll } = useRouteData<typeof routeData>();
 
-  const [searchText, setSearchText] = createSignal("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchText, setSearchText] = createSignal(searchParams.search ?? "");
 
   const filteredData = () =>
     all()?.data?.filter((row: string[]) =>
@@ -39,17 +40,19 @@ export default function Page() {
 
   const handleSearchChange = (e: Event) => {
     setSearchText((e?.currentTarget as HTMLInputElement)?.value ?? "");
+    setSearchParams({ search: (e?.currentTarget as HTMLInputElement)?.value });
   };
 
   const handleClear = () => {
     setSearchText("");
+    setSearchParams({ search: "" });
   };
 
   const handleDuplicate = (row: number) =>
-    navigate(`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}?duplicate=${filteredData()[row][0]}`);
+    navigate(`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}?duplicate=${filteredData()[row][0]}&search=${searchText()}`);
 
   const handleEdit = (row: number) =>
-    navigate(`${ROUTE_PAGE_I18N}/${filteredData()[row][0]}?dictionary=${all()?.dicts[0]}`);
+    navigate(`${ROUTE_PAGE_I18N}/${filteredData()[row][0]}?dictionary=${all()?.dicts[0]}&search=${searchText()}`);
 
   const deleteEntryAction = async (path: string) => {
     await TranslationService.deleteEntry("dict", path);
@@ -88,7 +91,7 @@ export default function Page() {
         trailing={<FiDelete size={22} />}
         trailingClick={handleClear}
       />
-      <Button onClick={() => navigate(`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}`)}>New</Button>
+      <Button onClick={() => navigate(`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}?search=${searchParams.search ?? ""}`)}>New</Button>
       <Card>
         <Table
           columns={["path", ...(all()?.dicts || [])]}
