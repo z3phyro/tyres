@@ -1,16 +1,10 @@
+import { Button, Card, EUiVariant, Main, Table, useDialog, useToast } from "@z3phyro/may-ui";
 import { FiEdit, FiTrash2 } from "solid-icons/fi";
 import { createResource } from "solid-js";
 import { useNavigate, useRouteData } from "solid-start";
 import { ROUTE_ACTION_NEW, ROUTE_PAGE_DICTIONARIES } from "~/config/routes";
-import { EUiVariant } from "~/core/types/ui-variants.type";
 import DictionaryService from "~/services/dictionary.service";
-import Button from "~/stories/components/button";
-import Card from "~/stories/components/card";
-import Main from "~/stories/components/main";
-import Table from "~/stories/components/table";
-import { useDialog } from "~/stories/containers/dialog-provider/dialog-provider";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
-import { useToast } from "~/stories/containers/toast-provider/toast-provider";
 
 export function routeData() {
   const [dicts, { refetch }] = createResource(async () => {

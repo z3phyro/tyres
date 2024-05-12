@@ -1,18 +1,12 @@
+import { Button, Card, EUiVariant, Main, Switch, useDialog, useToast } from "@z3phyro/may-ui";
 import { pathGet } from "@z3phyro/tyres-core";
 import { TDataNode } from "@z3phyro/tyres-core/lib/types";
 import { FiTrash2 } from "solid-icons/fi";
 import { createResource } from "solid-js";
 import { useNavigate, useRouteData } from "solid-start";
 import { ROUTE_ACTION_NEW, ROUTE_PAGE_FEATURE_FLAGS } from "~/config/routes";
-import { EUiVariant } from "~/core/types/ui-variants.type";
 import FeatureFlagsService from "~/services/feature-flags.service";
-import Button from "~/stories/components/button";
-import Card from "~/stories/components/card";
-import Main from "~/stories/components/main";
-import Switch from "~/stories/components/switch/switch";
-import { useDialog } from "~/stories/containers/dialog-provider/dialog-provider";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
-import { useToast } from "~/stories/containers/toast-provider/toast-provider";
 import { capitalize } from "~/utils/slugify.helper";
 
 export function routeData() {

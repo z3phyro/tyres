@@ -1,16 +1,11 @@
+import { Button, Card, EUiVariant, Input, Main, useToast } from "@z3phyro/may-ui";
 import { editDictionary } from "@z3phyro/tyres-core";
 import { createEffect, createResource, createSignal } from "solid-js";
 import { useNavigate, useParams, useRouteData } from "solid-start";
 import { createServerAction$ } from "solid-start/server";
 import { ROUTE_PAGE_DICTIONARIES } from "~/config/routes";
-import { EUiVariant } from "~/core/types/ui-variants.type";
 import DictionaryService from "~/services/dictionary.service";
-import Button from "~/stories/components/button";
-import Card from "~/stories/components/card";
-import Input from "~/stories/components/input";
-import Main from "~/stories/components/main";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
-import { useToast } from "~/stories/containers/toast-provider/toast-provider";
 import { ok } from "~/utils/response.helper";
 
 export function routeData() {

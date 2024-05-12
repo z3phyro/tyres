@@ -1,17 +1,11 @@
+import { Button, Card, EUiVariant, Main, Textarea, useDialog, useToast } from "@z3phyro/may-ui";
 import { pathExists, pathGet } from "@z3phyro/tyres-core";
 import { createEffect, createResource, createSignal } from "solid-js";
 import { A, useNavigate, useParams, useRouteData, useSearchParams } from "solid-start";
 import { ROUTE_PAGE_I18N } from "~/config/routes";
-import { EUiVariant } from "~/core/types/ui-variants.type";
 import DictionaryService from "~/services/dictionary.service";
 import TranslationService from "~/services/translation.service";
-import Button from "~/stories/components/button";
-import Card from "~/stories/components/card";
-import Main from "~/stories/components/main";
-import Textarea from "~/stories/components/textarea";
-import { useDialog } from "~/stories/containers/dialog-provider/dialog-provider";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
-import { useToast } from "~/stories/containers/toast-provider/toast-provider";
 
 export function routeData() {
   const [all] = createResource(async () => {

@@ -3,16 +3,9 @@ import { createResource, createSignal } from "solid-js";
 import { useNavigate, useRouteData, useSearchParams } from "solid-start";
 import DictionaryService from "~/services/dictionary.service";
 import TranslationService from "~/services/translation.service";
-import Card from "~/stories/components/card";
-import Input from "~/stories/components/input";
-import Table from "~/stories/components/table";
-import Main from "~/stories/components/main";
-import Button from "~/stories/components/button";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
 import { ROUTE_ACTION_NEW, ROUTE_PAGE_I18N } from "~/config/routes";
-import { useDialog } from "~/stories/containers/dialog-provider/dialog-provider";
-import { EUiVariant } from "~/core/types/ui-variants.type";
-import { useToast } from "~/stories/containers/toast-provider/toast-provider";
+import { Button, Card, EUiVariant, Input, Main, Table, useDialog, useToast } from "@z3phyro/may-ui";
 
 export function routeData() {
   const [all, { refetch }] = createResource(async () => {

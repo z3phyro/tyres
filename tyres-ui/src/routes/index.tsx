@@ -1,13 +1,10 @@
+import { Button, Card, EUiVariant, Main } from "@z3phyro/may-ui";
 import { createResource } from "solid-js";
 import { A, useRouteData } from "solid-start";
 import { ROUTE_PAGE_COVERAGE, ROUTE_PAGE_RESOURCES } from "~/config/routes";
-import { EUiVariant } from "~/core/types/ui-variants.type";
 import ConfigService from "~/services/config.service";
-import Button from "~/stories/components/button";
-import Card from "~/stories/components/card";
 import BooksIcon from "~/stories/components/icons/books.icon";
 import StatsIcon from "~/stories/components/icons/stats.icon";
-import Main from "~/stories/components/main";
 
 export function routeData() {
   const [all, { refetch }] = createResource(async () => {

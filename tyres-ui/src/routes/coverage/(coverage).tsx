@@ -1,13 +1,10 @@
+import { Accordion, Badge, EUiVariant, Main } from "@z3phyro/may-ui";
 import { FiLink } from "solid-icons/fi";
 import { createResource } from "solid-js";
 import { A, useRouteData } from "solid-start";
 import { ROUTE_PAGE_I18N } from "~/config/routes";
-import { EUiVariant } from "~/core/types/ui-variants.type";
 import CoverageService from "~/services/coverage.service";
 import DictionaryService from "~/services/dictionary.service";
-import Accordion from "~/stories/components/accordion/accordion";
-import Badge from "~/stories/components/badge/badge";
-import Main from "~/stories/components/main";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
 
 export function routeData() {

@@ -1,4 +1,4 @@
-// @refresh reload
+import { DialogProvider, ToastProvider } from "@z3phyro/may-ui";
 import { Suspense } from "solid-js";
 import {
   Body,
@@ -13,8 +13,6 @@ import {
 } from "solid-start";
 import "./root.css";
 import TopMenu from "./stories/containers/top-menu";
-import { ToastProvider } from "./stories/containers/toast-provider/toast-provider";
-import { DialogProvider } from "./stories/containers/dialog-provider/dialog-provider";
 
 export default function Root() {
   return (
