@@ -1,6 +1,6 @@
 {
   "name": "@z3phyro/tyres-cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "CLI inspired by prisma, to create and mantain statically typed resources on any typescript project.",
   "main": "lib/index.js",
   "scripts": {
@@ -9,7 +9,9 @@
     "build": "npx tsc",
     "postbuild": "echo '#!/usr/bin/env node' | cat - lib/index.js > temp && mv temp lib/index.js"
   },
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "bin": {
     "tyres": "./lib/index.js"
   },

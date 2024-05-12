@@ -1,17 +1,12 @@
 import { createResource, createSignal } from "solid-js";
 import { useNavigate, useRouteData, useSearchParams } from "solid-start";
 import { ROUTE_PAGE_I18N } from "~/config/routes";
-import { EUiVariant } from "~/core/types/ui-variants.type";
 import DictionaryService from "~/services/dictionary.service";
 import TranslationService from "~/services/translation.service";
-import Button from "~/stories/components/button";
-import Card from "~/stories/components/card";
-import Input from "~/stories/components/input";
-import Main from "~/stories/components/main";
+
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
-import { useToast } from "~/stories/containers/toast-provider/toast-provider";
-import { InfoBlock } from "~/stories/components/info-block/info-block";
 import { EntryNameSchema } from "~/core/validation/entry-name.validation";
+import { Button, Card, EUiVariant, InfoBlock, Input, Main, useToast } from "@z3phyro/may-ui";
 
 export function routeData() {
   const [dicts] = createResource(async () => {
