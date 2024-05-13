@@ -7,6 +7,6 @@ export default defineConfig({
     port: 8123,
   },
   ssr: {
-    noExternal: ["@kobalte/core"],
+    noExternal: ["@kobalte/core", "@z3phyro/may-ui"],
   },
 });

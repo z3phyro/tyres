@@ -26,6 +26,7 @@
   },
   "type": "module",
   "devDependencies": {
+    "@types/node": "^20.12.11",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "autoprefixer": "^10.4.13",
     "eslint": "^8.44.0",
@@ -41,7 +42,7 @@
     "@modular-forms/solid": "^0.19.1",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.2",
-    "@z3phyro/may-ui": "^0.0.2",
+    "@z3phyro/may-ui": "file:../../may-ui",
     "@z3phyro/tyres-core": "^0.1.2",
     "solid-icons": "^1.0.11",
     "solid-js": "^1.7.2",
