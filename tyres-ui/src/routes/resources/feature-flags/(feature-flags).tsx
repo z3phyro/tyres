@@ -1,15 +1,21 @@
-import { Button, Card, EUiVariant, Main, Switch, useDialog, useToast } from "@z3phyro/may-ui";
+import { useNavigate } from "@solidjs/router";
 import { pathGet } from "@z3phyro/tyres-core";
 import { TDataNode } from "@z3phyro/tyres-core/lib/types";
-import { FiTrash2 } from "solid-icons/fi";
 import { createResource } from "solid-js";
-import { useNavigate, useRouteData } from "solid-start";
 import { ROUTE_ACTION_NEW, ROUTE_PAGE_FEATURE_FLAGS } from "~/config/routes";
+import { EUiVariant } from "~/core/types/ui-variants.type";
 import FeatureFlagsService from "~/services/feature-flags.service";
+import Button from "~/stories/components/button";
+import Card from "~/stories/components/card";
+import TrashIcon from "~/stories/components/icons/trash.icon";
+import Main from "~/stories/components/main";
+import Switch from "~/stories/components/switch/switch";
+import { useDialog } from "~/stories/containers/dialog-provider/dialog-provider";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
+import { useToast } from "~/stories/containers/toast-provider/toast-provider";
 import { capitalize } from "~/utils/slugify.helper";
 
-export function routeData() {
+export default function Page() {
   const [all, { refetch }] = createResource(async () => {
     const features = await FeatureFlagsService.getAll();
     const list = await FeatureFlagsService.getList();
@@ -17,10 +23,6 @@ export function routeData() {
     return { features, list };
   });
 
-  return { all, refetch };
-}
-export default function Page() {
-  const { all, refetch: refetchFeatures } = useRouteData<typeof routeData>();
   const navigate = useNavigate();
   const dialog = useDialog();
   const toast = useToast();
@@ -28,7 +30,7 @@ export default function Page() {
   const actionRemove = async (path: string) => {
     await FeatureFlagsService.remove(path);
     toast.info({ title: "Feature removed" });
-    refetchFeatures();
+    refetch();
   };
 
   const handleRemove = async (path: string) => {
@@ -100,7 +102,7 @@ export default function Page() {
                       role="button"
                       class="cursor-pointer hover:text-blue-500"
                       onClick={() => handleRemove(path)}>
-                      <FiTrash2 />
+                      <TrashIcon />
                     </span>
                   </td>
                 </tr>

@@ -1,4 +1,5 @@
-import { A, useLocation } from "solid-start";
+import { A, useLocation } from "@solidjs/router";
+import MenuLink from "../components/menu-link";
 import {
   ROUTE_PAGE_COVERAGE,
   ROUTE_PAGE_FEATURE_FLAGS,
@@ -7,7 +8,6 @@ import {
   ROUTE_PAGE_DICTIONARIES,
 } from "~/config/routes";
 import { ETerms } from "~/config/terms";
-import MenuLink from "../components/menu-link";
 
 export default function TopMenu() {
   const location = useLocation();

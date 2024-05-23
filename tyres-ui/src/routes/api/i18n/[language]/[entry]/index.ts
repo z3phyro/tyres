@@ -1,5 +1,5 @@
 import { addTranslation, removeTranslation, updateTranslation } from "@z3phyro/tyres-core";
-import { APIEvent } from "solid-start/api";
+import type { APIEvent } from "@solidjs/start/server";
 import { ok } from "~/utils/response.helper";
 
 export const PUT = async ({ params, request }: APIEvent) => {

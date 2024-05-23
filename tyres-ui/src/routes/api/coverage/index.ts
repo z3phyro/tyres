@@ -1,5 +1,5 @@
+import { json } from "@solidjs/router";
 import { getAllCoverage } from "@z3phyro/tyres-core";
-import { json } from "solid-start";
 
 export const GET = () => {
   const result = getAllCoverage();

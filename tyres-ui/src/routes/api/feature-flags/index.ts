@@ -4,7 +4,7 @@ import {
   enableFeatureFlag,
   getAllFeatureFlags,
 } from "@z3phyro/tyres-core";
-import { APIEvent } from "solid-start";
+import type { APIEvent } from "@solidjs/start/server"
 import { ok } from "~/utils/response.helper";
 
 export const GET = () => {

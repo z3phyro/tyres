@@ -1,27 +1,30 @@
-import { FiCopy, FiDelete, FiEdit, FiFilter, FiTrash2 } from "solid-icons/fi";
 import { createResource, createSignal } from "solid-js";
-import { useNavigate, useRouteData, useSearchParams } from "solid-start";
 import DictionaryService from "~/services/dictionary.service";
 import TranslationService from "~/services/translation.service";
+import Card from "~/stories/components/card";
+import Input from "~/stories/components/input";
+import Table from "~/stories/components/table";
+import Main from "~/stories/components/main";
+import Button from "~/stories/components/button";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
 import { ROUTE_ACTION_NEW, ROUTE_PAGE_I18N } from "~/config/routes";
-import { Button, Card, EUiVariant, Input, Main, Table, useDialog, useToast } from "@z3phyro/may-ui";
-
-export function routeData() {
-  const [all, { refetch }] = createResource(async () => {
-    const dicts = await DictionaryService.getAllList();
-    const data = await TranslationService.getTranslationsTable();
-    return { dicts, data };
-  });
-
-  return { all, refetch };
-}
+import { useDialog } from "~/stories/containers/dialog-provider/dialog-provider";
+import { EUiVariant } from "~/core/types/ui-variants.type";
+import { useToast } from "~/stories/containers/toast-provider/toast-provider";
+import { useNavigate, useSearchParams } from "@solidjs/router";
+import CopyIcon from "~/stories/components/icons/duplicate.icon";
+import EditIcon from "~/stories/components/icons/edit.icon";
+import TrashIcon from "~/stories/components/icons/trash.icon";
 
 export default function Page() {
   const navigate = useNavigate();
   const dialog = useDialog();
   const toast = useToast();
-  const { all, refetch: refetchAll } = useRouteData<typeof routeData>();
+  const [all, { refetch }] = createResource(async () => {
+    const dicts = await DictionaryService.getAllList();
+    const data = await TranslationService.getTranslationsTable();
+    return { dicts, data };
+  });
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchText, setSearchText] = createSignal(searchParams.search ?? "");
@@ -52,7 +55,7 @@ export default function Page() {
     toast.info({
       title: "Entry removed",
     });
-    refetchAll();
+    refetch();
   };
 
   const handleRemove = (row: number) => {
@@ -79,9 +82,7 @@ export default function Page() {
       <Input
         value={searchText()}
         onInput={handleSearchChange}
-        leading={<FiFilter size={22} />}
         placeholder={"Filter by path"}
-        trailing={<FiDelete size={22} />}
         trailingClick={handleClear}
       />
       <Button onClick={() => navigate(`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}?search=${searchParams.search ?? ""}`)}>New</Button>
@@ -91,17 +92,17 @@ export default function Page() {
           data={filteredData()}
           actions={[
             {
-              content: <FiCopy />,
+              content: <CopyIcon />,
               action: handleDuplicate,
               hint: "Duplicate",
             },
             {
-              content: <FiEdit />,
+              content: <EditIcon />,
               action: handleEdit,
               hint: "Edit",
             },
             {
-              content: <FiTrash2 />,
+              content: <TrashIcon />,
               action: handleRemove,
               hint: "Delete",
             },

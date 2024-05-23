@@ -1,13 +1,18 @@
 import { SubmitHandler, createForm, valiForm } from "@modular-forms/solid";
-import { Button, Card, EUiVariant, Input, Main, useToast } from "@z3phyro/may-ui";
-import { useNavigate } from "solid-start";
+import { useNavigate } from "@solidjs/router";
 import { ROUTE_PAGE_DICTIONARIES } from "~/config/routes";
+import { EUiVariant } from "~/core/types/ui-variants.type";
 import {
   NewDictionaryForm,
   NewDictionarySchema,
 } from "~/core/validation/new-dictionary.validation";
 import DictionaryService from "~/services/dictionary.service";
+import Button from "~/stories/components/button";
+import Card from "~/stories/components/card";
+import Input from "~/stories/components/input";
+import Main from "~/stories/components/main";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
+import { useToast } from "~/stories/containers/toast-provider/toast-provider";
 
 export default function Page() {
   const navigate = useNavigate();

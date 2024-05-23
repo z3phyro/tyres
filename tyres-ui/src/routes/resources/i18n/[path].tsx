@@ -1,27 +1,27 @@
-import { Button, Card, EUiVariant, Main, Textarea, useDialog, useToast } from "@z3phyro/may-ui";
+import { A, useNavigate, useParams, useSearchParams } from "@solidjs/router";
 import { pathExists, pathGet } from "@z3phyro/tyres-core";
 import { createEffect, createResource, createSignal } from "solid-js";
-import { A, useNavigate, useParams, useRouteData, useSearchParams } from "solid-start";
 import { ROUTE_PAGE_I18N } from "~/config/routes";
+import { EUiVariant } from "~/core/types/ui-variants.type";
 import DictionaryService from "~/services/dictionary.service";
 import TranslationService from "~/services/translation.service";
+import Button from "~/stories/components/button";
+import Card from "~/stories/components/card";
+import Main from "~/stories/components/main";
+import Textarea from "~/stories/components/textarea";
+import { useDialog } from "~/stories/containers/dialog-provider/dialog-provider";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
+import { useToast } from "~/stories/containers/toast-provider/toast-provider";
 
-export function routeData() {
+export default function Page() {
+  const { path } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [all] = createResource(async () => {
     const dicts = await DictionaryService.getAllList();
     const data = await TranslationService.getTranslationsObject();
 
     return { dicts, data };
   });
-
-  return { all };
-}
-
-export default function Page() {
-  const { path } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { all } = useRouteData<typeof routeData>();
   const dialog = useDialog();
   const navigate = useNavigate();
   const toast = useToast();
@@ -29,7 +29,7 @@ export default function Page() {
   const dictionary = () => searchParams.dictionary;
   const dictIndex = () => {
     if (dictionary()) {
-      return all()?.dicts.indexOf(dictionary()) ?? 0;
+      return all()?.dicts.indexOf(dictionary() ?? "") ?? 0;
     }
     setSearchParams({
       dictionary: all()?.dicts[0] ?? "English",
@@ -55,7 +55,7 @@ export default function Page() {
   });
 
   const updateEntryAction = async (value: string, close: boolean = false) => {
-    await TranslationService.updateEntry(dictionary(), path, value);
+    await TranslationService.updateEntry(dictionary() ?? "", path, value);
     toast.info({
       title: "Entry updated",
     });
@@ -64,7 +64,7 @@ export default function Page() {
   };
 
   const deleteEntryAction = async () => {
-    await TranslationService.deleteEntry(dictionary(), path);
+    await TranslationService.deleteEntry(dictionary() ?? "", path);
     toast.info({
       title: "Entry removed",
     });

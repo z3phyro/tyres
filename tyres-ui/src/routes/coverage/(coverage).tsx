@@ -1,25 +1,22 @@
-import { Accordion, Badge, EUiVariant, Main } from "@z3phyro/may-ui";
-import { FiLink } from "solid-icons/fi";
+import { A } from "@solidjs/router";
 import { createResource } from "solid-js";
-import { A, useRouteData } from "solid-start";
 import { ROUTE_PAGE_I18N } from "~/config/routes";
+import { EUiVariant } from "~/core/types/ui-variants.type";
 import CoverageService from "~/services/coverage.service";
 import DictionaryService from "~/services/dictionary.service";
+import Accordion from "~/stories/components/accordion/accordion";
+import Badge from "~/stories/components/badge/badge";
+import LinkIcon from "~/stories/components/icons/link.icon";
+import Main from "~/stories/components/main";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
 
-export function routeData() {
+export default function Page() {
   const [all] = createResource(async () => {
     const dicts = await DictionaryService.getAll();
     const coverage = await CoverageService.getCoverage();
 
     return { dicts, coverage };
   });
-
-  return { all };
-}
-
-export default function Page() {
-  const { all } = useRouteData<typeof routeData>();
   const dicts = () => all()?.dicts;
   const coverage = () => all()?.coverage;
 
@@ -67,7 +64,7 @@ export default function Page() {
                         <A
                           class="flex items-center gap-1 hover:text-blue-500"
                           href={`${ROUTE_PAGE_I18N}/${path}?dictionary=${dicts()![dict]}`}>
-                          <FiLink /> {path}
+                          <LinkIcon /> {path}
                         </A>
                       ))}
                     </ul>

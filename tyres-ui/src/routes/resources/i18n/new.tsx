@@ -1,27 +1,27 @@
 import { createResource, createSignal } from "solid-js";
-import { useNavigate, useRouteData, useSearchParams } from "solid-start";
 import { ROUTE_PAGE_I18N } from "~/config/routes";
+import { EUiVariant } from "~/core/types/ui-variants.type";
 import DictionaryService from "~/services/dictionary.service";
 import TranslationService from "~/services/translation.service";
-
+import Button from "~/stories/components/button";
+import Card from "~/stories/components/card";
+import Input from "~/stories/components/input";
+import Main from "~/stories/components/main";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
+import { useToast } from "~/stories/containers/toast-provider/toast-provider";
+import { InfoBlock } from "~/stories/components/info-block/info-block";
 import { EntryNameSchema } from "~/core/validation/entry-name.validation";
-import { Button, Card, EUiVariant, InfoBlock, Input, Main, useToast } from "@z3phyro/may-ui";
-
-export function routeData() {
-  const [dicts] = createResource(async () => {
-    return await DictionaryService.getAllList();
-  });
-
-  return { dicts };
-}
+import { useNavigate, useSearchParams } from "@solidjs/router";
+import { parse } from "valibot"
 
 export default function Page() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [value, setValue] = createSignal(searchParams.duplicate ?? searchParams.search ?? "-");
   const toast = useToast();
-  const { dicts } = useRouteData<typeof routeData>();
+  const [dicts] = createResource(async () => {
+    return await DictionaryService.getAllList();
+  });
 
   const handleInput = (event: Event) => {
     setValue((event.target as HTMLInputElement)?.value);
@@ -29,7 +29,7 @@ export default function Page() {
 
   const isValid = () => {
     try {
-      EntryNameSchema.parse(value());
+      parse(EntryNameSchema, value());
     } catch (e) {
       return false;
     }

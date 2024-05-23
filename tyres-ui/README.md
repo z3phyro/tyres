@@ -1,33 +1,32 @@
-# Typed Resources UI - TyRes-UI
+# SolidStart
 
-UI for typed resources package (TyRes). It allows to use most of the functions of tyres-core, including, initializing the project.
+Everything you need to build a Solid project, powered by [`solid-start`](https://start.solidjs.com);
 
-# Installation
-
-## Install the dependency
-
-This needs to be executed inside your typescript project.
+## Creating a project
 
 ```bash
-npm i -D @z3phyro/tyres-ui
+# create a new project in the current directory
+npm init solid@latest
+
+# create a new project in my-app
+npm init solid@latest my-app
 ```
+
+## Developing
+
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
-yarn add -D @z3phyro/tyres-ui
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
 ```
 
-## Setup project package.json script
+## Building
 
-```json
-{
-  "scripts": {
-    "tyres-ui": "PORT=8123 node ./node_modules/.bin/tyres-ui"
-  }
-}
-```
+Solid apps are built with _presets_, which optimise your project for deployment to different environments.
 
-## Run it!
+By default, `npm run build` will generate a Node app that you can run with `npm start`. To use a different preset, add it to the `devDependencies` in `package.json` and specify in your `app.config.js`.
 
-```bash
-npm run tyres-ui
-```
+## This project was created with the [Solid CLI](https://solid-cli.netlify.app)

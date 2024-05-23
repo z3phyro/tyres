@@ -18,6 +18,11 @@ class DictionaryService {
       name,
     });
   };
+  static update = async (key: string, name: string) => {
+    await FetchHelper.put(`${ROUTE_API_DICTIONARIES}/${key}`, {
+      name,
+    });
+  }
   static delete = async (key: string) => {
     await FetchHelper.delete(`${ROUTE_API_DICTIONARIES}/${key}`);
   };

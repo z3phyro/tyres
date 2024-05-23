@@ -1,26 +1,27 @@
-import { Button, Card, EUiVariant, Main, Table, useDialog, useToast } from "@z3phyro/may-ui";
-import { FiEdit, FiTrash2 } from "solid-icons/fi";
+import { useNavigate } from "@solidjs/router";
 import { createResource } from "solid-js";
-import { useNavigate, useRouteData } from "solid-start";
 import { ROUTE_ACTION_NEW, ROUTE_PAGE_DICTIONARIES } from "~/config/routes";
+import { EUiVariant } from "~/core/types/ui-variants.type";
 import DictionaryService from "~/services/dictionary.service";
+import Button from "~/stories/components/button";
+import Card from "~/stories/components/card";
+import EditIcon from "~/stories/components/icons/edit.icon";
+import TrashIcon from "~/stories/components/icons/trash.icon";
+import Main from "~/stories/components/main";
+import Table from "~/stories/components/table";
+import { useDialog } from "~/stories/containers/dialog-provider/dialog-provider";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
-
-export function routeData() {
-  const [dicts, { refetch }] = createResource(async () => {
-    const dicts = await DictionaryService.getAll();
-    return dicts;
-  });
-
-  return { dicts, refetch };
-}
+import { useToast } from "~/stories/containers/toast-provider/toast-provider";
 
 export default function Page() {
   const navigate = useNavigate();
   const dialog = useDialog();
   const toast = useToast();
 
-  const { dicts, refetch: refetchDicts } = useRouteData<typeof routeData>();
+  const [dicts, { refetch }] = createResource(async () => {
+    const dicts = await DictionaryService.getAll();
+    return dicts;
+  });
   const data = () => Object.entries((dicts() as object) ?? {});
 
   const handleEdit = (row: number) => {
@@ -32,7 +33,7 @@ export default function Page() {
     toast.info({
       title: "Dictionary removed",
     });
-    refetchDicts();
+    refetch();
   };
 
   const handleRemove = (row: number) => {
@@ -67,9 +68,9 @@ export default function Page() {
           data={data()}
           columns={["Key", "Name"]}
           actions={[
-            { content: <FiEdit />, action: handleEdit, hint: "Edit" },
+            { content: <EditIcon />, action: handleEdit, hint: "Edit" },
             {
-              content: <FiTrash2 />,
+              content: <TrashIcon />,
               action: handleRemove,
               hint: "Remove",
             },

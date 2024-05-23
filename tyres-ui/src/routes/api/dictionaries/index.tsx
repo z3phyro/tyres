@@ -1,5 +1,6 @@
 import { addDictionary, getDictionaries } from "@z3phyro/tyres-core";
-import { APIEvent, json } from "solid-start/api";
+import type { APIEvent } from "@solidjs/start/server";
+import { json } from "@solidjs/router";
 
 export const GET = () => {
   const dicts = getDictionaries();
