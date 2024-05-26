@@ -4,7 +4,7 @@ import type { TranslationInterface } from "./translation.interface";
 export const EnglishTranslation: TranslationInterface = {
   general: {
     hello: "Hello World!!!!",
-    about: "About!!!!",
+    about: "About!!!",
     hello2: "OK ok"
   },
   about: {

@@ -1,6 +1,6 @@
 import { createForm, valiForm, SubmitHandler } from "@modular-forms/solid";
 import { useNavigate, useParams } from "@solidjs/router";
-import { createEffect, createResource, createSignal } from "solid-js";
+import { createResource } from "solid-js";
 import { ROUTE_PAGE_DICTIONARIES } from "~/config/routes";
 import { EUiVariant } from "~/core/types/ui-variants.type";
 import { NewDictionaryForm, NewDictionarySchema } from "~/core/validation/new-dictionary.validation";
@@ -55,11 +55,11 @@ export default function Page() {
           </Field>
         </Card>
         <div class="flex justify-end gap-2">
-          <Button variant={EUiVariant.Neutral} onClick={() => navigate(ROUTE_PAGE_DICTIONARIES)}>
-            Cancel
-          </Button>
           <Button type="submit" variant={EUiVariant.Info} disabled={newDictForm.invalid || newDictForm.submitting}>
             Save
+          </Button>
+          <Button variant={EUiVariant.Neutral} onClick={() => navigate(ROUTE_PAGE_DICTIONARIES)}>
+            Cancel
           </Button>
         </div>
       </Form>

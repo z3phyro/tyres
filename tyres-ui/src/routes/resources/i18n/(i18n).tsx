@@ -15,6 +15,8 @@ import { useNavigate, useSearchParams } from "@solidjs/router";
 import CopyIcon from "~/stories/components/icons/duplicate.icon";
 import EditIcon from "~/stories/components/icons/edit.icon";
 import TrashIcon from "~/stories/components/icons/trash.icon";
+import DeleteIcon from "~/stories/components/icons/delete.icon";
+import FilterIcon from "~/stories/components/icons/filter.icon";
 
 export default function Page() {
   const navigate = useNavigate();
@@ -64,13 +66,13 @@ export default function Page() {
       description: "Are you sure you want to delete this entry in all languages?",
       buttons: [
         {
-          children: "No",
-          variant: EUiVariant.Neutral,
-        },
-        {
           children: "Yes",
           variant: EUiVariant.Danger,
           onClick: () => deleteEntryAction(filteredData()[row][0]),
+        },
+        {
+          children: "No",
+          variant: EUiVariant.Neutral,
         },
       ],
     });
@@ -78,37 +80,42 @@ export default function Page() {
 
   return (
     <Main>
-      <SmartBreadcrumbs />
+      <div class="flex justify-between mb-4">
+        <SmartBreadcrumbs />
+        <Button href={`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}?search=${searchParams.search ?? ""}`} class="mb-2">
+          Add entry
+        </Button>
+      </div>
       <Input
+        class="mb-2"
         value={searchText()}
         onInput={handleSearchChange}
+        leading={<FilterIcon class="mt-1" />}
         placeholder={"Filter by path"}
+        trailing={<DeleteIcon class="mt-1" />}
         trailingClick={handleClear}
       />
-      <Button onClick={() => navigate(`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}?search=${searchParams.search ?? ""}`)}>New</Button>
-      <Card>
-        <Table
-          columns={["path", ...(all()?.dicts || [])]}
-          data={filteredData()}
-          actions={[
-            {
-              content: <CopyIcon />,
-              action: handleDuplicate,
-              hint: "Duplicate",
-            },
-            {
-              content: <EditIcon />,
-              action: handleEdit,
-              hint: "Edit",
-            },
-            {
-              content: <TrashIcon />,
-              action: handleRemove,
-              hint: "Delete",
-            },
-          ]}
-        />
-      </Card>
+      <Table
+        columns={[{ name: "path" }, ...(all()?.dicts.map(x => ({ name: x })) || [])]}
+        data={filteredData()}
+        actions={[
+          {
+            content: <CopyIcon />,
+            action: handleDuplicate,
+            hint: "Duplicate",
+          },
+          {
+            content: <EditIcon />,
+            action: handleEdit,
+            hint: "Edit",
+          },
+          {
+            content: <TrashIcon />,
+            action: handleRemove,
+            hint: "Delete",
+          },
+        ]}
+      />
     </Main>
   );
 }

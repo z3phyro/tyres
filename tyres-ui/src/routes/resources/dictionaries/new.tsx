@@ -46,14 +46,14 @@ export default function Page() {
           </Field>
         </Card>
         <div class="flex justify-end gap-2">
-          <Button variant={EUiVariant.Neutral} onClick={() => navigate(ROUTE_PAGE_DICTIONARIES)}>
-            Cancel
-          </Button>
           <Button
             type="submit"
             variant={EUiVariant.Info}
             disabled={newDictForm.invalid || !newDictForm.dirty}>
             Save
+          </Button>
+          <Button variant={EUiVariant.Neutral} onClick={() => navigate(ROUTE_PAGE_DICTIONARIES)}>
+            Cancel
           </Button>
         </div>
       </Form>

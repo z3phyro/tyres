@@ -4,29 +4,33 @@ import Tooltip from "../tooltip/tooltip";
 export interface TTableAction {
   content: JSX.Element | string;
   action: (row: number) => void;
+  href?: string;
   hint: string;
 }
+export interface TTableColumn {
+  name: string;
+  width?: string;
+  render?: () => JSX.Element;
+}
 export interface TTableProps {
-  columns: string[];
+  columns: TTableColumn[];
   data: string[][];
   actions?: TTableAction[];
 }
 
 export default function Table(props: TTableProps) {
-  const columns = () => (props.actions?.length ? [...props.columns, ""] : props.columns);
+  const columns = () => (props.actions?.length ? [...props.columns, { name: "" }] : props.columns);
 
   return (
-    <section class="w-full overflow-x-auto">
-      <table class="w-full">
+    <section class="w-full overflow-x-auto bg-white p-4 border border-gray-100 rounded overflow-hidden">
+      <table class="w-full min-w-full divide-y divide-gray-300">
         <thead>
           <tr>
             <For each={columns()}>
               {(column, i) => (
                 <th
-                  class={`${i() === 0 ? "rounded-l-lg pl-4" : ""} ${
-                    i() === columns().length - 1 ? "rounded-r-lg" : ""
-                  } bg-gray-100 py-2 uppercase font-bold text-gray-400 text-left text-sm`}>
-                  {column}
+                  class={`${i() == 0 ? "pl-4" : ""} py-2 uppercase text-gray-700 font-medium text-left text-sm`}>
+                  {column.render?.() ?? column.name}
                 </th>
               )}
             </For>
@@ -38,7 +42,7 @@ export default function Table(props: TTableProps) {
               <tr>
                 <For each={row}>
                   {(cell, i) => (
-                    <td class={`${i() == 0 ? "pl-4" : ""} text-gray-800 text-lg py-2 pr-4 w-auto`}>
+                    <td class={`${i() == 0 ? "pl-4 text-gray-800 " : ""} text-gray-500 text-lg py-2 pr-4 w-auto`}>
                       {cell}
                     </td>
                   )}
@@ -47,11 +51,9 @@ export default function Table(props: TTableProps) {
                   <td>
                     <div class="flex items-center justify-center select-none gap-2 ">
                       {props.actions.map((action) => (
-                        <Tooltip content={action.hint}>
+                        <Tooltip content={action.hint} onClick={() => action.action(k())}>
                           <span
-                            role="button"
-                            class="cursor-pointer hover:text-blue-500"
-                            onClick={() => action.action(k())}>
+                            class="cursor-pointer hover:text-blue-500">
                             {action.content}
                           </span>
                         </Tooltip>
@@ -64,6 +66,6 @@ export default function Table(props: TTableProps) {
           </For>
         </tbody>
       </table>
-    </section>
+    </section >
   );
 }

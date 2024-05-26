@@ -14,7 +14,7 @@ export type TUiVariant = ObjectValues<typeof EUiVariant>;
 
 export type TUiVariantDict = { [id in TUiVariant]: string };
 
-export const BorderVariantColor: TUiVariantDict = {
+export const BorderColor: TUiVariantDict = {
   Danger: "border-red-500",
   Info: "border-blue-500",
   Success: "border-green-700",
@@ -24,7 +24,7 @@ export const BorderVariantColor: TUiVariantDict = {
   Black: "border-gray-200",
 };
 
-export const BackgroundVariantColor: TUiVariantDict = {
+export const BackgroundColor: TUiVariantDict = {
   Danger: "bg-red-500 text-white",
   Info: "bg-blue-500 text-white",
   Success: "bg-green-500 text-white",
@@ -34,7 +34,7 @@ export const BackgroundVariantColor: TUiVariantDict = {
   Black: "bg-gray-500 text-white",
 };
 
-export const TextVariantColor: TUiVariantDict = {
+export const TextColor: TUiVariantDict = {
   Danger: "text-red-500",
   Info: "text-blue-500",
   Success: "text-green-700",
@@ -42,4 +42,14 @@ export const TextVariantColor: TUiVariantDict = {
   Neutral: "text-white-500",
   White: "text-gray-200",
   Black: "text-gray-200",
+};
+
+export const RingColor: TUiVariantDict = {
+  Danger: "ring-red-500",
+  Info: "ring-blue-500",
+  Success: "ring-green-500",
+  Warning: "ring-yellow-500",
+  Neutral: "ring-white-500",
+  White: "ring-gray-200",
+  Black: "ring-gray-200",
 };

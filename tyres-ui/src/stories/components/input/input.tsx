@@ -1,6 +1,7 @@
 import { TextField } from "@kobalte/core";
 import { JSX } from "solid-js";
-import { EUiVariant, TextVariantColor } from "~/core/types/ui-variants.type";
+import { EUiVariant, TextColor } from "~/core/types/ui-variants.type";
+import { cls } from "~/utils/class.helper";
 
 export interface TInputProps {
   value: string;
@@ -20,44 +21,44 @@ export interface TInputProps {
   onChange?: JSX.EventHandler<HTMLInputElement, Event>;
   onBlur?: JSX.EventHandler<HTMLInputElement, FocusEvent>;
   ref?: (element: HTMLInputElement) => void;
-}
+  class?: string;
+};
+
 export default function Input(props: TInputProps) {
   return (
-    <TextField.Root class="relative group" validationState={props.error ? "invalid" : "valid"}>
-      {props.label && (
-        <TextField.Label class="text-gray-600 text-light text-sm">{props.label}</TextField.Label>
-      )}
+    <TextField.Root class={cls({ "relative group": true, [props.class!]: !!props.class })} validationState={props.error ? "invalid" : "valid"}> {props.label && (
+      <TextField.Label class="text-gray-600 text-light text-sm">{props.label}</TextField.Label>
+    )}
       <span
-        class={`absolute left-3 top-2 transition-color duration-300 ${
-          props.value ? props.leadingClass || "text-blue-500" : "text-gray-300"
-        } ${props.leadingClick ? "cursor-pointer" : ""} `}>
+        class={`absolute left-3 top-2 transition-color duration-300 ${props.value ? props.leadingClass || "text-blue-500" : "text-gray-300"
+          } ${props.leadingClick ? "cursor-pointer" : ""} `}>
         {props.leading}
       </span>
       <TextField.Input
         name={props.name ?? props.label}
-        class={`w-full p-2 bg-white rounded mb-2 border outline-0 
-        focus:shadow-md ${
-          props.error
-            ? "border-2 border-red-500 focus:shadow-red-50 focus:border-red-500 "
-            : "border-1 focus:border-blue-500 focus:shadow-blue-50"
-        } transition-all 
-        duration-300 ${props.trailing ? "pr-4" : ""} ${props.leading ? "pl-10" : ""}
-        ${props.disabled ? "text-gray-400 cursor-not-allowed" : "bg-white"}`}
+        class={cls({
+          "w-full p-2 bg-white rounded mb-2 border outline-0 focus:shadow-md transition-all duration-300": true,
+          "border-red-500 focus:shadow-red-50 focus:border-red-500": !!props.error,
+          "focus:border-blue-500 focus:shadow-blue-50": !props.error,
+          "pr-4": !!props.trailing,
+          "pl-10": !!props.leading,
+          "text-gray-400 cursor-not-allowed": !!props.disabled,
+        })}
         value={props.value}
         onInput={props.onInput}
         placeholder={props.placeholder}
         aria-invalid={!!props.error}
         aria-errormessage={`${props.name}-error`}
         disabled={props.disabled}
+        required={props.required}
       />
       <span
-        class={`absolute right-3 top-2 transition-color duration-300 ${
-          props.value ? props.trailingClass || "text-blue-500" : "text-gray-300"
-        } ${props.trailingClick ? "cursor-pointer" : ""}`}
+        class={`absolute right-3 top-2 transition-color duration-300 ${props.value ? props.trailingClass || "text-blue-500" : "text-gray-300"
+          } ${props.trailingClick ? "cursor-pointer" : ""}`}
         onClick={props.trailingClick}>
         {props.trailing}
       </span>
-      <TextField.ErrorMessage class={`block text-xs ${TextVariantColor[EUiVariant.Danger]}`}>
+      <TextField.ErrorMessage class={`block text-xs ${TextColor[EUiVariant.Danger]}`}>
         {props.error}
       </TextField.ErrorMessage>
     </TextField.Root>

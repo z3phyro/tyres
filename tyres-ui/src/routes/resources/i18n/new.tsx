@@ -64,11 +64,11 @@ export default function Page() {
         </InfoBlock>
       </Card>
       <div class="flex justify-end gap-2">
-        <Button variant={EUiVariant.Neutral} onClick={() => navigate(`${ROUTE_PAGE_I18N}`)}>
-          Cancel
-        </Button>
         <Button disabled={!isValid()} onClick={createTranslation}>
           Continue
+        </Button>
+        <Button variant={EUiVariant.Neutral} onClick={() => navigate(`${ROUTE_PAGE_I18N}`)}>
+          Cancel
         </Button>
       </div>
     </Main>

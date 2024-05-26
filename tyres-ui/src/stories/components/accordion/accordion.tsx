@@ -2,8 +2,8 @@ import { Accordion as KAccordion } from "@kobalte/core";
 import { JSX } from "solid-js";
 import "./styles.css";
 import {
-  BackgroundVariantColor,
-  BorderVariantColor,
+  BackgroundColor,
+  BorderColor,
   EUiVariant,
   TUiVariant,
 } from "~/core/types/ui-variants.type";
@@ -27,8 +27,8 @@ export default function Accordion(props: TAccordionProps) {
       {props.items.map((item) => (
         <KAccordion.Item class={`accordion__item `} value={item.key}>
           <KAccordion.Header
-            class={`accordion__item-header rounded ${BorderVariantColor[props.variant ?? EUiVariant.White]
-              } ${BackgroundVariantColor[props.variant ?? EUiVariant.White]}`}>
+            class={`accordion__item-header rounded ${BorderColor[props.variant ?? EUiVariant.White]
+              } ${BackgroundColor[props.variant ?? EUiVariant.White]}`}>
             <KAccordion.Trigger class="accordion__item-trigger" disabled={props.disabled}>
               {item.header}
               {!props.disabled && (

@@ -39,13 +39,13 @@ export default function Page() {
       description: "Are you sure you want to delete this feature-flag?",
       buttons: [
         {
-          children: "No",
-          variant: EUiVariant.Neutral,
-        },
-        {
           children: "Yes",
           variant: EUiVariant.Danger,
           onClick: () => actionRemove(path),
+        },
+        {
+          children: "No",
+          variant: EUiVariant.Neutral,
         },
       ],
     });
@@ -59,14 +59,15 @@ export default function Page() {
 
   return (
     <Main>
-      <SmartBreadcrumbs />
-
-      <Button
-        class="mb-2"
-        onClick={() => navigate(`${ROUTE_PAGE_FEATURE_FLAGS}/${ROUTE_ACTION_NEW}`)}>
-        New
-      </Button>
-      <Card class="w-full overflow-auto">
+      <div class="flex justify-between mb-4">
+        <SmartBreadcrumbs />
+        <Button
+          class="mb-2"
+          onClick={() => navigate(`${ROUTE_PAGE_FEATURE_FLAGS}/${ROUTE_ACTION_NEW}`)}>
+          Add feature flag
+        </Button>
+      </div>
+      <Card>
         <table class="w-full">
           <thead>
             <tr>

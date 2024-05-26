@@ -39,14 +39,14 @@ export default function Page() {
           </Field>
         </Card>
         <div class="flex justify-end gap-2">
-          <Button variant={EUiVariant.Neutral} onClick={() => navigate(ROUTE_PAGE_FEATURE_FLAGS)}>
-            Cancel
-          </Button>
           <Button
             type="submit"
             variant={EUiVariant.Info}
             disabled={newFeatureForm.invalid || !newFeatureForm.dirty}>
             Save
+          </Button>
+          <Button variant={EUiVariant.Neutral} onClick={() => navigate(ROUTE_PAGE_FEATURE_FLAGS)}>
+            Cancel
           </Button>
         </div>
       </Form>

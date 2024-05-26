@@ -5,5 +5,5 @@ export interface TMainProps {
 }
 export default function Main(props: TMainProps) {
   const resolved = children(() => props.children);
-  return <main class="container mt-4">{resolved()}</main>;
+  return <main class="px-4 pt-4 w-full bg-white">{resolved()}</main>;
 }

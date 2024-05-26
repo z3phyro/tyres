@@ -105,14 +105,14 @@ export default function Page() {
         <Textarea placeholder="Value eg. Hello world!" value={value()} onInput={handleInput} />
       </Card>
       <div class="flex justify-end gap-2">
-        <Button variant={EUiVariant.Danger} onClick={deleteEntry}>
-          Delete
+        <Button type="button" disabled={!modified()} onClick={() => updateEntryAction(value(), true)}>
+          Save and Close
         </Button>
         <Button type="button" disabled={!modified()} onClick={() => updateEntryAction(value())}>
           Save
         </Button>
-        <Button type="button" disabled={!modified()} onClick={() => updateEntryAction(value(), true)}>
-          Save and Close
+        <Button variant={EUiVariant.Danger} onClick={deleteEntry}>
+          Delete
         </Button>
       </div>
     </Main>

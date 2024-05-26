@@ -42,13 +42,13 @@ export default function Page() {
       description: "Are you sure you want to delete this dictionary with all it's entries?",
       buttons: [
         {
-          children: "No",
-          variant: EUiVariant.Neutral,
-        },
-        {
           children: "Yes",
           variant: EUiVariant.Danger,
           onClick: () => deleteDictionaryAction(data()[row][0]),
+        },
+        {
+          children: "No",
+          variant: EUiVariant.Neutral,
         },
       ],
     });
@@ -56,27 +56,30 @@ export default function Page() {
 
   return (
     <Main>
-      <SmartBreadcrumbs />
-      <Button
-        class="mb-2"
-        variant="Info"
-        onClick={() => navigate(`${ROUTE_PAGE_DICTIONARIES}/${ROUTE_ACTION_NEW}`)}>
-        New
-      </Button>
-      <Card>
-        <Table
-          data={data()}
-          columns={["Key", "Name"]}
-          actions={[
-            { content: <EditIcon />, action: handleEdit, hint: "Edit" },
-            {
-              content: <TrashIcon />,
-              action: handleRemove,
-              hint: "Remove",
-            },
-          ]}
-        />
-      </Card>
+      <div class="flex justify-between mb-4">
+        <SmartBreadcrumbs />
+        <Button
+          class="mb-2"
+          variant="Info"
+          onClick={() => navigate(`${ROUTE_PAGE_DICTIONARIES}/${ROUTE_ACTION_NEW}`)}>
+          Add dictionary
+        </Button>
+      </div>
+      <Table
+        data={data()}
+        columns={[
+          { name: "Key" },
+          { name: "Name" },
+        ]}
+        actions={[
+          { content: <EditIcon />, action: handleEdit, hint: "Edit" },
+          {
+            content: <TrashIcon />,
+            action: handleRemove,
+            hint: "Remove",
+          },
+        ]}
+      />
     </Main>
   );
 }
