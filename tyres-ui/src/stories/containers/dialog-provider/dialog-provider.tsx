@@ -1,4 +1,10 @@
-import { JSX, createContext, createEffect, createSignal, useContext } from "solid-js";
+import {
+  JSX,
+  createContext,
+  createEffect,
+  createSignal,
+  useContext,
+} from "solid-js";
 import { TButtonProps } from "~/stories/components/button/button";
 import Modal from "~/stories/components/modal";
 import { TModalProps } from "~/stories/components/modal/modal";
@@ -48,7 +54,11 @@ export function DialogProvider(props: TDialogProviderProps) {
   return (
     <DialogContext.Provider value={{ show }}>
       {props.children}
-      <Modal {...restModal()} open={visible()} onClose={() => setVisible(false)} />
+      <Modal
+        {...restModal()}
+        open={visible()}
+        onClose={() => setVisible(false)}
+      />
     </DialogContext.Provider>
   );
 }

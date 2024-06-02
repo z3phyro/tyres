@@ -12,12 +12,14 @@ import { useToast } from "~/stories/containers/toast-provider/toast-provider";
 import { InfoBlock } from "~/stories/components/info-block/info-block";
 import { EntryNameSchema } from "~/core/validation/entry-name.validation";
 import { useNavigate, useSearchParams } from "@solidjs/router";
-import { parse } from "valibot"
+import { parse } from "valibot";
 
 export default function Page() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [value, setValue] = createSignal(searchParams.duplicate ?? searchParams.search ?? "-");
+  const [value, setValue] = createSignal(
+    searchParams.duplicate ?? searchParams.search ?? "-",
+  );
   const toast = useToast();
   const [dicts] = createResource(async () => {
     return await DictionaryService.getAllList();
@@ -41,7 +43,11 @@ export default function Page() {
     toast.info({
       title: "Entry added",
     });
-    navigate(`${ROUTE_PAGE_I18N}/${value()}?dictionary=${dicts()?.[0]}&search=${searchParams.search ?? ""}`);
+    navigate(
+      `${ROUTE_PAGE_I18N}/${value()}?dictionary=${dicts()?.[0]}&search=${
+        searchParams.search ?? ""
+      }`,
+    );
   };
 
   return (
@@ -58,8 +64,12 @@ export default function Page() {
           <ul class="list-disc">
             <li>At least 1 period separation. Eg. general.hello </li>
             <li>Always lowercase characters</li>
-            <li>Numbers cannot start a path but can end it. E.g. general.hello1</li>
-            {searchParams["duplicate"] && <li>Cannot be ecual to other path</li>}
+            <li>
+              Numbers cannot start a path but can end it. E.g. general.hello1
+            </li>
+            {searchParams["duplicate"] && (
+              <li>Cannot be ecual to other path</li>
+            )}
           </ul>
         </InfoBlock>
       </Card>
@@ -67,7 +77,10 @@ export default function Page() {
         <Button disabled={!isValid()} onClick={createTranslation}>
           Continue
         </Button>
-        <Button variant={EUiVariant.Neutral} onClick={() => navigate(`${ROUTE_PAGE_I18N}`)}>
+        <Button
+          variant={EUiVariant.Neutral}
+          onClick={() => navigate(`${ROUTE_PAGE_I18N}`)}
+        >
           Cancel
         </Button>
       </div>

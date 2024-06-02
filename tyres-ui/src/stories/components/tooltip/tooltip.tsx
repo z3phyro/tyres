@@ -10,7 +10,12 @@ interface TooltipProps {
 export default function Tooltip(props: TooltipProps) {
   return (
     <KTooltip.Root>
-      <KTooltip.Trigger class="focus:ring-2 ring-offset-2 ring-blue-500 outline-none rounded-sm" onClick={props.onClick}>{props.children}</KTooltip.Trigger>
+      <KTooltip.Trigger
+        class="focus:ring-2 ring-offset-2 ring-blue-500 outline-none rounded-sm"
+        onClick={props.onClick}
+      >
+        {props.children}
+      </KTooltip.Trigger>
       <KTooltip.Portal>
         <KTooltip.Content class="tooltip__content">
           <KTooltip.Arrow />

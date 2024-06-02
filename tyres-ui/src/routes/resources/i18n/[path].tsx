@@ -49,7 +49,7 @@ export default function Page() {
     setValue(
       (pathExists(all()?.data[dictIndex()] ?? {}, path) &&
         pathGet(all()?.data[dictIndex()] ?? {}, path)?.toString()) ||
-      ""
+        "",
     );
     setModified(false);
   });
@@ -60,7 +60,8 @@ export default function Page() {
       title: "Entry updated",
     });
 
-    if (close) navigate(`${ROUTE_PAGE_I18N}?search=${searchParams.search ?? ""}`);
+    if (close)
+      navigate(`${ROUTE_PAGE_I18N}?search=${searchParams.search ?? ""}`);
   };
 
   const deleteEntryAction = async () => {
@@ -74,7 +75,8 @@ export default function Page() {
   const deleteEntry = () => {
     dialog?.show({
       title: "Confirmation",
-      description: "Are you sure you want to delete this entry in all languages?",
+      description:
+        "Are you sure you want to delete this entry in all languages?",
       buttons: [
         {
           children: "No",
@@ -95,20 +97,35 @@ export default function Page() {
       <div class="flex w-full justify-end gap-2 mb-4">
         {all()?.dicts.map((dict: string) => (
           <A
-            class={`${dictionary() === dict ? "text-blue-500" : "text-gray-500"}`}
-            href={`?dictionary=${dict}&search=${searchParams.search ?? ""}`}>
+            class={`${
+              dictionary() === dict ? "text-blue-500" : "text-gray-500"
+            }`}
+            href={`?dictionary=${dict}&search=${searchParams.search ?? ""}`}
+          >
             {dict}
           </A>
         ))}
       </div>
       <Card>
-        <Textarea placeholder="Value eg. Hello world!" value={value()} onInput={handleInput} />
+        <Textarea
+          placeholder="Value eg. Hello world!"
+          value={value()}
+          onInput={handleInput}
+        />
       </Card>
       <div class="flex justify-end gap-2">
-        <Button type="button" disabled={!modified()} onClick={() => updateEntryAction(value(), true)}>
+        <Button
+          type="button"
+          disabled={!modified()}
+          onClick={() => updateEntryAction(value(), true)}
+        >
           Save and Close
         </Button>
-        <Button type="button" disabled={!modified()} onClick={() => updateEntryAction(value())}>
+        <Button
+          type="button"
+          disabled={!modified()}
+          onClick={() => updateEntryAction(value())}
+        >
           Save
         </Button>
         <Button variant={EUiVariant.Danger} onClick={deleteEntry}>

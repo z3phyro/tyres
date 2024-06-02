@@ -11,7 +11,13 @@ interface TMenuLink {
   isChild?: boolean;
   isActive?: () => boolean;
 }
-export default function MenuLink({ title, href, items, isChild, isActive }: TMenuLink) {
+export default function MenuLink({
+  title,
+  href,
+  items,
+  isChild,
+  isActive,
+}: TMenuLink) {
   const location = useLocation();
   const [open, setOpen] = createSignal(false);
 
@@ -23,18 +29,23 @@ export default function MenuLink({ title, href, items, isChild, isActive }: TMen
     if (!isActive?.() || !items?.length) return title;
 
     return (
-      items?.find((item) => item.href && location.pathname.includes(item.href))?.title ?? title
+      items?.find((item) => item.href && location.pathname.includes(item.href))
+        ?.title ?? title
     );
   };
 
   return (
     <DropdownMenu.Root open={open()} onOpenChange={setOpen}>
       <DropdownMenu.Trigger
-        class={`flex items-center gap-2 ${isActive?.() ? "text-blue-500 font-medium" : "font-light"
-          } ${isChild ? "p-2" : ""}`}>
+        class={`flex items-center gap-2 ${
+          isActive?.() ? "text-blue-500 font-medium" : "font-light"
+        } ${isChild ? "p-2" : ""}`}
+      >
         {href ? <A href={href}>{title}</A> : showTitle()}
         {items?.length && (
-          <DropdownMenu.Icon>{open() ? <ChevronUp /> : <ChevronDown />}</DropdownMenu.Icon>
+          <DropdownMenu.Icon>
+            {open() ? <ChevronUp /> : <ChevronDown />}
+          </DropdownMenu.Icon>
         )}
       </DropdownMenu.Trigger>
       <Show when={items?.length}>

@@ -36,12 +36,22 @@ export default function Page() {
         <Card>
           <Field name="key">
             {(field, props) => (
-              <Input label="Key" error={field.error} value={field.value ?? ""} {...props} />
+              <Input
+                label="Key"
+                error={field.error}
+                value={field.value ?? ""}
+                {...props}
+              />
             )}
           </Field>
           <Field name="name">
             {(field, props) => (
-              <Input label="Name" error={field.error} value={field.value ?? ""} {...props} />
+              <Input
+                label="Name"
+                error={field.error}
+                value={field.value ?? ""}
+                {...props}
+              />
             )}
           </Field>
         </Card>
@@ -49,10 +59,14 @@ export default function Page() {
           <Button
             type="submit"
             variant={EUiVariant.Info}
-            disabled={newDictForm.invalid || !newDictForm.dirty}>
+            disabled={newDictForm.invalid || !newDictForm.dirty}
+          >
             Save
           </Button>
-          <Button variant={EUiVariant.Neutral} onClick={() => navigate(ROUTE_PAGE_DICTIONARIES)}>
+          <Button
+            variant={EUiVariant.Neutral}
+            onClick={() => navigate(ROUTE_PAGE_DICTIONARIES)}
+          >
             Cancel
           </Button>
         </div>

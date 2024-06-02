@@ -6,14 +6,13 @@ import { ROUTE_ACTION_NEW, ROUTE_PAGE_FEATURE_FLAGS } from "~/config/routes";
 import { EUiVariant } from "~/core/types/ui-variants.type";
 import FeatureFlagsService from "~/services/feature-flags.service";
 import Button from "~/stories/components/button";
-import Card from "~/stories/components/card";
 import TrashIcon from "~/stories/components/icons/trash.icon";
 import Main from "~/stories/components/main";
 import Switch from "~/stories/components/switch/switch";
+import Table from "~/stories/components/table";
 import { useDialog } from "~/stories/containers/dialog-provider/dialog-provider";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
 import { useToast } from "~/stories/containers/toast-provider/toast-provider";
-import { capitalize } from "~/utils/slugify.helper";
 
 export default function Page() {
   const [all, { refetch }] = createResource(async () => {
@@ -63,54 +62,45 @@ export default function Page() {
         <SmartBreadcrumbs />
         <Button
           class="mb-2"
-          onClick={() => navigate(`${ROUTE_PAGE_FEATURE_FLAGS}/${ROUTE_ACTION_NEW}`)}>
+          onClick={() =>
+            navigate(`${ROUTE_PAGE_FEATURE_FLAGS}/${ROUTE_ACTION_NEW}`)
+          }
+        >
           Add feature flag
         </Button>
       </div>
-      <Card>
-        <table class="w-full">
-          <thead>
-            <tr>
-              <td class="text-gray-400 font-light">Feature name</td>
-              {all() &&
-                environments().map((env) => (
-                  <th class="text-center">
-                    <span class="rounded-xl py-1 px-3 bg-gray-200 font-light">
-                      {capitalize(env)}
-                    </span>
-                  </th>
-                ))}
-              <td></td>
-            </tr>
-          </thead>
-          <tbody>
-            {all() &&
-              all()?.list.map((path) => (
-                <tr>
-                  <td>{path}</td>
-                  {environments().map((env) => (
-                    <td class="text-center">
-                      <div class="my-3">
-                        <Switch
-                          onChange={(val) => handleChange(path, env, val)}
-                          checked={!!pathGet(all()?.features[env] as TDataNode, path)}
-                        />
-                      </div>
-                    </td>
-                  ))}
-                  <td>
-                    <span
-                      role="button"
-                      class="cursor-pointer hover:text-blue-500"
-                      onClick={() => handleRemove(path)}>
-                      <TrashIcon />
-                    </span>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      </Card>
+      <Table
+        columns={[
+          { name: "Feature" },
+          ...environments().map((column, i) => ({
+            name: column,
+            renderCell: (data: any) => (
+              <Switch
+                class={i === 1 ? "ml-4" : "ml-8"}
+                checked={data.value}
+                onChange={(val) => handleChange(data.path, column, val)}
+              />
+            ),
+          })),
+        ]}
+        data={
+          all()?.list.map((path) => [
+            path,
+            ...environments().map((env) => ({
+              path,
+              env,
+              value: !!pathGet(all()?.features[env] as TDataNode, path),
+            })),
+          ]) ?? []
+        }
+        actions={[
+          {
+            content: <TrashIcon />,
+            hint: "Remove",
+            action: (index: number) => handleRemove(all()?.list[index] ?? ""),
+          },
+        ]}
+      />
     </Main>
   );
 }

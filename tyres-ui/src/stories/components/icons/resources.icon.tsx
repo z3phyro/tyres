@@ -2,7 +2,11 @@ import { IconProps } from "./icon.props";
 
 export default function ResourcesIcon(props: IconProps) {
   return (
-    <svg class={props.class} viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      class={props.class}
+      viewBox="0 0 64 64"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <title>spanish</title>
 
       <g id="spanish">

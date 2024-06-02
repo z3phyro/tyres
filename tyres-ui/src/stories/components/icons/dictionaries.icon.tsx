@@ -8,8 +8,12 @@ export default function DictionariesIcon(props: IconProps) {
       height="800px"
       viewBox="0 0 32 32"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg">
-      <path d="M13 9H27V5H13V9ZM27 1V5H13H7V9C7 9 3 9 3 5C3 1 7 1 7 1H27Z" fill="#668077" />
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M13 9H27V5H13V9ZM27 1V5H13H7V9C7 9 3 9 3 5C3 1 7 1 7 1H27Z"
+        fill="#668077"
+      />
       <path d="M13 9V17L10 15L7 17V9V5H13V9Z" fill="#FFE6EA" />
       <path
         fill-rule="evenodd"

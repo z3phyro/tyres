@@ -63,7 +63,10 @@ export default function Page() {
                       {coverage()?.[dict].paths.map((path) => (
                         <A
                           class="flex items-center gap-1 hover:text-blue-500"
-                          href={`${ROUTE_PAGE_I18N}/${path}?dictionary=${dicts()![dict]}`}>
+                          href={`${ROUTE_PAGE_I18N}/${path}?dictionary=${
+                            dicts()![dict]
+                          }`}
+                        >
                           <LinkIcon /> {path}
                         </A>
                       ))}

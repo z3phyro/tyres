@@ -13,7 +13,11 @@ class FeatureFlagsService {
 
     return (await response.json()) || [];
   };
-  static setValue = async (path: string, environment: string, value: boolean) => {
+  static setValue = async (
+    path: string,
+    environment: string,
+    value: boolean,
+  ) => {
     await FetchHelper.put(`${ROUTE_API_FEATURE_FLAGS}`, {
       path,
       environment,

@@ -23,16 +23,28 @@ export interface TAccordionProps {
 }
 export default function Accordion(props: TAccordionProps) {
   return (
-    <KAccordion.Root class="accordion rounded" defaultValue={props.defaultValue} collapsible>
+    <KAccordion.Root
+      class="accordion rounded"
+      defaultValue={props.defaultValue}
+      collapsible
+    >
       {props.items.map((item) => (
         <KAccordion.Item class={`accordion__item `} value={item.key}>
           <KAccordion.Header
-            class={`accordion__item-header rounded ${BorderColor[props.variant ?? EUiVariant.White]
-              } ${BackgroundColor[props.variant ?? EUiVariant.White]}`}>
-            <KAccordion.Trigger class="accordion__item-trigger" disabled={props.disabled}>
+            class={`accordion__item-header rounded ${
+              BorderColor[props.variant ?? EUiVariant.White]
+            } ${BackgroundColor[props.variant ?? EUiVariant.White]}`}
+          >
+            <KAccordion.Trigger
+              class="accordion__item-trigger"
+              disabled={props.disabled}
+            >
               {item.header}
               {!props.disabled && (
-                <ChevronDownIcon class="accordion__item-trigger-icon" aria-hidden />
+                <ChevronDownIcon
+                  class="accordion__item-trigger-icon"
+                  aria-hidden
+                />
               )}
             </KAccordion.Trigger>
           </KAccordion.Header>

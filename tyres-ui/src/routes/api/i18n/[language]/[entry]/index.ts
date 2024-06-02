@@ -1,4 +1,8 @@
-import { addTranslation, removeTranslation, updateTranslation } from "@z3phyro/tyres-core";
+import {
+  addTranslation,
+  removeTranslation,
+  updateTranslation,
+} from "@z3phyro/tyres-core";
 import type { APIEvent } from "@solidjs/start/server";
 import { ok } from "~/utils/response.helper";
 

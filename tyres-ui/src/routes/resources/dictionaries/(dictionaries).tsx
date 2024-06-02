@@ -4,7 +4,6 @@ import { ROUTE_ACTION_NEW, ROUTE_PAGE_DICTIONARIES } from "~/config/routes";
 import { EUiVariant } from "~/core/types/ui-variants.type";
 import DictionaryService from "~/services/dictionary.service";
 import Button from "~/stories/components/button";
-import Card from "~/stories/components/card";
 import EditIcon from "~/stories/components/icons/edit.icon";
 import TrashIcon from "~/stories/components/icons/trash.icon";
 import Main from "~/stories/components/main";
@@ -39,7 +38,8 @@ export default function Page() {
   const handleRemove = (row: number) => {
     dialog?.show({
       title: "Confirmation",
-      description: "Are you sure you want to delete this dictionary with all it's entries?",
+      description:
+        "Are you sure you want to delete this dictionary with all it's entries?",
       buttons: [
         {
           children: "Yes",
@@ -61,16 +61,16 @@ export default function Page() {
         <Button
           class="mb-2"
           variant="Info"
-          onClick={() => navigate(`${ROUTE_PAGE_DICTIONARIES}/${ROUTE_ACTION_NEW}`)}>
+          onClick={() =>
+            navigate(`${ROUTE_PAGE_DICTIONARIES}/${ROUTE_ACTION_NEW}`)
+          }
+        >
           Add dictionary
         </Button>
       </div>
       <Table
         data={data()}
-        columns={[
-          { name: "Key" },
-          { name: "Name" },
-        ]}
+        columns={[{ name: "Key" }, { name: "Name" }]}
         actions={[
           { content: <EditIcon />, action: handleEdit, hint: "Edit" },
           {

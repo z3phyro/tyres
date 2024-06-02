@@ -10,4 +10,4 @@ export const PUT = async ({ request, params }: APIEvent) => {
   const name = body.name;
 
   editDictionary(params.key, name);
-}
+};

@@ -3,7 +3,10 @@ import { useNavigate, useParams } from "@solidjs/router";
 import { createResource } from "solid-js";
 import { ROUTE_PAGE_DICTIONARIES } from "~/config/routes";
 import { EUiVariant } from "~/core/types/ui-variants.type";
-import { NewDictionaryForm, NewDictionarySchema } from "~/core/validation/new-dictionary.validation";
+import {
+  NewDictionaryForm,
+  NewDictionarySchema,
+} from "~/core/validation/new-dictionary.validation";
 import DictionaryService from "~/services/dictionary.service";
 import Button from "~/stories/components/button";
 import Card from "~/stories/components/card";
@@ -28,8 +31,8 @@ export default function Page() {
     validateOn: "input",
     initialValues: {
       key,
-      name: dicts()?.[key] ?? ""
-    }
+      name: dicts()?.[key] ?? "",
+    },
   });
 
   const handleSubmit: SubmitHandler<NewDictionaryForm> = (values) => {
@@ -45,20 +48,38 @@ export default function Page() {
         <Card>
           <Field name="key">
             {(field, props) => (
-              <Input label="Key" error={field.error} disabled value={field.value ?? ""} {...props} />
+              <Input
+                label="Key"
+                error={field.error}
+                disabled
+                value={field.value ?? ""}
+                {...props}
+              />
             )}
           </Field>
           <Field name="name">
             {(field, props) => (
-              <Input label="Name" error={field.error} value={field.value ?? ""} {...props} />
+              <Input
+                label="Name"
+                error={field.error}
+                value={field.value ?? ""}
+                {...props}
+              />
             )}
           </Field>
         </Card>
         <div class="flex justify-end gap-2">
-          <Button type="submit" variant={EUiVariant.Info} disabled={newDictForm.invalid || newDictForm.submitting}>
+          <Button
+            type="submit"
+            variant={EUiVariant.Info}
+            disabled={newDictForm.invalid || newDictForm.submitting}
+          >
             Save
           </Button>
-          <Button variant={EUiVariant.Neutral} onClick={() => navigate(ROUTE_PAGE_DICTIONARIES)}>
+          <Button
+            variant={EUiVariant.Neutral}
+            onClick={() => navigate(ROUTE_PAGE_DICTIONARIES)}
+          >
             Cancel
           </Button>
         </div>

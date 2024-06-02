@@ -7,7 +7,8 @@ export default function BooksIcon(props: IconProps) {
       version="1.1"
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 512 512">
+      viewBox="0 0 512 512"
+    >
       <polygon
         style="fill:#FF0F4D;"
         points="356.7,85.27 290.857,85.27 269.959,279.924 290.857,461.892 356.7,461.892 "
@@ -33,19 +34,43 @@ export default function BooksIcon(props: IconProps) {
 	163.846,461.892 163.846,50.104 "
       />
       <g>
-        <rect x="140.131" y="90.549" style="fill:#983300;" width="47.428" height="31.347" />
-        <rect x="140.131" y="135.438" style="fill:#983300;" width="47.428" height="31.347" />
+        <rect
+          x="140.131"
+          y="90.549"
+          style="fill:#983300;"
+          width="47.428"
+          height="31.347"
+        />
+        <rect
+          x="140.131"
+          y="135.438"
+          style="fill:#983300;"
+          width="47.428"
+          height="31.347"
+        />
       </g>
       <polygon
         style="fill:#663300;"
         points="225.014,191.555 163.846,191.555 142.948,207.229 163.846,222.902 225.014,222.902 "
       />
-      <rect x="102.682" y="191.56" style="fill:#983300;" width="61.168" height="31.347" />
+      <rect
+        x="102.682"
+        y="191.56"
+        style="fill:#983300;"
+        width="61.168"
+        height="31.347"
+      />
       <polygon
         style="fill:#FFBA00;"
         points="67.013,139.902 51.34,139.902 40.891,273.581 51.34,414.474 67.013,414.474 "
       />
-      <rect x="35.662" y="139.9" style="fill:#FDE09C;" width="15.673" height="274.568" />
+      <rect
+        x="35.662"
+        y="139.9"
+        style="fill:#FDE09C;"
+        width="15.673"
+        height="274.568"
+      />
       <g>
         <polygon
           style="fill:#FFBA00;"
@@ -57,8 +82,20 @@ export default function BooksIcon(props: IconProps) {
         />
       </g>
       <g>
-        <rect x="256.94" y="345.692" style="fill:#FDE09C;" width="33.915" height="31.347" />
-        <rect x="256.94" y="390.581" style="fill:#FDE09C;" width="33.915" height="31.347" />
+        <rect
+          x="256.94"
+          y="345.692"
+          style="fill:#FDE09C;"
+          width="33.915"
+          height="31.347"
+        />
+        <rect
+          x="256.94"
+          y="390.581"
+          style="fill:#FDE09C;"
+          width="33.915"
+          height="31.347"
+        />
       </g>
       <polygon
         style="fill:#FF8E00;"

@@ -19,11 +19,16 @@ export default function Breadcrumbs(props: TBreadcrumbsProps) {
               <A
                 aria-disabled={!link.href}
                 class={`${link.active ? "text-blue-500" : "text-gray-600"}`}
-                href={link.href ?? "#"}>
+                href={link.href ?? "#"}
+              >
                 {link.title}
               </A>
             ) : (
-              <span class={`${link.active ? "text-blue-500" : "text-gray-600"}`}>{link.title}</span>
+              <span
+                class={`${link.active ? "text-blue-500" : "text-gray-600"}`}
+              >
+                {link.title}
+              </span>
             )}
             {i < props.links.length - 1 && <span class="ml-2">/</span>}
           </li>

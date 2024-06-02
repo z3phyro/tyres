@@ -44,7 +44,11 @@ export class FetchHelper {
   }
 
   // POST method
-  static async post<T>(url: string, data: object, customHeaders?: HeadersInit): Promise<T> {
+  static async post<T>(
+    url: string,
+    data: object,
+    customHeaders?: HeadersInit,
+  ): Promise<T> {
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -61,7 +65,11 @@ export class FetchHelper {
   }
 
   // PUT method
-  static async put<T>(url: string, data: object, customHeaders?: HeadersInit): Promise<T> {
+  static async put<T>(
+    url: string,
+    data: object,
+    customHeaders?: HeadersInit,
+  ): Promise<T> {
     try {
       const response = await fetch(url, {
         method: "PUT",

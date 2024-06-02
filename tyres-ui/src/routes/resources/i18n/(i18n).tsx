@@ -1,7 +1,6 @@
 import { createResource, createSignal } from "solid-js";
 import DictionaryService from "~/services/dictionary.service";
 import TranslationService from "~/services/translation.service";
-import Card from "~/stories/components/card";
 import Input from "~/stories/components/input";
 import Table from "~/stories/components/table";
 import Main from "~/stories/components/main";
@@ -17,6 +16,8 @@ import EditIcon from "~/stories/components/icons/edit.icon";
 import TrashIcon from "~/stories/components/icons/trash.icon";
 import DeleteIcon from "~/stories/components/icons/delete.icon";
 import FilterIcon from "~/stories/components/icons/filter.icon";
+import { For } from "solid-js";
+import { cls } from "~/utils/class.helper";
 
 export default function Page() {
   const navigate = useNavigate();
@@ -24,16 +25,28 @@ export default function Page() {
   const toast = useToast();
   const [all, { refetch }] = createResource(async () => {
     const dicts = await DictionaryService.getAllList();
-    const data = await TranslationService.getTranslationsTable();
-    return { dicts, data };
+    const fullDicts = await DictionaryService.getAll();
+    const index = searchParams.dictionary
+      ? dicts.indexOf(searchParams.dictionary)
+      : 0;
+    const data = await TranslationService.getTranslationsTable(index);
+    return { dicts, data, fullDicts };
   });
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchText, setSearchText] = createSignal(searchParams.search ?? "");
+  const activeDict = () => searchParams.dictionary ?? all()?.dicts[0];
+
+  const changeLanguage = (dict: string) => {
+    setSearchParams({ dictionary: dict });
+    refetch();
+  };
 
   const filteredData = () =>
     all()?.data?.filter((row: string[]) =>
-      row.some((cell) => cell.toLowerCase().includes(searchText().toLowerCase()))
+      row.some((cell) =>
+        cell.toLowerCase().includes(searchText().toLowerCase()),
+      ),
     ) ?? [];
 
   const handleSearchChange = (e: Event) => {
@@ -47,10 +60,16 @@ export default function Page() {
   };
 
   const handleDuplicate = (row: number) =>
-    navigate(`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}?duplicate=${filteredData()[row][0]}&search=${searchText()}`);
+    navigate(
+      `${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}?duplicate=${filteredData()[row][0]
+      }&search=${searchText()}`,
+    );
 
   const handleEdit = (row: number) =>
-    navigate(`${ROUTE_PAGE_I18N}/${filteredData()[row][0]}?dictionary=${all()?.dicts[0]}&search=${searchText()}`);
+    navigate(
+      `${ROUTE_PAGE_I18N}/${filteredData()[row][0]
+      }?dictionary=${activeDict()}&search=${searchText()}`,
+    );
 
   const deleteEntryAction = async (path: string) => {
     await TranslationService.deleteEntry("dict", path);
@@ -63,7 +82,8 @@ export default function Page() {
   const handleRemove = (row: number) => {
     dialog?.show({
       title: "Confirmation",
-      description: "Are you sure you want to delete this entry in all languages?",
+      description:
+        "Are you sure you want to delete this entry in all languages?",
       buttons: [
         {
           children: "Yes",
@@ -82,7 +102,11 @@ export default function Page() {
     <Main>
       <div class="flex justify-between mb-4">
         <SmartBreadcrumbs />
-        <Button href={`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}?search=${searchParams.search ?? ""}`} class="mb-2">
+        <Button
+          href={`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}?search=${searchParams.search ?? ""
+            }`}
+          class="mb-2"
+        >
           Add entry
         </Button>
       </div>
@@ -96,7 +120,35 @@ export default function Page() {
         trailingClick={handleClear}
       />
       <Table
-        columns={[{ name: "path" }, ...(all()?.dicts.map(x => ({ name: x })) || [])]}
+        columns={[
+          { name: "path" },
+          {
+            name: "language",
+            renderHeader: () => (
+              <ul class="display flex gap-2">
+                <For each={all()?.dicts}>
+                  {(dict) => (
+                    <li
+                      class={cls({
+                        "hover:text-blue-400 cursor-pointer":
+                          activeDict() !== dict,
+                        "text-blue-500": activeDict() === dict,
+                      })}
+                      onClick={() => changeLanguage(dict)}
+                    >
+                      {activeDict() === dict
+                        ? dict
+                        : all() &&
+                        Object.keys(all()!.fullDicts).find(
+                          (x) => all()!.fullDicts[x] == dict,
+                        )}
+                    </li>
+                  )}
+                </For>
+              </ul>
+            ),
+          },
+        ]}
         data={filteredData()}
         actions={[
           {

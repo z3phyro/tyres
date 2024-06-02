@@ -3,7 +3,10 @@ import { useNavigate } from "@solidjs/router";
 
 import { ROUTE_PAGE_FEATURE_FLAGS } from "~/config/routes";
 import { EUiVariant } from "~/core/types/ui-variants.type";
-import { NewFeatureSchema, NewFeatureSchemaForm } from "~/core/validation/new-feature.validation";
+import {
+  NewFeatureSchema,
+  NewFeatureSchemaForm,
+} from "~/core/validation/new-feature.validation";
 import FeatureFlagsService from "~/services/feature-flags.service";
 import Button from "~/stories/components/button";
 import Card from "~/stories/components/card";
@@ -34,7 +37,12 @@ export default function Page() {
         <Card>
           <Field name="name">
             {(field, props) => (
-              <Input label="Name" error={field.error} value={field.value ?? ""} {...props} />
+              <Input
+                label="Name"
+                error={field.error}
+                value={field.value ?? ""}
+                {...props}
+              />
             )}
           </Field>
         </Card>
@@ -42,10 +50,14 @@ export default function Page() {
           <Button
             type="submit"
             variant={EUiVariant.Info}
-            disabled={newFeatureForm.invalid || !newFeatureForm.dirty}>
+            disabled={newFeatureForm.invalid || !newFeatureForm.dirty}
+          >
             Save
           </Button>
-          <Button variant={EUiVariant.Neutral} onClick={() => navigate(ROUTE_PAGE_FEATURE_FLAGS)}>
+          <Button
+            variant={EUiVariant.Neutral}
+            onClick={() => navigate(ROUTE_PAGE_FEATURE_FLAGS)}
+          >
             Cancel
           </Button>
         </div>

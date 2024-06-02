@@ -5,7 +5,7 @@ export const NewFeatureSchema = object({
     minLength(1, "Required field"),
     regex(
       /^[a-z]+[a-z0-9](?:\.[a-z]+[a-z0-9]*)+$/,
-      "Needs to have at least 1 period. Eg. general.this"
+      "Needs to have at least 1 period. Eg. general.this",
     ),
   ]),
 });

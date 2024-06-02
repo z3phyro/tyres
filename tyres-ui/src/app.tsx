@@ -10,7 +10,7 @@ import Sidebar from "./stories/components/sidebar/sidebar";
 export default function App() {
   return (
     <Router
-      root={props => (
+      root={(props) => (
         <>
           <DialogProvider>
             <ToastProvider>

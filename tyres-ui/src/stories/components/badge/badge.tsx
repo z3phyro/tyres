@@ -1,5 +1,9 @@
 import { JSX } from "solid-js";
-import { BackgroundColor, EUiVariant, TUiVariant } from "~/core/types/ui-variants.type";
+import {
+  BackgroundColor,
+  EUiVariant,
+  TUiVariant,
+} from "~/core/types/ui-variants.type";
 
 export interface TBadgeProps {
   variant?: TUiVariant;
@@ -9,8 +13,10 @@ export interface TBadgeProps {
 export default function Badge(props: TBadgeProps) {
   return (
     <span
-      class={`p-1 text-sm rounded text-center ${BackgroundColor[props.variant ?? EUiVariant.Neutral]
-        } ${props.class}`}>
+      class={`p-1 text-sm rounded text-center ${
+        BackgroundColor[props.variant ?? EUiVariant.Neutral]
+      } ${props.class}`}
+    >
       {props.children}
     </span>
   );

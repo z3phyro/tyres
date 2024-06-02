@@ -7,7 +7,8 @@ export default function FeaturesIcon(props: IconProps) {
       version="1.1"
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 58 58">
+      viewBox="0 0 58 58"
+    >
       <path
         style="fill:#556080;"
         d="M51.471,58H6.529C2.923,58,0,55.077,0,51.471V6.529C0,2.923,2.923,0,6.529,0h44.943

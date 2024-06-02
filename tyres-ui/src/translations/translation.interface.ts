@@ -4,8 +4,8 @@ export interface TranslationInterface {
     hello: string;
     about: string;
     goodbye: string;
-  },
+  };
   about: {
     company: string;
-  }
-};
+  };
+}

@@ -7,8 +7,13 @@ export default function StatsIcon(props: IconProps) {
       width="800px"
       height="800px"
       viewBox="0 0 48.891 48.891"
-      xmlns="http://www.w3.org/2000/svg">
-      <g id="stats_graph" data-name="stats graph" transform="translate(-34.49 -321.837)">
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g
+        id="stats_graph"
+        data-name="stats graph"
+        transform="translate(-34.49 -321.837)"
+      >
         <path
           id="Path_111"
           data-name="Path 111"
