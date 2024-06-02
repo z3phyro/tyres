@@ -17,6 +17,7 @@ export const ROUTE_API_PATHS = `${ROUTE_API_LOCAL}/${ETermsSlugged.Paths}`;
 export const ROUTE_API_COVERAGE = `${ROUTE_API_LOCAL}/${ETermsSlugged.Coverage}`;
 export const ROUTE_API_INIT = `${ROUTE_API_LOCAL}/${ETermsSlugged.Init}`;
 export const ROUTE_API_INIT_CHECK = `${ROUTE_API_LOCAL}/${ETermsSlugged.Init}/${ETermsSlugged.Check}`;
+export const ROUTE_API_CONFIG = `${ROUTE_API_LOCAL}/${ETermsSlugged.Config}`;
 
 // Action routes
 export const ROUTE_ACTION_NEW = "new";

@@ -3,6 +3,9 @@ import { For, createResource } from "solid-js";
 import { ROUTE_PAGE_COVERAGE, ROUTE_PAGE_DICTIONARIES, ROUTE_PAGE_FEATURE_FLAGS, ROUTE_PAGE_I18N } from "~/config/routes";
 import { EUiVariant } from "~/core/types/ui-variants.type";
 import ConfigService from "~/services/config.service";
+import CoverageService from "~/services/coverage.service";
+import FeatureFlagsService from "~/services/feature-flags.service";
+import TranslationService from "~/services/translation.service";
 import Button from "~/stories/components/button";
 import Card from "~/stories/components/card";
 import Heading from "~/stories/components/heading";
@@ -11,7 +14,12 @@ import Main from "~/stories/components/main";
 export default function Home() {
   const [all, { refetch }] = createResource(async () => {
     const initialized = await ConfigService.checkInit();
-    return { initialized };
+    const configs = initialized && await ConfigService.getConfig();
+    const translations = initialized && await TranslationService.getTranslationsTable(0);
+    const featureFlags = initialized && await FeatureFlagsService.getList();
+    const coverage = initialized && await CoverageService.getCoverage();
+
+    return { initialized, configs, translations, featureFlags, coverage };
   });
 
   const handleInitialize = async () => {
@@ -19,9 +27,16 @@ export default function Home() {
     refetch();
   };
 
+  const dictionariesAmount = () => Object.keys(all()?.configs?.dictionaries ?? {}).length;
+  const environmentsAmount = () => all()?.configs?.environments?.length ?? 0;
+  const translationEntries = () => all()?.translations?.length ?? 0;
+  const featureFlagsAmount = () => all()?.featureFlags?.length ?? 0;
+  const coveragePercentage = () => Object.entries(all()?.coverage ?? {})
+    .reduce((acc, curr) => acc + (curr[1] as any).percent, 0) / Object.keys(all()?.coverage ?? {}).length;
+
   const coverageStats = () => [
     {
-      title: "100%",
+      title: `${coveragePercentage()}%`,
       description: "Average i18n coverage",
       icon: <svg
         class="w-8 h-8"
@@ -41,7 +56,7 @@ export default function Home() {
 
   const resourceStats = () => [
     {
-      title: 45,
+      title: translationEntries(),
       icon: <svg
         class="w-8 h-8"
         fill="currentColor"
@@ -58,7 +73,7 @@ export default function Home() {
       route: ROUTE_PAGE_I18N
     },
     {
-      title: 2,
+      title: dictionariesAmount(),
       icon: <svg
         class="w-8 h-8"
         fill="currentColor"
@@ -86,7 +101,7 @@ export default function Home() {
       route: ROUTE_PAGE_DICTIONARIES
     },
     {
-      title: 5,
+      title: featureFlagsAmount(),
       icon: <svg
         class="w-8 h-8"
         fill="currentColor"

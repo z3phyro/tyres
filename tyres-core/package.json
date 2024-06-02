@@ -1,6 +1,6 @@
 {
   "name": "@z3phyro/tyres-core",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Core project of CLI inspired by prisma, to create and mantain statically typed resources on any typescript project.",
   "files": [
     "lib"

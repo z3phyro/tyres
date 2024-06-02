@@ -9,6 +9,7 @@ export const ETerms = {
   Paths: "Paths",
   Init: "Init",
   Check: "Check",
+  Config: "Config",
 } as const;
 
 const slugifyHandler = {

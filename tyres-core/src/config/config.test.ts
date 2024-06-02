@@ -16,8 +16,10 @@ import {
   checkInit,
   initConfigs,
 } from "./config";
+import { removeFolder } from "../io";
 
 const TEST_CONFIG_FILE = "tyres-config.config.json";
+const TEST_CONFIG_FOLDER = "src/config/sandbox";
 
 describe("Checking configuration file", () => {
   beforeAll(() => {
@@ -33,6 +35,7 @@ describe("Checking configuration file", () => {
 
   afterAll(() => {
     config.removeConfigs();
+    removeFolder(TEST_CONFIG_FOLDER);
   });
 
   test("Reads configuration file properly", () => {
@@ -79,8 +82,8 @@ describe("Checking configuration file", () => {
   });
 
   test("Check if values are set when passed on initialization", () => {
-    const translationsPath = "i18n";
-    const featureFlagsPath = "ffs";
+    const translationsPath = TEST_CONFIG_FOLDER + "/i18n";
+    const featureFlagsPath = TEST_CONFIG_FOLDER + "/ffs";
     const projectName = "Test Project";
 
     initConfigs({
@@ -97,5 +100,4 @@ describe("Checking configuration file", () => {
     expect(config.featureFlagsPath).toEqual(featureFlagsPath);
     expect(config.projectName).toEqual(projectName);
   });
-
 });

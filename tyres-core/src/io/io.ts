@@ -12,7 +12,7 @@ export const createFolder = (folder: string) => {
 
 export const removeFolder = (folder: string) => {
   try {
-    fs.rmdirSync(folder, { recursive: true });
+    fs.rmSync(folder, { recursive: true });
   } catch (e) {
     console.error(e);
   }
