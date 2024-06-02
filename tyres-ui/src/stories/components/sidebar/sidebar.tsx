@@ -1,4 +1,4 @@
-import { useLocation } from "@solidjs/router";
+import { A, useLocation } from "@solidjs/router";
 import { For, JSX, createMemo } from "solid-js";
 import {
   ROUTE_PAGE_COVERAGE,
@@ -125,7 +125,7 @@ export default function Sidebar() {
   return (
     <div class="flex flex-col top-0 left-0 w-64 bg-white h-full border-r">
       <div class="flex items-center justify-start h-14 border-b pl-4">
-        <div>TyRes</div>
+        <A href="/">TyRes</A>
       </div>
       <div class="overflow-y-auto overflow-x-hidden flex-grow">
         <ul class="flex flex-col py-4 space-y-1">
@@ -144,7 +144,7 @@ export default function Sidebar() {
                     class={cls({
                       "relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 focus:bg-gray-50 pr-6":
                         true,
-                      "border-indigo-500":
+                      "border-indigo-500 text-gray-800":
                         !!item.route && pathname().startsWith(item.route),
                       "border-transparent":
                         !item.route || !pathname().startsWith(item.route),

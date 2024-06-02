@@ -1,12 +1,11 @@
 import { A } from "@solidjs/router";
-import { createResource } from "solid-js";
-import { ROUTE_PAGE_COVERAGE, ROUTE_PAGE_RESOURCES } from "~/config/routes";
+import { For, createResource } from "solid-js";
+import { ROUTE_PAGE_COVERAGE, ROUTE_PAGE_DICTIONARIES, ROUTE_PAGE_FEATURE_FLAGS, ROUTE_PAGE_I18N } from "~/config/routes";
 import { EUiVariant } from "~/core/types/ui-variants.type";
 import ConfigService from "~/services/config.service";
 import Button from "~/stories/components/button";
 import Card from "~/stories/components/card";
-import BooksIcon from "~/stories/components/icons/books.icon";
-import StatsIcon from "~/stories/components/icons/stats.icon";
+import Heading from "~/stories/components/heading";
 import Main from "~/stories/components/main";
 
 export default function Home() {
@@ -20,25 +19,121 @@ export default function Home() {
     refetch();
   };
 
+  const coverageStats = () => [
+    {
+      title: "100%",
+      description: "Average i18n coverage",
+      icon: <svg
+        class="w-8 h-8"
+        fill="currentColor"
+        stroke-width="0"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 512 512"
+        height="1em"
+        width="1em"
+        style="overflow: visible; color: currentcolor;"
+      >
+        <path d="M363 176 246 464h47.24l24.49-58h90.54l24.49 58H480Zm-26.69 186L363 279.85 389.69 362ZM272 320c-.25-.19-20.59-15.77-45.42-42.67 39.58-53.64 62-114.61 71.15-143.33H352V90H214V48h-44v42H32v44h219.25c-9.52 26.95-27.05 69.5-53.79 108.36-32.68-43.44-47.14-75.88-47.33-76.22L143 152l-38 22 6.87 13.86c.89 1.56 17.19 37.9 54.71 86.57.92 1.21 1.85 2.39 2.78 3.57-49.72 56.86-89.15 79.09-89.66 79.47L64 368l23 36 19.3-11.47c2.2-1.67 41.33-24 92-80.78 24.52 26.28 43.22 40.83 44.3 41.67L255 362Z"></path>
+      </svg>,
+      route: ROUTE_PAGE_COVERAGE
+    }
+  ]
+
+  const resourceStats = () => [
+    {
+      title: 45,
+      icon: <svg
+        class="w-8 h-8"
+        fill="currentColor"
+        stroke-width="0"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 512 512"
+        height="1em"
+        width="1em"
+        style="overflow: visible; color: currentcolor;"
+      >
+        <path d="M363 176 246 464h47.24l24.49-58h90.54l24.49 58H480Zm-26.69 186L363 279.85 389.69 362ZM272 320c-.25-.19-20.59-15.77-45.42-42.67 39.58-53.64 62-114.61 71.15-143.33H352V90H214V48h-44v42H32v44h219.25c-9.52 26.95-27.05 69.5-53.79 108.36-32.68-43.44-47.14-75.88-47.33-76.22L143 152l-38 22 6.87 13.86c.89 1.56 17.19 37.9 54.71 86.57.92 1.21 1.85 2.39 2.78 3.57-49.72 56.86-89.15 79.09-89.66 79.47L64 368l23 36 19.3-11.47c2.2-1.67 41.33-24 92-80.78 24.52 26.28 43.22 40.83 44.3 41.67L255 362Z"></path>
+      </svg>,
+      description: "I18n entries added",
+      route: ROUTE_PAGE_I18N
+    },
+    {
+      title: 2,
+      icon: <svg
+        class="w-8 h-8"
+        fill="currentColor"
+        stroke-width="0"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 18 16"
+        height="1em"
+        width="1em"
+        style="overflow: visible; color: currentcolor;"
+      >
+        <path
+          fill="currentColor"
+          d="M3.5 2h-3c-.275 0-.5.225-.5.5v11c0 .275.225.5.5.5h3c.275 0 .5-.225.5-.5v-11c0-.275-.225-.5-.5-.5zM3 5H1V4h2v1zM8.5 2h-3c-.275 0-.5.225-.5.5v11c0 .275.225.5.5.5h3c.275 0 .5-.225.5-.5v-11c0-.275-.225-.5-.5-.5zM8 5H6V4h2v1z"
+        ></path>
+        <path
+          fill="currentColor"
+          d="m11.954 2.773-2.679 1.35a.502.502 0 0 0-.222.671l4.5 8.93a.502.502 0 0 0 .671.222l2.679-1.35a.502.502 0 0 0 .222-.671l-4.5-8.93a.502.502 0 0 0-.671-.222z"
+        ></path>
+        <path
+          fill="currentColor"
+          d="M14.5 13.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"
+        ></path>
+      </svg>,
+      description: "Existing dictionaries",
+      route: ROUTE_PAGE_DICTIONARIES
+    },
+    {
+      title: 5,
+      icon: <svg
+        class="w-8 h-8"
+        fill="currentColor"
+        stroke-width="0"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1024 1024"
+        height="1em"
+        width="1em"
+        style="overflow: visible; color: currentcolor;"
+      >
+        <path d="M880 305H624V192c0-17.7-14.3-32-32-32H184v-40c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v784c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V640h248v113c0 17.7 14.3 32 32 32h416c17.7 0 32-14.3 32-32V337c0-17.7-14.3-32-32-32zM184 568V232h368v336H184zm656 145H504v-73h112c4.4 0 8-3.6 8-8V377h216v336z"></path>
+      </svg>,
+      description: "Feature flags created",
+      route: ROUTE_PAGE_FEATURE_FLAGS
+    }
+  ];
+
   return (
     <Main>
       {all?.()?.initialized ? (
         <>
-          <div class="flex gap-4 md:flex-row flex-col flex-wrap pt-10">
-            <A class="flex-1" href={ROUTE_PAGE_RESOURCES}>
-              <Card class="flex-1 relative">
-                <h1 class="text-xl relative mb-1 z-10">Resources</h1>
-                <BooksIcon class="w-[120px] h-[120px] sm:w-[180px] sm:h-[180px] absolute right-2 sm:top-2 bottom-10 z-0 opacity-80" />
-                <p class="mb-[120px] relative z-10">Manage your resources</p>
+          <Heading>
+            Your Project Stats
+          </Heading>
+          <p class="mb-2">Resources</p>
+          <div class="flex space-between gap-4 flex-wrap">
+            <For each={resourceStats()}>{(item) => (
+              <Card class="flex-1 basis-[250px] grow relative">
+                <h1 class="text-2xl mb-2 flex">{item.title}</h1>
+                <p class="text-gray-500">{item.description}</p>
+                <span class="mr-3 absolute right-2 bottom-4 text-gray-600">{item.icon}</span>
+                <A class="inset-0 block absolute z-10" href={item.route}><span class="sr-only">Link to {item.route}</span></A>
               </Card>
-            </A>
-            <A class="flex-1" href={ROUTE_PAGE_COVERAGE}>
-              <Card class="flex-1 relative">
-                <h1 class="text-xl relative mb-1 z-10">Coverage</h1>
-                <StatsIcon class="w-[120px] h-[120px] sm:w-[180px] sm:h-[180px] absolute right-2 sm:top-2 bottom-10 z-0 opacity-80" />
-                <p class="mb-[120px] relative z-10">Show i18n coverage here</p>
+            )}
+            </For>
+          </div>
+          <p class="mb-2">Coverage</p>
+          <div class="flex gap-4 flex-wrap">
+            <For each={coverageStats()}>{(item) => (
+              <Card class="basis-[250px] grow relative">
+                <h1 class="text-2xl mb-2 flex">{item.title}</h1>
+                <p class="text-gray-500">{item.description}</p>
+                <span class="mr-3 absolute right-2 bottom-4 text-gray-600">{item.icon}</span>
+                <A class="inset-0 block absolute z-10" href={item.route}><span class="sr-only">Link to {item.route}</span></A>
               </Card>
-            </A>
+            )}
+            </For>
           </div>
         </>
       ) : (

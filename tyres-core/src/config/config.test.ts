@@ -14,6 +14,7 @@ import {
   setDictionaries,
   setEnvironments,
   checkInit,
+  initConfigs,
 } from "./config";
 
 const TEST_CONFIG_FILE = "tyres-config.config.json";
@@ -76,4 +77,25 @@ describe("Checking configuration file", () => {
   test("Checks if the initialization was done", () => {
     expect(checkInit()).toBeFalsy();
   });
+
+  test("Check if values are set when passed on initialization", () => {
+    const translationsPath = "i18n";
+    const featureFlagsPath = "ffs";
+    const projectName = "Test Project";
+
+    initConfigs({
+      translationsPath,
+      featureFlagsPath,
+      projectName,
+      environments: [],
+      dictionaries: {},
+    });
+
+    const config = getConfigs();
+
+    expect(config.translationsPath).toEqual(translationsPath);
+    expect(config.featureFlagsPath).toEqual(featureFlagsPath);
+    expect(config.projectName).toEqual(projectName);
+  });
+
 });

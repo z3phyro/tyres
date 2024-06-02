@@ -13,4 +13,5 @@ export type TConfig = {
   featureFlagsPath: string;
   dictionaries: TDictNode;
   environments: string[];
+  projectName: string;
 };

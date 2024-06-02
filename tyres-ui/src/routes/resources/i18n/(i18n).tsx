@@ -100,7 +100,7 @@ export default function Page() {
 
   return (
     <Main>
-      <div class="flex justify-between mb-4">
+      <div class="flex flex-col sm:flex-row justify-between mb-4">
         <SmartBreadcrumbs />
         <Button
           href={`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}?search=${searchParams.search ?? ""

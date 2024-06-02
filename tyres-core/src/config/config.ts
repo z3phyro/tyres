@@ -4,6 +4,7 @@ import { TConfig, TDictNode } from "../types";
 export const CONFIG_FILE_NAME = "tyres.config.json";
 export const DEFAULT_TRANSLATION_FOLDER = "src/i18n/";
 export const DEFAULT_FEATURE_FLAGS_FOLDER = "src/feature-flags/";
+export const DEFAULT_PROJECT_NAME = "My Project";
 export const DEFAULT_ENVIRONMENT_DATA = [
   "development",
   "staging",
@@ -16,15 +17,16 @@ export const DEFAULT_DICTIONARIES = {
 
 export const getConfigFilename = () => CONFIG_FILE_NAME;
 
-export const initConfigs = () => {
+export const initConfigs = (config?: TConfig) => {
   if (!fs.existsSync(getConfigFilename())) {
     fs.writeFileSync(
       getConfigFilename(),
       `{ 
-        "translationsPath": "${DEFAULT_TRANSLATION_FOLDER}",
-        "featureFlagsPath": "${DEFAULT_FEATURE_FLAGS_FOLDER}", 
+        "translationsPath": "${config?.translationsPath ?? DEFAULT_TRANSLATION_FOLDER}",
+        "featureFlagsPath": "${config?.featureFlagsPath ?? DEFAULT_FEATURE_FLAGS_FOLDER}", 
         "dictionaries": ${JSON.stringify(DEFAULT_DICTIONARIES)},
-        "environments": ${JSON.stringify(DEFAULT_ENVIRONMENT_DATA)}
+        "environments": ${JSON.stringify(DEFAULT_ENVIRONMENT_DATA)},
+        "projectName": "${config?.projectName ?? DEFAULT_PROJECT_NAME}"
        }`
     );
   }
