@@ -1,5 +1,5 @@
 import { useLocation } from "@solidjs/router";
-import { For, JSX, createMemo } from "solid-js";
+import { For, JSX, createMemo, createSignal } from "solid-js";
 import {
   ROUTE_PAGE_COVERAGE,
   ROUTE_PAGE_DICTIONARIES,
@@ -25,6 +25,7 @@ export interface TMenuItem {
 export default function Sidebar() {
   const location = useLocation();
   const pathname = createMemo(() => location.pathname);
+  const [menuVisible, setMenuVisible] = createSignal(false);
 
   const menuItems: TMenuItem[] = [
     {
@@ -99,6 +100,20 @@ export default function Sidebar() {
             </For>
           </ul>
         </div>
+      </div>
+      <div class="flex sm:hidden absolute top-0 h-14 shadow-md w-full z-50 p-4 bg-white justify-between">
+        <Logo />
+
+        <Button variant="Info" class="w-6 h-6 p-1! justify-center" onClick={() => setMenuVisible(!menuVisible())}>
+          <BurgerIcon class="w-5 h-5" />
+        </Button>
+      </div>
+      <div class={cls({
+        "flex-col fixed top-0 z-[52] w-full h-full bg-white p-8": true,
+        "flex": menuVisible(),
+        "hidden": !menuVisible()
+      })}>
+        Text here
       </div>
     </>
   );
