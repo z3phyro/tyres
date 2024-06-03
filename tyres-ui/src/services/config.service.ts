@@ -1,5 +1,6 @@
 import { TConfig } from "@z3phyro/tyres-core/lib/types";
 import { ROUTE_API_CONFIG, ROUTE_API_INIT } from "~/config/routes";
+import { FetchHelper } from "~/utils/fetch.helper";
 
 class ConfigService {
   static checkInit = async () => {
@@ -10,8 +11,8 @@ class ConfigService {
     return data.initialized;
   };
 
-  static initialize = async () => {
-    await fetch(ROUTE_API_INIT);
+  static initialize = async (values: Exclude<TConfig, "environments">) => {
+    await FetchHelper.post(ROUTE_API_INIT, values);
   };
 
   static getConfig = async () => {

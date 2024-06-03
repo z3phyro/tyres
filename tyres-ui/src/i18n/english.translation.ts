@@ -3,11 +3,10 @@ import type { TranslationInterface } from "./translation.interface";
 
 export const EnglishTranslation: TranslationInterface = {
   general: {
-    hello: "Hello World!!!!",
-    about: "About!!!",
-    hello2: "1"
+    hello: "Hello World!",
+    about: "About"
   },
   about: {
-    company: "Company!"
+    company: "Company"
   }
 };

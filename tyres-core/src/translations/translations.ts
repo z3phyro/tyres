@@ -7,7 +7,7 @@ import {
   writeInterface,
 } from "../utils";
 import { TCoverage, TDataNode, TDictNode } from "../types";
-import { initConfigs, getDictionaries, getFolder } from "../config";
+import { getDictionaries, getFolder } from "../config";
 
 export const listTranslation = () => {
   const result: string[] = [];
@@ -76,7 +76,6 @@ export const removeTranslation = (entry_path: string) => {
 };
 
 export const initTranslations = () => {
-  initConfigs();
   initDictionaries();
 
   const json = [
