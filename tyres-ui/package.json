@@ -1,7 +1,7 @@
 {
   "name": "@z3phyro/tyres-ui",
   "description": "UI for typed resources package (TyRes). It allows to use most of the functions of tyres-core, including, initializing the project.",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "type": "module",
   "scripts": {
     "dev": "vinxi dev --port 8123",
