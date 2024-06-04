@@ -7,7 +7,6 @@ export const POST = async ({ request: { body } }: APIEvent) => {
   try {
 
     const values = await new Response(body).json();
-    console.log(values);
     initConfigs(values as any as TConfig);
     initTranslations();
     initFeatureFlags();

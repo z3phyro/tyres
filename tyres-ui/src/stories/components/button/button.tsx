@@ -25,7 +25,7 @@ export default function Button(props: TButtonProps) {
   return (
     <KButton.Root
       class={cls({
-        "flex items-center rounded ring-offset-1 focus:ring-2 outline-none w-full sm:w-fit":
+        "flex items-center justify-center sm:justify-start rounded ring-offset-1 focus:ring-2 outline-none w-full sm:w-fit":
           true,
         "bg-gray-300": !!props.disabled,
         "h-4 p-4 transition-all duration-300": true,

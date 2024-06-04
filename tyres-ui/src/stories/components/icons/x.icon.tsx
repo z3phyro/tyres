@@ -1,6 +1,9 @@
-export default function XIcon() {
+import { IconProps } from "./icon.props";
+
+export default function XIcon(props: IconProps) {
   return (
     <svg
+      {...props}
       fill="none"
       stroke-width="2"
       xmlns="http://www.w3.org/2000/svg"

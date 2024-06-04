@@ -58,7 +58,7 @@ export default function Page() {
 
   return (
     <Main>
-      <div class="flex justify-between mb-4">
+      <div class="flex flex-col sm:flex-row justify-between mb-4">
         <SmartBreadcrumbs />
         <Button
           class="mb-2"

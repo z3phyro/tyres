@@ -14,6 +14,7 @@ import TranslationIcon from "../icons/translation.icon";
 import FeatureFlagsIcon from "../icons/feature-flags.icon";
 import ShelfIcon from "../icons/shelf.icon";
 import CoverageIcon from "../icons/coverage.icon";
+import XIcon from "../icons/x.icon";
 
 export interface TMenuItem {
   icon?: JSX.Element;
@@ -113,7 +114,43 @@ export default function Sidebar() {
         "flex": menuVisible(),
         "hidden": !menuVisible()
       })}>
-        Text here
+        <button type="button" class="cursor-pointer absolute top-5 right-5 rounded-full p-2" onClick={() => setMenuVisible(false)}>
+          <XIcon class="w-6 h-6" />
+        </button>
+        <ul class="flex flex-col py-4 space-y-1">
+          <For each={menuItems}>
+            {(item) => (
+              <li class={cls({ "px-5": !!item.isHeader })}>
+                {item.isHeader ? (
+                  <div class="flex flex-row items-center h-8">
+                    <div class="text-sm font-light tracking-wide text-gray-500">
+                      {item.label}
+                    </div>
+                  </div>
+                ) : (
+                  <a
+                    href={item.route}
+                    onClick={() => setMenuVisible(false)}
+                    class={cls({
+                      "relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 focus:bg-gray-50 pr-6":
+                        true,
+                      "text-gray-800":
+                        !!item.route && pathname().startsWith(item.route),
+                    })}
+                  >
+                    <span class="inline-flex justify-center items-center ml-4">
+                      {item.icon}
+                    </span>
+                    <span class="ml-2 text-sm tracking-wide truncate">
+                      {item.label}
+                    </span>
+                  </a>
+                )}
+              </li>
+            )}
+          </For>
+        </ul>
+
       </div>
     </>
   );
