@@ -116,7 +116,7 @@ export default function Page() {
         onInput={handleSearchChange}
         leading={<FilterIcon class="mt-1" />}
         placeholder={"Filter by path"}
-        trailing={<DeleteIcon class="mt-1" />}
+        trailing={<DeleteIcon class="mt-1 outline-none focus:ring-2 ring-offset-2 rounded-sm" tabindex="0" />}
         trailingClick={handleClear}
       />
       <Table
@@ -125,16 +125,19 @@ export default function Page() {
           {
             name: "language",
             renderHeader: () => (
-              <ul class="display flex gap-2">
+              <div class="display flex gap-2">
                 <For each={all()?.dicts}>
                   {(dict) => (
-                    <li
+                    <a
                       class={cls({
                         "hover:text-blue-400 cursor-pointer":
                           activeDict() !== dict,
                         "text-blue-500": activeDict() === dict,
+                        "outline-none focus:ring-2 ring-offset-2 rounded-sm": true,
                       })}
+                      href="#"
                       onClick={() => changeLanguage(dict)}
+                      tabindex="0"
                     >
                       {activeDict() === dict
                         ? dict
@@ -142,10 +145,10 @@ export default function Page() {
                         Object.keys(all()!.fullDicts).find(
                           (x) => all()!.fullDicts[x] == dict,
                         )}
-                    </li>
+                    </a>
                   )}
                 </For>
-              </ul>
+              </div>
             ),
           },
         ]}
