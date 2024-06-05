@@ -118,7 +118,7 @@ export default function Home() {
         </>
       ) : (
         <>
-          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32">
+          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 pt-20 text-center lg:pt-32 flex flex-col items-center">
             <h1 class="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl">
               Typed
               <span class="relative whitespace-nowrap text-blue-600 pl-4">
@@ -133,10 +133,10 @@ export default function Home() {
                 <span class="relative">Resources</span>
               </span>
             </h1>
-            <p class="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700">
+            <p class="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700 mb-8">
               Manage i18n and feature flags like a <b>pro</b>
             </p>
-            <Form onSubmit={handleSubmit}>
+            <Form class="max-w-[600px] flex-1" onSubmit={handleSubmit}>
               <Field name="projectName">
                 {(field, props) => (
                   <Input label="Project name" error={field.error} value={field.value ?? ""} {...props} />

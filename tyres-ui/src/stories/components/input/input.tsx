@@ -37,9 +37,8 @@ export default function Input(props: TInputProps) {
         </TextField.Label>
       )}
       <span
-        class={`absolute left-3 top-2 transition-color duration-300 ${
-          props.value ? props.leadingClass || "text-blue-500" : "text-gray-300"
-        } ${props.leadingClick ? "cursor-pointer" : ""} `}
+        class={`absolute left-3 top-2 transition-color duration-300 ${props.value ? props.leadingClass || "text-blue-500" : "text-gray-300"
+          } ${props.leadingClick ? "cursor-pointer" : ""} `}
       >
         {props.leading}
       </span>
@@ -64,9 +63,8 @@ export default function Input(props: TInputProps) {
         required={props.required}
       />
       <span
-        class={`absolute right-3 top-2 transition-color duration-300 ${
-          props.value ? props.trailingClass || "text-blue-500" : "text-gray-300"
-        } ${props.trailingClick ? "cursor-pointer" : ""}`}
+        class={`absolute right-3 top-2 transition-color duration-300 ${props.value ? props.trailingClass || "text-blue-500" : "text-gray-300"
+          } ${props.trailingClick ? "cursor-pointer" : ""}`}
         onClick={props.trailingClick}
       >
         {props.trailing}
