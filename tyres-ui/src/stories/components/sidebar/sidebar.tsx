@@ -105,7 +105,7 @@ export default function Sidebar() {
       <div class="flex sm:hidden absolute top-0 h-14 shadow-md w-full z-50 p-4 bg-white justify-between">
         <Logo />
 
-        <Button variant="Info" class="w-6 h-6 p-1! justify-center" onClick={() => setMenuVisible(!menuVisible())}>
+        <Button variant="Info" class="!w-6 !h-6 p-1 justify-center" onClick={() => setMenuVisible(!menuVisible())}>
           <BurgerIcon class="w-5 h-5" />
         </Button>
       </div>
@@ -150,7 +150,6 @@ export default function Sidebar() {
             )}
           </For>
         </ul>
-
       </div>
     </>
   );

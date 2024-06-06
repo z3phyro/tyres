@@ -31,7 +31,7 @@ export default function Button(props: TButtonProps) {
         "h-4 p-4 transition-all duration-300": true,
         [BackgroundColor[props.variant ?? EUiVariant.Info]]: true,
         [RingColor[props.variant ?? EUiVariant.Info]]: true,
-        [props.class ?? ""]: true,
+        [props.class ?? ""]: !!props.class,
       })}
       type={props.type ?? "button"}
       {...(props.href && {
