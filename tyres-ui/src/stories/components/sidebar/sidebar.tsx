@@ -80,9 +80,9 @@ export default function Sidebar() {
                     <a
                       href={item.route}
                       class={cls({
-                        "relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 focus:bg-gray-50 pr-6":
+                        "relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-100 text-gray-600 hover:text-gray-800 border-l-4 focus:bg-gray-50 pr-6":
                           true,
-                        "border-indigo-500 text-gray-800":
+                        "border-indigo-500 text-gray-800 bg-gray-50":
                           !!item.route && pathname().startsWith(item.route),
                         "border-transparent":
                           !item.route || !pathname().startsWith(item.route),
@@ -110,7 +110,7 @@ export default function Sidebar() {
         </Button>
       </div>
       <div class={cls({
-        "flex-col fixed top-0 z-[52] w-full h-full bg-white p-8": true,
+        "flex-col fixed top-0 z-[52] w-full h-full bg-white p-8 sm:hidden": true,
         "flex": menuVisible(),
         "hidden": !menuVisible()
       })}>
@@ -132,10 +132,12 @@ export default function Sidebar() {
                     href={item.route}
                     onClick={() => setMenuVisible(false)}
                     class={cls({
-                      "relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 focus:bg-gray-50 pr-6":
+                      "relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-100 text-gray-600 hover:text-gray-800 focus:bg-gray-50 pr-6 border-l-4":
                         true,
-                      "text-gray-800":
+                      "border-indigo-500 text-gray-800 bg-gray-50":
                         !!item.route && pathname().startsWith(item.route),
+                      "border-transparent":
+                        !item.route || !pathname().startsWith(item.route),
                     })}
                   >
                     <span class="inline-flex justify-center items-center ml-4">
