@@ -18,6 +18,7 @@ import DeleteIcon from "~/stories/components/icons/delete.icon";
 import FilterIcon from "~/stories/components/icons/filter.icon";
 import { For } from "solid-js";
 import { cls } from "~/utils/class.helper";
+import Pagination from "~/stories/components/pagination";
 
 export default function Page() {
   const navigate = useNavigate();
@@ -35,6 +36,8 @@ export default function Page() {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchText, setSearchText] = createSignal(searchParams.search ?? "");
+
+  const page = () => searchParams.page ? Number(searchParams.page) : 0;
   const activeDict = () => searchParams.dictionary ?? all()?.dicts[0];
 
   const changeLanguage = (dict: string) => {
@@ -171,6 +174,7 @@ export default function Page() {
           },
         ]}
       />
+      <Pagination count={20} defaultPage={page()} onPageChange={(page) => setSearchParams({ page })} />
     </Main>
   );
 }
