@@ -19,6 +19,7 @@ import FilterIcon from "~/stories/components/icons/filter.icon";
 import { For } from "solid-js";
 import { cls } from "~/utils/class.helper";
 import Pagination from "~/stories/components/pagination";
+import { createPager } from "~/utils/pager.helper";
 
 export default function Page() {
   const navigate = useNavigate();
@@ -37,7 +38,8 @@ export default function Page() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchText, setSearchText] = createSignal(searchParams.search ?? "");
 
-  const page = () => searchParams.page ? Number(searchParams.page) : 0;
+  const page = () => searchParams.page ? Number(searchParams.page) : 1;
+  const pageSize = 10;
   const activeDict = () => searchParams.dictionary ?? all()?.dicts[0];
 
   const changeLanguage = (dict: string) => {
@@ -45,12 +47,15 @@ export default function Page() {
     refetch();
   };
 
-  const filteredData = () =>
-    all()?.data?.filter((row: string[]) =>
+  const pager = () => {
+    const data = all()?.data?.filter((row: string[]) =>
       row.some((cell) =>
         cell.toLowerCase().includes(searchText().toLowerCase()),
-      ),
+      )
     ) ?? [];
+
+    return createPager<string[]>(data, pageSize, page());
+  }
 
   const handleSearchChange = (e: Event) => {
     setSearchText((e?.currentTarget as HTMLInputElement)?.value ?? "");
@@ -64,13 +69,13 @@ export default function Page() {
 
   const handleDuplicate = (row: number) =>
     navigate(
-      `${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}?duplicate=${filteredData()[row][0]
+      `${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}?duplicate=${pager().pagedItems[row][0]
       }&search=${searchText()}`,
     );
 
   const handleEdit = (row: number) =>
     navigate(
-      `${ROUTE_PAGE_I18N}/${filteredData()[row][0]
+      `${ROUTE_PAGE_I18N}/${pager().pagedItems[row][0]
       }?dictionary=${activeDict()}&search=${searchText()}`,
     );
 
@@ -91,7 +96,7 @@ export default function Page() {
         {
           children: "Yes",
           variant: EUiVariant.Danger,
-          onClick: () => deleteEntryAction(filteredData()[row][0]),
+          onClick: () => deleteEntryAction(pager().pagedItems[row][0]),
         },
         {
           children: "No",
@@ -155,7 +160,7 @@ export default function Page() {
             ),
           },
         ]}
-        data={filteredData()}
+        data={pager().pagedItems}
         actions={[
           {
             content: <CopyIcon />,
@@ -174,7 +179,7 @@ export default function Page() {
           },
         ]}
       />
-      <Pagination count={20} defaultPage={page()} onPageChange={(page) => setSearchParams({ page })} />
+      <Pagination count={pager().totalPages} defaultPage={page()} onPageChange={(page) => setSearchParams({ page })} />
     </Main>
   );
 }
