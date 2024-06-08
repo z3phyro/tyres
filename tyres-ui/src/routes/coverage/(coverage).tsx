@@ -52,7 +52,7 @@ export default function Page() {
                 {
                   header: (
                     <span class="flex gap-2">
-                      <Badge class="w-10" variant={EUiVariant.White}>
+                      <Badge class="w-11" variant={EUiVariant.White}>
                         {getParsedPercent(dict)}%
                       </Badge>
                       <span>{dicts()![dict]}</span>
