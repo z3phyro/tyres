@@ -52,25 +52,27 @@ export default function Page() {
                 {
                   header: (
                     <span class="flex gap-2">
-                      <Badge class="w-8" variant={EUiVariant.White}>
-                        {getParsedPercent(dict)}
+                      <Badge class="w-10" variant={EUiVariant.White}>
+                        {getParsedPercent(dict)}%
                       </Badge>
                       <span>{dicts()![dict]}</span>
                     </span>
                   ),
                   content: (
-                    <ul class="flex flex-col">
-                      {coverage()?.[dict].paths.map((path) => (
-                        <A
-                          class="flex items-center gap-1 hover:text-blue-500"
-                          href={`${ROUTE_PAGE_I18N}/${path}?dictionary=${
-                            dicts()![dict]
-                          }`}
-                        >
-                          <LinkIcon /> {path}
-                        </A>
-                      ))}
-                    </ul>
+                    <>
+                      <h3 class="text-gray-500 mb-2">Pending translations</h3>
+                      <ul class="flex flex-col">
+                        {coverage()?.[dict].paths.map((path) => (
+                          <A
+                            class="flex items-center gap-1 hover:text-blue-500"
+                            href={`${ROUTE_PAGE_I18N}/${path}?dictionary=${dicts()![dict]
+                              }`}
+                          >
+                            <LinkIcon /> {path}
+                          </A>
+                        ))}
+                      </ul>
+                    </>
                   ),
                   key: dict,
                 },
