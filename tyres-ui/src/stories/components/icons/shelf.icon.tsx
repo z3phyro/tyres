@@ -1,6 +1,6 @@
-import { IconProps } from "./icon.props";
+import { TIconProps } from "./icon.props";
 
-export default function ShelfIcon(props: IconProps) {
+export default function ShelfIcon(props: TIconProps) {
   return <svg
     {...props}
     fill="currentColor"

@@ -1,6 +1,6 @@
-import { IconProps } from "./icon.props";
+import { TIconProps } from "./icon.props";
 
-export default function TranslationIcon(props: IconProps) {
+export default function TranslationIcon(props: TIconProps) {
   return <svg
     {...props}
     fill="currentColor"

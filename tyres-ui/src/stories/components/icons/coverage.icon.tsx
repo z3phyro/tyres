@@ -1,6 +1,6 @@
-import { IconProps } from "./icon.props";
+import { TIconProps } from "./icon.props";
 
-export default function CoverageIcon(props: IconProps) {
+export default function CoverageIcon(props: TIconProps) {
   return <svg
     {...props}
     fill="none"

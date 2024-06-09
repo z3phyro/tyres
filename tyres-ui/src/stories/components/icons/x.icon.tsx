@@ -1,6 +1,6 @@
-import { IconProps } from "./icon.props";
+import { TIconProps } from "./icon.props";
 
-export default function XIcon(props: IconProps) {
+export default function XIcon(props: TIconProps) {
   return (
     <svg
       {...props}

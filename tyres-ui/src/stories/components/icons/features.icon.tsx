@@ -1,6 +1,6 @@
-import { IconProps } from "./icon.props";
+import { TIconProps } from "./icon.props";
 
-export default function FeaturesIcon(props: IconProps) {
+export default function FeaturesIcon(props: TIconProps) {
   return (
     <svg
       class={props.class}
