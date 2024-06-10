@@ -23,7 +23,6 @@ const DEFAULT_INTERFACE = `{
 }`;
 
 export const initFeatureFlags = () => {
-  createFolder(config.getFeaturesFolder());
   writeFile(
     "feature-flags.interface.ts",
     `export interface FeatureFlagsInterface ${DEFAULT_INTERFACE}`,

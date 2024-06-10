@@ -1,7 +1,7 @@
 {
   "name": "@z3phyro/tyres-ui",
   "description": "UI for typed resources package (TyRes). It allows to use most of the functions of tyres-core, including, initializing the project.",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "type": "module",
   "scripts": {
     "dev": "vinxi dev --port 8123",
@@ -31,7 +31,7 @@
     "@solidjs/meta": "^0.29.4",
     "@solidjs/router": "^0.13.3",
     "@solidjs/start": "^1.0.0",
-    "@z3phyro/tyres-core": "^0.1.4",
+    "@z3phyro/tyres-core": "^0.1.5",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
     "solid-js": "^1.8.17",
