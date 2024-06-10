@@ -1,3 +1,4 @@
+import { MetaProvider, Title } from "@solidjs/meta";
 import { useNavigate } from "@solidjs/router";
 import { createResource } from "solid-js";
 import { ROUTE_ACTION_NEW, ROUTE_PAGE_DICTIONARIES } from "~/config/routes";
@@ -56,6 +57,9 @@ export default function Page() {
 
   return (
     <Main>
+      <MetaProvider>
+        <Title>Tyres UI - Dictionaries</Title>
+      </MetaProvider>
       <div class="flex flex-col sm:flex-row justify-between mb-4">
         <SmartBreadcrumbs />
         <Button

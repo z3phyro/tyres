@@ -5,7 +5,7 @@ import "./app.css";
 import { DialogProvider } from "./stories/containers/dialog-provider/dialog-provider";
 import { ToastProvider } from "./stories/containers/toast-provider/toast-provider";
 import Sidebar from "./stories/components/sidebar/sidebar";
-import { Link, MetaProvider, Title } from "@solidjs/meta";
+import { Link, MetaProvider } from "@solidjs/meta";
 
 export default function App() {
   return (
@@ -13,7 +13,6 @@ export default function App() {
       root={(props) => (
         <>
           <MetaProvider>
-            <Title>Tyres UI</Title>
             <Link rel="icon" href="/favicon.svg" />
           </MetaProvider>
           <DialogProvider>

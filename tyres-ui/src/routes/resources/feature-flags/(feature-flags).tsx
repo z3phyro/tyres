@@ -1,3 +1,4 @@
+import { MetaProvider, Title } from "@solidjs/meta";
 import { useNavigate } from "@solidjs/router";
 import { pathGet } from "@z3phyro/tyres-core";
 import { TDataNode } from "@z3phyro/tyres-core/lib/types";
@@ -58,6 +59,9 @@ export default function Page() {
 
   return (
     <Main>
+      <MetaProvider>
+        <Title>Tyres UI - Feature Flags</Title>
+      </MetaProvider>
       <div class="flex flex-col sm:flex-row justify-between mb-4">
         <SmartBreadcrumbs />
         <Button

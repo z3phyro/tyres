@@ -1,3 +1,4 @@
+import { MetaProvider, Title } from "@solidjs/meta";
 import { A, useNavigate, useParams, useSearchParams } from "@solidjs/router";
 import { pathExists, pathGet } from "@z3phyro/tyres-core";
 import { createEffect, createResource, createSignal } from "solid-js";
@@ -49,7 +50,7 @@ export default function Page() {
     setValue(
       (pathExists(all()?.data[dictIndex()] ?? {}, path) &&
         pathGet(all()?.data[dictIndex()] ?? {}, path)?.toString()) ||
-        "",
+      "",
     );
     setModified(false);
   });
@@ -93,13 +94,15 @@ export default function Page() {
 
   return (
     <Main>
+      <MetaProvider>
+        <Title>Tyres UI - Edit i18n</Title>
+      </MetaProvider>
       <SmartBreadcrumbs />
       <div class="flex w-full justify-end gap-2 mb-4">
         {all()?.dicts.map((dict: string) => (
           <A
-            class={`${
-              dictionary() === dict ? "text-blue-500" : "text-gray-500"
-            }`}
+            class={`${dictionary() === dict ? "text-blue-500" : "text-gray-500"
+              }`}
             href={`?dictionary=${dict}&search=${searchParams.search ?? ""}`}
           >
             {dict}

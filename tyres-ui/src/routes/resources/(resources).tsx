@@ -1,3 +1,4 @@
+import { MetaProvider, Title } from "@solidjs/meta";
 import { A } from "@solidjs/router";
 import {
   ROUTE_PAGE_DICTIONARIES,
@@ -15,6 +16,9 @@ import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-bread
 export default function Page() {
   return (
     <Main>
+      <MetaProvider>
+        <Title>Tyres UI - Resources</Title>
+      </MetaProvider>
       <SmartBreadcrumbs />
       <div class="flex gap-4 md:flex-row flex-col flex-wrap pt-0">
         <A class="flex-1" href={ROUTE_PAGE_I18N}>

@@ -20,6 +20,7 @@ import { For } from "solid-js";
 import { cls } from "~/utils/class.helper";
 import Pagination from "~/stories/components/pagination";
 import { createPager } from "~/utils/pager.helper";
+import { MetaProvider, Title } from "@solidjs/meta";
 
 export default function Page() {
   const navigate = useNavigate();
@@ -108,6 +109,9 @@ export default function Page() {
 
   return (
     <Main>
+      <MetaProvider>
+        <Title>Tyres UI - i18n</Title>
+      </MetaProvider>
       <div class="flex flex-col sm:flex-row justify-between mb-4">
         <SmartBreadcrumbs />
         <Button
@@ -181,5 +185,5 @@ export default function Page() {
       />
       <Pagination count={pager().totalPages} defaultPage={page()} onPageChange={(page) => setSearchParams({ page })} />
     </Main>
-  );
-}
+    );
+  }

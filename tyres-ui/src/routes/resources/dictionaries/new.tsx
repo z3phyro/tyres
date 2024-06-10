@@ -1,4 +1,5 @@
 import { SubmitHandler, createForm, valiForm } from "@modular-forms/solid";
+import { MetaProvider, Title } from "@solidjs/meta";
 import { useNavigate } from "@solidjs/router";
 import { ROUTE_PAGE_DICTIONARIES } from "~/config/routes";
 import { EUiVariant } from "~/core/types/ui-variants.type";
@@ -31,6 +32,9 @@ export default function Page() {
 
   return (
     <Main>
+      <MetaProvider>
+        <Title>Tyres UI - New Dictionary</Title>
+      </MetaProvider>
       <SmartBreadcrumbs />
       <Form onSubmit={handleSubmit}>
         <Card>

@@ -1,4 +1,5 @@
 import { SubmitHandler, createForm, valiForm } from "@modular-forms/solid";
+import { MetaProvider, Title } from "@solidjs/meta";
 import { useNavigate } from "@solidjs/router";
 
 import { ROUTE_PAGE_FEATURE_FLAGS } from "~/config/routes";
@@ -32,6 +33,9 @@ export default function Page() {
 
   return (
     <Main>
+      <MetaProvider>
+        <Title>Tyres UI - New Feature Flag</Title>
+      </MetaProvider>
       <SmartBreadcrumbs />
       <Form onSubmit={handleSubmit}>
         <Card>

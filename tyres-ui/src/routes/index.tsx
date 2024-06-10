@@ -1,4 +1,5 @@
 import { SubmitHandler, createForm, valiForm } from "@modular-forms/solid";
+import { MetaProvider, Title } from "@solidjs/meta";
 import { A } from "@solidjs/router";
 import { TConfig } from "@z3phyro/tyres-core/lib/types";
 import { For, createResource } from "solid-js";
@@ -86,6 +87,9 @@ export default function Home() {
 
   return (
     <Main>
+      <MetaProvider>
+        <Title>Tyres UI</Title>
+      </MetaProvider>
       {all?.()?.initialized ? (
         <>
           <Heading>

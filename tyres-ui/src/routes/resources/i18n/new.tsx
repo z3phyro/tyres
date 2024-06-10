@@ -13,6 +13,7 @@ import { InfoBlock } from "~/stories/components/info-block/info-block";
 import { EntryNameSchema } from "~/core/validation/entry-name.validation";
 import { useNavigate, useSearchParams } from "@solidjs/router";
 import { parse } from "valibot";
+import { MetaProvider, Title } from "@solidjs/meta";
 
 export default function Page() {
   const navigate = useNavigate();
@@ -44,14 +45,16 @@ export default function Page() {
       title: "Entry added",
     });
     navigate(
-      `${ROUTE_PAGE_I18N}/${value()}?dictionary=${dicts()?.[0]}&search=${
-        searchParams.search ?? ""
+      `${ROUTE_PAGE_I18N}/${value()}?dictionary=${dicts()?.[0]}&search=${searchParams.search ?? ""
       }`,
     );
   };
 
   return (
     <Main>
+      <MetaProvider>
+        <Title>Tyres UI - New i18n</Title>
+      </MetaProvider>
       <SmartBreadcrumbs />
       <Card>
         <Input

@@ -1,3 +1,4 @@
+import { MetaProvider, Title } from "@solidjs/meta";
 import { A } from "@solidjs/router";
 import { createResource } from "solid-js";
 import { ROUTE_PAGE_I18N } from "~/config/routes";
@@ -41,6 +42,9 @@ export default function Page() {
 
   return (
     <Main>
+      <MetaProvider>
+        <Title>Tyres UI - Coverage</Title>
+      </MetaProvider>
       <SmartBreadcrumbs />
       <section class="flex flex-col gap-2">
         {dicts() &&
