@@ -131,6 +131,12 @@ export default function Page() {
         >
           Save
         </Button>
+        <Button
+          type="button"
+          href={`${ROUTE_PAGE_I18N}?dictionary=${dictionary()}&search=${searchParams.search ?? ""}`}
+          variant={EUiVariant.Neutral}>
+          Cancel
+        </Button>
         <Button variant={EUiVariant.Danger} onClick={deleteEntry}>
           Delete
         </Button>
