@@ -4,7 +4,7 @@ import { EUiVariant, TextColor } from "~/core/types/ui-variants.type";
 import { cls } from "~/utils/class.helper";
 
 export interface TInputProps {
-  value: string;
+  value?: string;
   error?: string;
   name?: string;
   disabled?: boolean;
@@ -17,7 +17,7 @@ export interface TInputProps {
   placeholder?: string;
   label?: string;
   required?: boolean;
-  onInput: JSX.EventHandler<HTMLInputElement, InputEvent>;
+  onInput?: JSX.EventHandler<HTMLInputElement, InputEvent>;
   onChange?: JSX.EventHandler<HTMLInputElement, Event>;
   onBlur?: JSX.EventHandler<HTMLInputElement, FocusEvent>;
   ref?: (element: HTMLInputElement) => void;
@@ -37,8 +37,15 @@ export default function Input(props: TInputProps) {
         </TextField.Label>
       )}
       <span
-        class={`absolute left-3 top-2 transition-color duration-300 ${props.value ? props.leadingClass || "text-blue-500" : "text-gray-300"
-          } ${props.leadingClick ? "cursor-pointer" : ""} `}
+        role={props.leadingClick ? "button" : "img"}
+        class={cls({
+          "absolute left-3 top-2 transition-color duration-300": true,
+          "text-blue-500": !!props.value,
+          "text-gray-300": !props.value,
+          "cursor-pointer": !!props.leadingClick,
+          [props.leadingClass!]: !!props.leadingClass,
+        })}
+        onClick={props.leadingClick}
       >
         {props.leading}
       </span>
@@ -63,13 +70,21 @@ export default function Input(props: TInputProps) {
         required={props.required}
       />
       <span
-        class={`absolute right-3 top-2 transition-color duration-300 ${props.value ? props.trailingClass || "text-blue-500" : "text-gray-300"
-          } ${props.trailingClick ? "cursor-pointer" : ""}`}
+        role={props.trailingClick ? "button" : "img"}
+        class={cls({
+          "absolute right-3 top-2 transition-color duration-300": true,
+          "text-blue-500": !!props.value,
+          "text-gray-300": !props.value,
+          "cursor-pointer": !!props.trailingClick,
+          [props.trailingClass!]: !!props.trailingClass,
+        })}
         onClick={props.trailingClick}
       >
         {props.trailing}
       </span>
       <TextField.ErrorMessage
+        id={`${props.name}-error`}
+        role="alert"
         class={`block text-xs ${TextColor[EUiVariant.Danger]}`}
       >
         {props.error}

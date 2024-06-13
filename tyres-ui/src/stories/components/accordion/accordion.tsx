@@ -20,6 +20,7 @@ export interface TAccordionProps {
   defaultValue?: string[];
   variant?: TUiVariant;
   disabled?: boolean;
+  testId?: string;
 }
 export default function Accordion(props: TAccordionProps) {
   return (
@@ -27,13 +28,13 @@ export default function Accordion(props: TAccordionProps) {
       class="accordion rounded"
       defaultValue={props.defaultValue}
       collapsible
+      role="list"
     >
       {props.items.map((item) => (
         <KAccordion.Item class={`accordion__item `} value={item.key}>
           <KAccordion.Header
-            class={`accordion__item-header rounded ${
-              BorderColor[props.variant ?? EUiVariant.White]
-            } ${BackgroundColor[props.variant ?? EUiVariant.White]}`}
+            class={`accordion__item-header rounded ${BorderColor[props.variant ?? EUiVariant.White]
+              } ${BackgroundColor[props.variant ?? EUiVariant.White]}`}
           >
             <KAccordion.Trigger
               class="accordion__item-trigger"

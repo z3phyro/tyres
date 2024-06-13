@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Input snapshot test 1`] = `"<div role="group" id="textfield-cl-38" data-valid="" class="relative group"> <span role="img" class="absolute left-3 top-2 transition-color duration-300 text-gray-300"></span><input id="textfield-cl-38-input" name="textfield-cl-38" aria-invalid="false" data-valid="" type="text" class="w-full p-2 bg-white rounded mb-2 border outline-0 focus:shadow-md transition-all duration-300 focus:border-blue-500 focus:shadow-blue-50" aria-errormessage="undefined-error"><span role="img" class="absolute right-3 top-2 transition-color duration-300 text-gray-300"></span></div>"`;

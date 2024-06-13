@@ -1,6 +1,6 @@
 import { JSX, children } from "solid-js";
 export interface TCardProps {
-  children: JSX.Element;
+  children?: JSX.Element;
   class?: string;
 }
 export default function Card(props: TCardProps) {

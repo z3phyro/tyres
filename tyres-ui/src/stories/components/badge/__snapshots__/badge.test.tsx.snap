@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Badge snapshot test 1`] = `"<span role="status" aria-live="polite" class="p-1 text-sm rounded text-center bg-gray-200 text-black undefined">1</span>"`;

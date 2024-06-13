@@ -18,6 +18,7 @@ export interface TButtonProps {
   loading?: boolean;
   class?: string;
   href?: string;
+  testId?: string;
 }
 export default function Button(props: TButtonProps) {
   const solved = children(() => props.children);
@@ -40,6 +41,8 @@ export default function Button(props: TButtonProps) {
       href={props.href}
       onClick={props.onClick}
       disabled={props.disabled}
+      data-testId={props.testId}
+      aria-busy={props.loading}
     >
       {props.loading && <Spinner class="ml-[-10px] mr-2" size={20} />}
       {solved()}

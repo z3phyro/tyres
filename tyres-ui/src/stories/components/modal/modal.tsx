@@ -11,6 +11,7 @@ export interface TModalProps {
   buttons?: TButtonProps[];
   open?: boolean;
   onClose?: () => void;
+  testId?: string;
 }
 export default function Modal(props: TModalProps) {
   const onKeyDown = (e: KeyboardEvent) => {
@@ -26,9 +27,9 @@ export default function Modal(props: TModalProps) {
           class="w-full h-full absolute top-0 left-0 flex items-center justify-center"
           onKeyDown={onKeyDown}
         >
-          <Dialog.Content class="min-w-[400px] m-auto">
+          <Dialog.Content data-testid={props.testId} class="min-w-[400px] m-auto" role="dialog">
             <Card>
-              <Dialog.Title as="h1" class="float-left mb-4 text-xl font-bold">
+              <Dialog.Title role="heading" as="h1" class="float-left mb-4 text-xl font-bold">
                 {props.title}
               </Dialog.Title>
               <Dialog.CloseButton class="float-right" onClick={props.onClose}>
@@ -36,7 +37,7 @@ export default function Modal(props: TModalProps) {
                 <span class="sr-only">Close</span>
               </Dialog.CloseButton>
               <Dialog.Description class="clear-left">
-                <p>{props.description}</p>
+                {props.description}
                 <div class="flex justify-end w-full mt-4 gap-2">
                   <For each={props.buttons}>
                     {(button) => <Button {...button}>{button.children}</Button>}

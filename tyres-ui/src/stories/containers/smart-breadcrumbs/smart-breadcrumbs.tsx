@@ -11,8 +11,8 @@ export default function SmartBreadcrumbs() {
     .split("/")
     .filter((part) => part);
 
-  const links = parts.map((part) => ({
-    active: false,
+  const links = parts.map((part, i) => ({
+    active: parts.length - 1 === i,
     title: deSlugify(part),
     href: pathname().slice(0, pathname().indexOf(part) + part.length),
   }));

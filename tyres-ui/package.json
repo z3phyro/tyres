@@ -12,7 +12,8 @@
     "prettier:check": "prettier . --check",
     "eslint:check": "eslint .",
     "eslint:fix": "eslint . --fix",
-    "fix": "prettier . -w && eslint . --fix"
+    "fix": "prettier . -w && eslint . --fix",
+    "test": "vitest"
   },
   "files": [
     ".output"
@@ -26,7 +27,7 @@
     "url": "https://github.com/z3phyro/tyres.git"
   },
   "dependencies": {
-    "@kobalte/core": "^0.13.1",
+    "@kobalte/core": "0.13.0",
     "@modular-forms/solid": "^0.20.0",
     "@solidjs/meta": "^0.29.4",
     "@solidjs/router": "^0.13.3",
@@ -41,5 +42,14 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "solid-prevent-scroll": "file:./custom_modules/solid-prevent-scroll",
+    "@solidjs/testing-library": "^0.8.8",
+    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/user-event": "^14.5.2",
+    "jsdom": "^24.1.0",
+    "vite-tsconfig-paths": "^4.3.2",
+    "vitest": "^1.6.0"
   }
 }

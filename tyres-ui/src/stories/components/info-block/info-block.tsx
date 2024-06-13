@@ -2,8 +2,8 @@ import { JSX } from "solid-js";
 import InfoIcon from "../icons/info.icon";
 
 export interface InfoBlockProps {
-  title: string;
-  children: JSX.Element | string;
+  title?: string;
+  children?: JSX.Element | string;
 }
 export function InfoBlock(props: InfoBlockProps) {
   return (

@@ -1,3 +1,3 @@
 export interface TIconProps {
-  class: string;
+  class?: string;
 }

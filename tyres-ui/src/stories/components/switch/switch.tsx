@@ -24,9 +24,9 @@ export default function Switch(props: SwitchProps) {
       checked={checked()}
     >
       {props.label && (
-        <KSwitch.Label class="switch__label">{props.label}</KSwitch.Label>
+        <KSwitch.Label as="label" class="switch__label">{props.label}</KSwitch.Label>
       )}
-      <KSwitch.Input class="switch__input" />
+      <KSwitch.Input role="checkbox" class="switch__input" />
       <KSwitch.Control class="switch__control">
         <KSwitch.Thumb class="switch__thumb" />
       </KSwitch.Control>
