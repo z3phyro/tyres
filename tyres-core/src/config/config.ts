@@ -22,16 +22,14 @@ export const initConfigs = (config?: TConfig) => {
     fs.writeFileSync(
       getConfigFilename(),
       `{ 
-        "translationsPath": "${
-          config?.translationsPath ?? DEFAULT_TRANSLATION_FOLDER
-        }",
-        "featureFlagsPath": "${
-          config?.featureFlagsPath ?? DEFAULT_FEATURE_FLAGS_FOLDER
-        }", 
-        "dictionaries": ${JSON.stringify(DEFAULT_DICTIONARIES)},
-        "environments": ${JSON.stringify(DEFAULT_ENVIRONMENT_DATA)},
-        "projectName": "${config?.projectName ?? DEFAULT_PROJECT_NAME}"
-       }`
+"translationsPath": "${config?.translationsPath ?? DEFAULT_TRANSLATION_FOLDER}",
+"featureFlagsPath": "${
+        config?.featureFlagsPath ?? DEFAULT_FEATURE_FLAGS_FOLDER
+      }", 
+"dictionaries": ${JSON.stringify(DEFAULT_DICTIONARIES)},
+"environments": ${JSON.stringify(DEFAULT_ENVIRONMENT_DATA)},
+"projectName": "${config?.projectName ?? DEFAULT_PROJECT_NAME}"
+}`
     );
   }
 
