@@ -1,7 +1,7 @@
 {
   "name": "@z3phyro/tyres-ui",
   "description": "UI for typed resources package (TyRes). It allows to use most of the functions of tyres-core, including, initializing the project.",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "type": "module",
   "scripts": {
     "dev": "vinxi dev --port 8123",
@@ -27,12 +27,12 @@
     "url": "https://github.com/z3phyro/tyres.git"
   },
   "dependencies": {
-    "@kobalte/core": "0.13.0",
+    "@kobalte/core": "^0.13.3",
     "@modular-forms/solid": "^0.20.0",
     "@solidjs/meta": "^0.29.4",
     "@solidjs/router": "^0.13.3",
     "@solidjs/start": "^1.0.0",
-    "@z3phyro/tyres-core": "^0.1.5",
+    "@z3phyro/tyres-core": "^0.1.6",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
     "solid-js": "^1.8.17",
@@ -44,7 +44,8 @@
     "node": ">=18"
   },
   "devDependencies": {
-    "solid-prevent-scroll": "file:./custom_modules/solid-prevent-scroll",
+    "solid-prevent-scroll": "^0.1.8",
+    "solid-presence": "^0.1.7",
     "@solidjs/testing-library": "^0.8.8",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/user-event": "^14.5.2",
