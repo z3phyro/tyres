@@ -1,7 +1,7 @@
-import { createForm, valiForm, SubmitHandler } from "@modular-forms/solid";
+import { createForm, valiForm, SubmitHandler, setValue } from "@modular-forms/solid";
 import { MetaProvider, Title } from "@solidjs/meta";
 import { useNavigate, useParams } from "@solidjs/router";
-import { createResource } from "solid-js";
+import { createEffect, createResource } from "solid-js";
 import { ROUTE_PAGE_DICTIONARIES } from "~/config/routes";
 import { EUiVariant } from "~/core/types/ui-variants.type";
 import {
@@ -27,13 +27,18 @@ export default function Page() {
   const toast = useToast();
   const navigate = useNavigate();
 
+  const dictName = () => dicts()?.[key];
+
   const [newDictForm, { Form, Field }] = createForm<NewDictionaryForm>({
     validate: valiForm(NewDictionarySchema),
     validateOn: "input",
-    initialValues: {
-      key,
-      name: dicts()?.[key] ?? "",
-    },
+  });
+
+  createEffect(() => {
+    if (dictName()) {
+      setValue(newDictForm, "key", key);
+      setValue(newDictForm, "name", dictName()!);
+    }
   });
 
   const handleSubmit: SubmitHandler<NewDictionaryForm> = (values) => {
@@ -66,13 +71,13 @@ export default function Page() {
               <Input
                 label="Name"
                 error={field.error}
-                value={field.value ?? ""}
+                value={field.value}
                 {...props}
               />
             )}
           </Field>
         </Card>
-        <div class="flex justify-end gap-2">
+        <div class="flex flex-col sm:flex-row justify-end gap-2">
           <Button
             type="submit"
             variant={EUiVariant.Info}

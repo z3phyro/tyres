@@ -80,13 +80,13 @@ export default function Page() {
         "Are you sure you want to delete this entry in all languages?",
       buttons: [
         {
-          children: "No",
-          variant: EUiVariant.Neutral,
-        },
-        {
           children: "Yes",
           variant: EUiVariant.Danger,
           onClick: deleteEntryAction,
+        },
+        {
+          children: "No",
+          variant: EUiVariant.Neutral,
         },
       ],
     });
@@ -116,7 +116,7 @@ export default function Page() {
           onInput={handleInput}
         />
       </Card>
-      <div class="flex justify-end gap-2">
+      <div class="flex flex-col sm:flex-row justify-end gap-2">
         <Button
           type="button"
           disabled={!modified()}
@@ -131,14 +131,14 @@ export default function Page() {
         >
           Save
         </Button>
+        <Button variant={EUiVariant.Danger} onClick={deleteEntry}>
+          Delete
+        </Button>
         <Button
           type="button"
           href={`${ROUTE_PAGE_I18N}?dictionary=${dictionary()}&search=${searchParams.search ?? ""}`}
           variant={EUiVariant.Neutral}>
           Cancel
-        </Button>
-        <Button variant={EUiVariant.Danger} onClick={deleteEntry}>
-          Delete
         </Button>
       </div>
     </Main>

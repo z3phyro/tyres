@@ -76,13 +76,13 @@ export default function Page() {
           </ul>
         </InfoBlock>
       </Card>
-      <div class="flex justify-end gap-2">
+      <div class="flex flex-col sm:flex-row justify-end gap-2">
         <Button disabled={!isValid()} onClick={createTranslation}>
           Continue
         </Button>
         <Button
           variant={EUiVariant.Neutral}
-          onClick={() => navigate(`${ROUTE_PAGE_I18N}`)}
+          href={`${ROUTE_PAGE_I18N}?dictionary=${dicts()?.[0]}&search=${searchParams.search ?? ''}`}
         >
           Cancel
         </Button>

@@ -59,7 +59,7 @@ export default function Page() {
             )}
           </Field>
         </Card>
-        <div class="flex justify-end gap-2">
+        <div class="flex flex-col sm:flex-row justify-end gap-2">
           <Button
             type="submit"
             variant={EUiVariant.Info}
@@ -69,7 +69,7 @@ export default function Page() {
           </Button>
           <Button
             variant={EUiVariant.Neutral}
-            onClick={() => navigate(ROUTE_PAGE_DICTIONARIES)}
+            href={ROUTE_PAGE_DICTIONARIES}
           >
             Cancel
           </Button>
