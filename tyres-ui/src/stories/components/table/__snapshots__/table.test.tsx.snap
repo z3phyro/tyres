@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Table snapshot test 1`] = `"<section class="w-full overflow-x-auto bg-white p-4 border border-gray-100 rounded overflow-hidden"><table class="w-full min-w-full divide-y divide-gray-300"><thead><tr><th class="pl-4 py-2 uppercase text-gray-700 font-medium text-left text-sm">Test column</th></tr></thead><tbody><tr><td class="pl-4 text-gray-800  text-gray-600 text-lg py-2 pr-4 w-auto">Test data</td></tr></tbody></table></section>"`;

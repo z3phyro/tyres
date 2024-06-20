@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Textarea snapshot test 1`] = `
+"<div role="group" id="textfield-cl-12"><textarea id="textfield-cl-12-textarea" name="textfield-cl-12" class="w-full p-2 bg-white rounded mb-2 border border-1 outline-0 
+        focus:shadow-md focus:shadow-blue-50 focus:border-blue-500 transition-all 
+        duration-300 "></textarea></div>"
+`;

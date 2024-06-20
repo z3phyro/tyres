@@ -1,5 +1,6 @@
 import { For, JSX } from "solid-js";
 import Tooltip from "../tooltip/tooltip";
+import { cls } from "~/utils/class.helper";
 
 export interface TTableAction {
   content: JSX.Element | string;
@@ -17,6 +18,7 @@ export interface TTableProps {
   columns: TTableColumn[];
   data: any[][];
   actions?: TTableAction[];
+  class?: string;
 }
 
 export default function Table(props: TTableProps) {
@@ -25,15 +27,14 @@ export default function Table(props: TTableProps) {
 
   return (
     <section class="w-full overflow-x-auto bg-white p-4 border border-gray-100 rounded overflow-hidden">
-      <table class="w-full min-w-full divide-y divide-gray-300">
+      <table class={cls({ "w-full min-w-full divide-y divide-gray-300": true, [props.class!]: !!props.class })}>
         <thead>
           <tr>
             <For each={columns()}>
               {(column, i) => (
                 <th
-                  class={`${
-                    i() == 0 ? "pl-4" : ""
-                  } py-2 uppercase text-gray-700 font-medium text-left text-sm`}
+                  class={`${i() == 0 ? "pl-4" : ""
+                    } py-2 uppercase text-gray-700 font-medium text-left text-sm`}
                 >
                   {column.renderHeader?.() ?? column.name}
                 </th>
@@ -48,9 +49,8 @@ export default function Table(props: TTableProps) {
                 <For each={row}>
                   {(cell, i) => (
                     <td
-                      class={`${
-                        i() == 0 ? "pl-4 text-gray-800 " : ""
-                      } text-gray-600 text-lg py-2 pr-4 w-auto`}
+                      class={`${i() == 0 ? "pl-4 text-gray-800 " : ""
+                        } text-gray-600 text-lg py-2 pr-4 w-auto`}
                     >
                       {columns()[i()].renderCell?.(cell) ?? cell}
                     </td>
@@ -62,11 +62,10 @@ export default function Table(props: TTableProps) {
                       {props.actions.map((action) => (
                         <Tooltip
                           content={action.hint}
-                          onClick={() => action.action(k())}
                         >
-                          <span class="cursor-pointer hover:text-blue-500">
+                          <button class="hover:text-blue-500" onClick={() => action.action?.((k()))}>
                             {action.content}
-                          </span>
+                          </button>
                         </Tooltip>
                       ))}
                     </div>

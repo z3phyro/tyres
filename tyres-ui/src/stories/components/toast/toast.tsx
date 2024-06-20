@@ -2,7 +2,6 @@ import { Toast as KToast } from "@kobalte/core";
 import {
   EUiVariant,
   TUiVariant,
-  BackgroundColor,
   BorderColor,
 } from "~/core/types/ui-variants.type";
 import { cls } from "~/utils/class.helper";
