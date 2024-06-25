@@ -13,7 +13,8 @@
     "eslint:check": "eslint .",
     "eslint:fix": "eslint . --fix",
     "fix": "prettier . -w && eslint . --fix",
-    "test": "vitest"
+    "test:unit": "vitest",
+    "test:e2e": "npx playwright test"
   },
   "files": [
     ".output"
@@ -44,12 +45,14 @@
     "node": ">=18"
   },
   "devDependencies": {
-    "solid-prevent-scroll": "^0.1.8",
-    "solid-presence": "^0.1.7",
+    "@playwright/test": "^1.44.1",
     "@solidjs/testing-library": "^0.8.8",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/user-event": "^14.5.2",
+    "@types/node": "^20.14.8",
     "jsdom": "^24.1.0",
+    "solid-presence": "^0.1.7",
+    "solid-prevent-scroll": "^0.1.8",
     "vite-tsconfig-paths": "^4.3.2",
     "vitest": "^1.6.0"
   }

@@ -62,16 +62,17 @@ export default function Page() {
           onInput={handleInput}
           placeholder="eg. general.hello"
           value={value()}
+          testId="path-input"
         />
         <InfoBlock title="Naming rules:">
           <ul class="list-disc">
             <li>At least 1 period separation. Eg. general.hello </li>
             <li>Always lowercase characters</li>
             <li>
-              Numbers cannot start a path but can end it. E.g. general.hello1
+              Numbers can sufix but not prefix paths. E.g. general.hello1
             </li>
             {searchParams["duplicate"] && (
-              <li>Cannot be ecual to other path</li>
+              <li>Cannot be equal to other path</li>
             )}
           </ul>
         </InfoBlock>

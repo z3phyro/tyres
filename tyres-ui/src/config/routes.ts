@@ -1,6 +1,7 @@
 import { ETermsSlugged } from "./terms";
 
 // Page routes
+export const ROUTE_PAGE_ROOT = "http://localhost:8123";
 export const ROUTE_PAGE_RESOURCES = `/${ETermsSlugged.Resources}`;
 export const ROUTE_PAGE_I18N = `${ROUTE_PAGE_RESOURCES}/${ETermsSlugged.i18n}`;
 export const ROUTE_PAGE_FEATURE_FLAGS = `${ROUTE_PAGE_RESOURCES}/${ETermsSlugged.FeatureFlags}`;

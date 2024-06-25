@@ -6,10 +6,13 @@ export interface TPager<T> {
   pagedItems: T[];
 }
 export function createPager<T>(data: T[], pageSize: number, pageNumber: number): TPager<T> {
-  const pager: TPager<T> = {} as TPager<T>; pager.pageNumber = pageNumber;
+  const pager: TPager<T> = {} as TPager<T>;
+
+  pager.pageNumber = pageNumber;
   pager.pageSize = pageSize;
   pager.totalItems = data.length;
-  pager.totalPages = Math.ceil(data.length / pageSize);
+  pager.totalPages = data.length ? Math.ceil(data.length / pageSize) : 0;
   pager.pagedItems = data.slice((pageNumber - 1) * pageSize, pageNumber * pageSize);
+
   return pager;
 }

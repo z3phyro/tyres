@@ -22,6 +22,7 @@ export interface TInputProps {
   onBlur?: JSX.EventHandler<HTMLInputElement, FocusEvent>;
   ref?: (element: HTMLInputElement) => void;
   class?: string;
+  testId?: string;
 }
 
 export default function Input(props: TInputProps) {
@@ -68,6 +69,7 @@ export default function Input(props: TInputProps) {
         aria-errormessage={`${props.name}-error`}
         disabled={props.disabled}
         required={props.required}
+        data-testid={props.testId}
       />
       <span
         role={props.trailingClick ? "button" : "img"}

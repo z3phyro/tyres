@@ -1,4 +1,4 @@
-import { createResource, createSignal } from "solid-js";
+import { createResource, createSignal, Show } from "solid-js";
 import DictionaryService from "~/services/dictionary.service";
 import TranslationService from "~/services/translation.service";
 import Input from "~/stories/components/input";
@@ -115,6 +115,7 @@ export default function Page() {
       <div class="flex flex-col sm:flex-row justify-between mb-4">
         <SmartBreadcrumbs />
         <Button
+          testId="add-entry"
           href={`${ROUTE_PAGE_I18N}/${ROUTE_ACTION_NEW}?search=${searchParams.search ?? ""
             }`}
           class="mb-2"
@@ -183,7 +184,9 @@ export default function Page() {
           },
         ]}
       />
-      <Pagination count={pager().totalPages} defaultPage={page()} onPageChange={(page) => setSearchParams({ page })} />
+      <Show when={pager().totalPages > 1}>
+        <Pagination count={pager().totalPages} defaultPage={page()} onPageChange={(page) => setSearchParams({ page })} />
+      </Show>
     </Main>
-    );
-  }
+  );
+}

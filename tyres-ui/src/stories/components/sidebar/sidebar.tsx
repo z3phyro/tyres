@@ -65,7 +65,7 @@ export default function Sidebar() {
         <div class="flex items-center justify-start h-14 border-b pl-4">
           <Logo />
         </div>
-        <div class="overflow-y-auto overflow-x-hidden flex-grow">
+        <nav class="overflow-y-auto overflow-x-hidden flex-grow">
           <ul class="flex flex-col py-4 space-y-1">
             <For each={menuItems}>
               {(item) => (
@@ -100,7 +100,7 @@ export default function Sidebar() {
               )}
             </For>
           </ul>
-        </div>
+        </nav>
       </div>
       <div class="flex sm:hidden absolute top-0 h-14 shadow-md w-full z-50 p-4 bg-white justify-between">
         <Logo />
@@ -109,7 +109,7 @@ export default function Sidebar() {
           <BurgerIcon class="w-5 h-5" />
         </Button>
       </div>
-      <div class={cls({
+      <nav class={cls({
         "flex-col fixed top-0 z-[52] w-full h-full bg-white p-8 sm:hidden": true,
         "flex": menuVisible(),
         "hidden": !menuVisible()
@@ -152,7 +152,7 @@ export default function Sidebar() {
             )}
           </For>
         </ul>
-      </div>
+      </nav>
     </>
   );
 }
