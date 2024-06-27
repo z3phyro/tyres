@@ -4,6 +4,7 @@ export default function TranslationIcon(props: TIconProps) {
   return <svg
     {...props}
     fill="currentColor"
+    role="img"
     stroke-width="0"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 512 512"

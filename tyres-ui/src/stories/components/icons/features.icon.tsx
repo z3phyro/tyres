@@ -8,6 +8,7 @@ export default function FeaturesIcon(props: TIconProps) {
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 58 58"
+      role="img"
     >
       <path
         style="fill:#556080;"

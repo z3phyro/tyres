@@ -5,6 +5,7 @@ export default function XIcon(props: TIconProps) {
     <svg
       {...props}
       fill="none"
+      role="img"
       stroke-width="2"
       xmlns="http://www.w3.org/2000/svg"
       stroke="currentColor"

@@ -6,6 +6,7 @@ export default function StatsIcon(props: TIconProps) {
       class={props.class}
       width="800px"
       height="800px"
+      role="img"
       viewBox="0 0 48.891 48.891"
       xmlns="http://www.w3.org/2000/svg"
     >

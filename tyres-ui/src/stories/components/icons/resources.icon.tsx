@@ -5,6 +5,7 @@ export default function ResourcesIcon(props: TIconProps) {
     <svg
       class={props.class}
       viewBox="0 0 64 64"
+      role="img"
       xmlns="http://www.w3.org/2000/svg"
     >
       <title>spanish</title>

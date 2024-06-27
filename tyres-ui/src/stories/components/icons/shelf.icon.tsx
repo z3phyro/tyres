@@ -5,6 +5,7 @@ export default function ShelfIcon(props: TIconProps) {
     {...props}
     fill="currentColor"
     stroke-width="0"
+    role="img"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 18 16"
     height="1em"

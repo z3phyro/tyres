@@ -4,6 +4,7 @@ export default function Link(props: any) {
       {...props}
       fill="none"
       stroke-width="2"
+      role="img"
       xmlns="http://www.w3.org/2000/svg"
       stroke="currentColor"
       stroke-linecap="round"

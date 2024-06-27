@@ -8,7 +8,7 @@ export interface TPager<T> {
 export function createPager<T>(data: T[], pageSize: number, pageNumber: number): TPager<T> {
   const pager: TPager<T> = {} as TPager<T>;
 
-  pager.pageNumber = pageNumber;
+  pager.pageNumber = pageSize * (pageNumber - 1) < data.length ? pageNumber : 1;
   pager.pageSize = pageSize;
   pager.totalItems = data.length;
   pager.totalPages = data.length ? Math.ceil(data.length / pageSize) : 0;
