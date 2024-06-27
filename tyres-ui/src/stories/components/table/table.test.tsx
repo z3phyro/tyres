@@ -42,7 +42,7 @@ test("Table renders with actions", () => {
     />
   ));
 
-  const actionElement = getByRole("button");
+  const actionElement = getByRole("tooltip");
   expect(actionElement).toHaveTextContent("Test action");
 });
 
@@ -56,7 +56,7 @@ test("Table calls action", () => {
     />
   ));
 
-  const actionElement = getByRole("button");
+  const actionElement = getByRole("tooltip");
   actionElement.click();
   expect(action).toHaveBeenCalled();
 });
