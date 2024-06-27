@@ -62,10 +62,11 @@ export default function Table(props: TTableProps) {
                       {props.actions.map((action) => (
                         <Tooltip
                           content={action.hint}
+                          onClick={() => action.action?.((k()))}
                         >
-                          <button class="hover:text-blue-500" onClick={() => action.action?.((k()))}>
+                          <div class="hover:text-blue-500" >
                             {action.content}
-                          </button>
+                          </div>
                         </Tooltip>
                       ))}
                     </div>

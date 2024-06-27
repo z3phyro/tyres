@@ -6,6 +6,7 @@ interface TooltipProps {
   children: JSX.Element | JSX.Element[];
   content: JSX.Element | string;
   id?: string;
+  onClick?: () => void;
 }
 export default function Tooltip(props: TooltipProps) {
   return (
@@ -14,6 +15,7 @@ export default function Tooltip(props: TooltipProps) {
         role="tooltip"
         class="focus:ring-2 ring-offset-2 ring-blue-500 outline-none rounded-sm"
         aria-describedby={props.id}
+        onClick={props.onClick}
       >
         {props.children}
       </KTooltip.Trigger>
