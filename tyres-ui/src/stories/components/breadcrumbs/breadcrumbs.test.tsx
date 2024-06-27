@@ -94,26 +94,25 @@ test("Breadcrumbs renders with custom links and active link", () => {
   expect(links[1].classList.contains("text-blue-500")).toBe(true);
 });
 
-// test("Breadcrumbs snapshot test", () => {
-//   const history = createMemoryHistory();
-//   history.set({ value: "/breadcrumbs" });
-//
-//   const { asFragment } = render(() => (<MemoryRouter history={history}>
-//     <Route path="/breadcrumbs">
-//       <Breadcrumbs
-//         links={[
-//           {
-//             title: "Link 1",
-//             active: false,
-//           },
-//           {
-//             title: "Link 2",
-//             active: true,
-//           },
-//         ]}
-//       />
-//     </Route>
-//   </MemoryRouter>
-//   ));
-//   expect(asFragment()).toMatchSnapshot();
-// });
+test("Breadcrumbs snapshot test", () => {
+  const history = createMemoryHistory();
+  history.set({ value: "/breadcrumbs" });
+
+  const { asFragment } = render(() => (<MemoryRouter history={history}>
+    <Route path="/breadcrumbs" component={() => <Breadcrumbs
+      links={[
+        {
+          title: "Link 1",
+          active: false,
+        },
+        {
+          title: "Link 2",
+          active: true,
+        },
+      ]}
+    />
+    } />
+  </MemoryRouter>
+  ));
+  expect(asFragment()).toMatchSnapshot();
+});
