@@ -9,6 +9,7 @@ import { InitializationSchema } from "~/core/validation/initialization.validatio
 import type { InitializationSchemaForm } from "~/core/validation/initialization.validation";
 import ConfigService from "~/services/config.service";
 import CoverageService from "~/services/coverage.service";
+import DictionaryService from "~/services/dictionary.service";
 import FeatureFlagsService from "~/services/feature-flags.service";
 import TranslationService from "~/services/translation.service";
 import Button from "~/stories/components/button";
@@ -25,7 +26,8 @@ export default function Home() {
   const [all, { refetch }] = createResource(async () => {
     const initialized = await ConfigService.checkInit();
     const configs = initialized && await ConfigService.getConfig();
-    const translations = initialized && await TranslationService.getTranslationsTable(0);
+    const dicts = initialized && await DictionaryService.getAllList();
+    const translations = initialized && await TranslationService.getTranslationsTable(0, dicts);
     const featureFlags = initialized && await FeatureFlagsService.getList();
     const coverage = initialized && await CoverageService.getCoverage();
 

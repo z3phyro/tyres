@@ -27,12 +27,14 @@ export default function Page() {
   const dialog = useDialog();
   const toast = useToast();
   const [all, { refetch }] = createResource(async () => {
-    const dicts = await DictionaryService.getAllList();
     const fullDicts = await DictionaryService.getAll();
+    const dicts = Object.values(fullDicts) || [];
+
     const index = searchParams.dictionary
       ? dicts.indexOf(searchParams.dictionary)
       : 0;
-    const data = await TranslationService.getTranslationsTable(index);
+    const data = await TranslationService.getTranslationsTable(index, dicts);
+
     return { dicts, data, fullDicts };
   });
 

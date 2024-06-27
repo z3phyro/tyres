@@ -1,5 +1,6 @@
 import { MetaProvider, Title } from "@solidjs/meta";
 import { A } from "@solidjs/router";
+import { For } from "solid-js";
 import {
   ROUTE_PAGE_DICTIONARIES,
   ROUTE_PAGE_FEATURE_FLAGS,
@@ -14,34 +15,43 @@ import Main from "~/stories/components/main";
 import SmartBreadcrumbs from "~/stories/containers/smart-breadcrumbs/smart-breadcrumbs";
 
 export default function Page() {
+  const resources = () => [
+    {
+      title: ETerms.i18n,
+      icon: <TranslationIcon class="w-8 h-8" />,
+      description: "Manage your translations",
+      route: ROUTE_PAGE_I18N,
+    },
+    {
+      title: ETerms.Dictionaries,
+      icon: <ShelfIcon class="w-8 h-8" />,
+      description: "Manage your dictionaries",
+      route: ROUTE_PAGE_DICTIONARIES,
+    },
+    {
+      title: ETerms.FeatureFlags,
+      icon: <FeatureFlagsIcon class="w-8 h-8" />,
+      description: "Manage your feature flags",
+      route: ROUTE_PAGE_FEATURE_FLAGS,
+    },
+  ];
+
   return (
     <Main>
       <MetaProvider>
         <Title>Tyres UI - Resources</Title>
       </MetaProvider>
       <SmartBreadcrumbs />
-      <div class="flex gap-4 md:flex-row flex-col flex-wrap pt-0">
-        <A class="flex-1" href={ROUTE_PAGE_I18N}>
-          <Card class="flex-1 relative">
-            <h1 class="text-xl relative mb-1 z-10">{ETerms.i18n}</h1>
-            <TranslationIcon class="w-8 h-8 absolute right-2 bottom-4 z-0 opacity-80" />
-            <p class="relative z-10">Manage internationalization</p>
+      <div class="flex space-between gap-4 flex-wrap">
+        <For each={resources()}>{(item) => (
+          <Card class="flex-1 basis-[250px] grow relative">
+            <h1 class="text-2xl mb-2 flex">{item.title}</h1>
+            <p class="text-gray-500">{item.description}</p>
+            <span class="mr-3 absolute right-2 bottom-4 text-gray-600">{item.icon}</span>
+            <A class="inset-0 block absolute z-10" href={item.route}><span class="sr-only">Link to {item.route}</span></A>
           </Card>
-        </A>
-        <A class="flex-1" href={ROUTE_PAGE_DICTIONARIES}>
-          <Card class="flex-1 relative">
-            <h1 class="text-xl relative mb-1 z-10">{ETerms.Dictionaries}</h1>
-            <ShelfIcon class="w-8 h-8 absolute right-2 bottom-4 z-0 opacity-80" />
-            <p class="relative z-10">Manage dictionaries</p>
-          </Card>
-        </A>
-        <A class="flex-1" href={ROUTE_PAGE_FEATURE_FLAGS}>
-          <Card class="flex-1 relative">
-            <h1 class="text-xl relative mb-1 z-10">{ETerms.FeatureFlags}</h1>
-            <FeatureFlagsIcon class="w-8 h-8 absolute right-4 bottom-2 z-0 opacity-80" />
-            <p class="relative z-10">Manage feature flags</p>
-          </Card>
-        </A>
+        )}
+        </For>
       </div>
     </Main>
   );

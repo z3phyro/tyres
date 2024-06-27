@@ -19,7 +19,7 @@ export default function Page() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [all] = createResource(async () => {
     const dicts = await DictionaryService.getAllList();
-    const data = await TranslationService.getTranslationsObject();
+    const data = await TranslationService.getTranslationsObject(dicts);
 
     return { dicts, data };
   });
