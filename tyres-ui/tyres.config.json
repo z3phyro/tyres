@@ -1,7 +1,14 @@
-{ 
+{
         "translationsPath": "src/i18n/",
-        "featureFlagsPath": "src/feature-flags/", 
-        "dictionaries": {"en":"English","es":"Spanish"},
-        "environments": ["development","staging","production"],
+        "featureFlagsPath": "src/feature-flags/",
+        "dictionaries": {
+                "en": "English",
+                "es": "Spanish"
+        },
+        "environments": [
+                "development",
+                "staging",
+                "production"
+        ],
         "projectName": "Tyres UI"
-       }
+}
