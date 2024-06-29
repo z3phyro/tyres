@@ -41,7 +41,7 @@ const entry = program
 entry
   .command("list")
   .description("Lists the translation interface entries")
-  .action(listTranslation);
+  .action(() => { listTranslation() });
 
 entry
   .command("add <entry.path> [values...]")
@@ -117,7 +117,7 @@ const featureFlags = program
 featureFlags
   .command("list")
   .description("Lists feature flags")
-  .action(listFeatureFlags);
+  .action(() => { listFeatureFlags() });
 
 featureFlags
   .command("init")
