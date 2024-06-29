@@ -1,6 +1,6 @@
 import * as config from "../config";
 import { readTypedFile, writeFile } from "../io";
-import { createFolder, removeFile, writeFeatureFlag } from "../io/io";
+import { removeFile, writeFeatureFlag } from "../io/io";
 import { TDataNode } from "../types";
 import {
   clearEntries,
