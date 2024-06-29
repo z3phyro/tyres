@@ -84,7 +84,7 @@ packageJson.scripts = {
 // Add new dependencies
 packageJson.dependencies = {
   ...packageJson.dependencies,
-  "@z3phyro/tyres-ui": "^0.1.9"
+  "@z3phyro/tyres-ui": "^0.1.11"
 };
 
 // Write the updated package.json back to the file

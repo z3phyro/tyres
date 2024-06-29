@@ -1,6 +1,6 @@
 {
   "name": "tyres-create",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A command to initialize Typed Resources in your code base",
   "main": "index.js",
   "bin": {
